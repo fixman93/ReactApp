@@ -1,0 +1,13 @@
+.dropdown {
+    margin-bottom: 50px;
+}
+.dropdown dl {
+    position: absolute;
+    background: white;
+    z-index: 9;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 0 40px 0 rgba(0, 0, 0, 0.1);
+    min-width: 312px;
+    padding: 15px 20px;
+}

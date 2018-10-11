@@ -1,0 +1,10 @@
+.login-page {
+  background: var(--main-blue);
+  min-height: 100%;
+  overflow: hidden;
+}
+
+.login-page .panel {
+  margin: 20px auto 0px auto;
+  padding: 0 60px;
+}

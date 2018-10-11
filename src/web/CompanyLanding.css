@@ -1,0 +1,93 @@
+.landing-top.company {
+  background: var(--teal-blue);
+}
+
+.company-application img {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+}
+
+.company-text {
+  width: 600px;
+  position: absolute;
+  top: 240px;
+  left: 50%;
+  margin-left: -450px;
+}
+
+.company-text .btn-white {
+  border-radius: 32px;
+  padding: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 25px;
+  color: var(--teal-blue);
+}
+
+.company-text h1 {
+  top: 0;
+}
+
+.preparation-banner {
+  background: var(--pastel-orange);
+  box-sizing: border-box;
+  border-bottom: solid 10px var(--white);
+}
+
+.application-banner {
+  background: var(--main-blue);
+  box-sizing: border-box;
+  border-bottom: solid 10px var(--white);
+}
+
+.interviews-banner {
+  background: var(--teal-blue);
+  box-sizing: border-box;
+  border-bottom: solid 10px var(--white);
+}
+
+.company-steps {
+}
+
+.company-steps .container {
+  position: relative;
+  height: 880px;
+}
+
+.company-steps .person-image {
+  position: absolute;
+  margin: auto;
+  bottom: -10px;
+  left: 0;
+  right: 0;
+}
+
+.company-steps h3 {
+  color: var(--white);
+  font-weight: bolder;
+  padding-top: 80px;
+  font-size: 32px;
+}
+
+.company-steps p {
+  color: var(--white);
+  font-size: 14px;
+  padding-top: 10px;
+}
+
+.company-steps .landing-card {
+  margin-top: 32px;
+}
+
+.subscribe-banner {
+  background: var(--pastel-orange);
+}
+
+.subscribe-banner .container {
+  height: 1010px;
+}
+
+.profession-list {
+  margin-top: 50px;
+}

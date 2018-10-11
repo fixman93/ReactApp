@@ -1,0 +1,93 @@
+.talent-page .container-fluid {
+    padding: 0;
+}
+
+.TalentHeader {
+    background: white;
+    margin-bottom: 0;
+}
+
+.talent-page .TalentHeader {
+    padding-bottom: 61px;
+    padding-right: 0;
+}
+
+.talent-page .container-fluid {
+    padding: 0;
+}
+
+.talent-page {
+    background: #00c1d8;
+    min-height: 100%;
+}
+
+.talent-page .featured-title {
+    background: white;
+    position: relative;
+}
+
+.talent-page .featured-title h3 {
+    color: #333333;
+}
+
+.talent-page .featured-title p {
+    color: #333;
+}
+
+.TalentHeader .menu-button a {
+    background: #00c1d8;
+    border-radius: 10px;
+    background-color: #00c1d8;
+    box-shadow: 0 4px 10px 0 rgba(203, 203, 203, 0.6);
+    font-size: 12px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+    padding: 10px 20px;
+}
+
+.UserCompleted {
+    background-color: #ffffff;
+    border: solid 2px #00c1d8;
+    display: inline-block;
+    width: 93px;
+    height: 93px;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.UserCompleted h4 {
+    font-size: 20px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #00c1d8 !important;
+    margin-top: 30px;
+    margin-bottom: 0;
+    line-height: 10px;
+}
+
+.UserCompleted span {
+    font-size: 10px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #000000 !important;
+}
+
+.talent-page .container-fluid .featured-title {
+    padding-bottom: 45px;
+}

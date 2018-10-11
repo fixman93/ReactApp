@@ -1,0 +1,6 @@
+.error-text {
+  color: var(--danger);
+  font-size: 14px;
+  font-family: 'Muli', sans-serif;
+  font-weight: bold;
+}

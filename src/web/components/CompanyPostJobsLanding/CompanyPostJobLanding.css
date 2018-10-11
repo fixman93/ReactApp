@@ -1,0 +1,55 @@
+.terms {
+    margin-top: 30px;
+    font-size: 12px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+}
+
+.terms p {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.terms .link {
+    font-size: 12px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+    border-bottom: 1px solid white;
+    text-decoration: none;
+}
+
+.terms a.btn {
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 10px 0 rgba(255, 255, 255, 0.6);
+    padding: 7.5px 22.5px;
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #ff955a;
+}
+
+.terms a.btn:hover {
+    color: #ff955a;
+    text-decoration: none;
+}
+
+.terms a.btn img {
+    margin-left: 5px;
+}

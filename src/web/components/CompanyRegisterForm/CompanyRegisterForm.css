@@ -1,0 +1,85 @@
+.login-page {
+  background-color: var(--main-blue);
+}
+
+.register-panel {
+  max-width: 430px;
+}
+
+.login-page .company-panel-wide {
+  max-width: 1060px;
+  width: 100%;
+}
+
+body .login-page .company-panel-wide-short {
+  max-width: 1060px;
+  width: 100%;
+  max-width: 1060px;
+  width: 100%;
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 48px 60px 40px;
+}
+
+.login-page .form-row {
+  display: flex;
+}
+
+.login-page .form-row .form-input-group:nth-child(2) {
+  padding: 0 0 8px 0;
+  margin-left: 50px;
+  padding-left: 48px;
+  position: relative;
+}
+
+.login-page .form-row .form-input-group:nth-child(2)::before {
+  content: '';
+  width: 2px;
+  height: 25px;
+  color: #d8d8d8;
+}
+
+.login-page .form-row .form-input-group:nth-child(2):after {
+  content: "";
+  position: absolute;
+  height: 25px;
+  width: 2px;
+  background: #d8d8d8;
+  top: 30px;
+  left: 0;
+}
+
+.uploadLogo button {
+  border-radius: 10px;
+  border: solid 1px #000000;
+  font-size: 12px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #000000;
+}
+
+.companyLogo h5 {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #000000;
+  margin-bottom: 0;
+}
+
+.companyLogo .media .media-body {
+  font-size: 12px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #666666;
+}

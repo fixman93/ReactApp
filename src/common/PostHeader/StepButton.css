@@ -1,0 +1,43 @@
+.menu-header .btn.btn-outline-orange {
+  background-color: var(--pastel-orange);
+  border: 2px solid var(--white);
+  color: var(--white);
+  font-family: 'Muli', sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.menu-header .btn.btn-outline-orange.active {
+  background-color: var(--white);
+  color: var(--pastel-orange);
+}
+
+.menu-header.postHeader .btn:not(:last-child) {
+  margin-right: 30px;
+}
+
+.post-page .menu-header .col-6 button {
+  position: relative;
+  box-shadow: none;
+  opacity: 0.5;
+}
+
+.post-page .menu-header .col-6 button.active {
+  opacity: 1;
+}
+
+.post-page .menu-header .col-6 button:after {
+  content: "";
+  width: 30px;
+  height: 2px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  right: -32px;
+  background: white;
+  top: 50%;
+}
+
+.post-page .menu-header .col-6 button:last-child:after {
+  width: 0;
+}

@@ -1,0 +1,24 @@
+.newsletter-component input[type='text'] {
+  height: 48px;
+  padding: 0 20px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border: solid 1px var(--dark-faint);
+  border-right: none;
+  font-family: var(--body-font);
+  font-weight: lighter;
+  font-size: 12px;
+}
+
+.newsletter-component input[type='button'] {
+  height: 48px;
+  padding: 0 20px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  background: var(--main-blue);
+  border: none;
+  color: var(--white);
+  font-family: var(--body-font);
+  font-weight: bolder;
+  font-size: 12px;
+}

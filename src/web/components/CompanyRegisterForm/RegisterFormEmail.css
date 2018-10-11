@@ -1,0 +1,20 @@
+.email-page {
+    background-image: url('../../../assets/images/CompanyRegistration/emailBackground.png');
+    background-color: #f0f0f0;
+    height: 100%;
+    background-position: bottom center;
+    background-size: auto 100vh;
+    background-repeat: no-repeat;
+}
+
+.emailBody {
+    text-align: center;
+    margin-top: 20vh;
+    max-width: 309px;
+    margin: 27vh auto;
+    width: 100%;
+}
+
+.emailBody h3 {
+    font-weight: bold;
+}

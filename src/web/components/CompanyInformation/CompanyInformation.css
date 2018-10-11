@@ -1,0 +1,49 @@
+.company-main-info .col-sm-4 .input-form {
+    padding-bottom: 0;
+}
+
+.company-main-info .col-sm-4:last-child {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.company-main-info .col-sm-4:last-child a {
+    border-radius: 10px;
+    border: solid 1px #000000;
+    font-size: 12px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #000000;
+    padding: 5px 15px;
+    text-decoration: none;
+}
+
+.company-main-info p {
+    color: #00c1d8;
+    font-weight: 900;
+    margin-bottom: 0;
+    font-size: 12px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #00c1d8;
+}
+
+.company-content p {
+    color: #00c1d8;
+    font-weight: 900;
+    margin-bottom: 0;
+    font-size: 12px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #00c1d8;
+}

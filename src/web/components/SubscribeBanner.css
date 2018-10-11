@@ -1,0 +1,75 @@
+.subscribe-banner {}
+
+.subscribe-banner .hand-calculator {
+  position: absolute;
+  bottom: 0;
+  margin: auto;
+  margin-left: 160px;
+}
+
+.subscribe-banner .subscribe-form {
+  width: 592px;
+  padding: 20px 60px;
+  background: var(--white);
+  border-radius: 10px;
+  margin: 65px auto auto auto;
+  height: 445px;
+}
+
+.subscribe-banner .subscribe-form h3 {
+  color: var(--black);
+  padding: 0;
+}
+
+.subscribe-banner .subscribe-form p {
+  color: var(--black)
+}
+
+.subscribe-banner .subscribe-form ul {
+  list-style: none;
+  margin-top: 20px;
+}
+
+.subscribe-banner .subscribe-form ul li {
+  padding-bottom: 10px;
+}
+
+.subscribe-banner .subscribe-form ul img {
+  vertical-align: sub;
+}
+
+.subscribe-banner .subscribe-form ul h6 {
+  margin-bottom: 0;
+}
+
+.subscribe-banner .subscribe-form ul p {
+  font-size: 12px;
+}
+
+.subscribe-banner .price {
+  margin-top: 60px;
+}
+
+.subscribe-banner .price-info {
+  padding: 20px;
+}
+
+.subscribe-banner .price-info .price-value {
+  font-size: 48px;
+  font-weight: bold;
+}
+
+.subscribe-banner .price-info .price-value span {
+  font-size: 48px;
+  font-weight: 100;
+}
+
+.subscribe-banner .price-info .desc {
+  font-size: 12px;
+  font-weight: bold;
+  width: 100px;
+}
+
+.subscribe-banner .price-info button {
+  margin-top: 20px;
+}

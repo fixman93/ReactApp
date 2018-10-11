@@ -1,0 +1,90 @@
+.mainContainer .preview-container {
+  padding-top: 60px;
+}
+
+.mainContainer .employer-container {
+  padding: 0 40px;
+  margin-bottom: 100px;
+}
+
+.mainContainer .divider {
+  border-bottom: 1px solid rgba(102, 102, 102, 0.1);
+  margin-bottom: 20px;
+  padding-bottom: 35px;
+}
+
+.avatar-image {
+  width: 60px;
+  height: 60px;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
+.employer-container .employer-flex {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.employer-container .avatar-image {
+  align-self: flex-end;
+}
+
+.employer-container .employer-flex small {
+  margin-left: auto;
+}
+
+.employer-container .employer-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.employer-container small.employer-date {
+  font-family: 'Muli', sans-serif;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.employer-container .employer-title {
+  margin-bottom: 6px;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'Muli', sans-serif;
+}
+
+.employer-container .employer-desc {
+  font-size: 12px;
+  font-family: 'Muli', sans-serif;
+}
+
+.employer-container.single-row {
+  display: flex;
+}
+
+.employer-container-content {
+  margin-left: 60px;
+  margin-right: 60px;
+}
+
+.employer-container-content h3 {
+  margin-bottom: 15px;
+  font-family: 'Muli', sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.employer-container-content .req-container {
+  margin-bottom: 60px;
+}
+
+.employer-container-content > p {
+  margin-bottom: 60px;
+  font-family: 'Muli', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.85;
+}
+
+.employer-container-content .skills-container {
+  margin-bottom: 60px;
+}

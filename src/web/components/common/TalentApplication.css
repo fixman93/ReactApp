@@ -1,0 +1,71 @@
+.experience-text {
+  display: block;
+  margin-top: 16px;
+  width: 100%;
+  font-size: 12px;
+  font-family: 'Muli', sans-serif;
+}
+
+.experience-text strong {
+  font-size: 12px;
+  font-family: 'Muli', sans-serif;
+  font-weight: bold;
+}
+
+.application-btn-container {
+  display: flex;
+  margin-left: auto;
+}
+
+.application-btn-container .info-tag {
+  margin-left: 16px;
+}
+
+.job-posting .info-link img {
+  width: 20px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.job-posting .info-link:nth-child(2) {margin-left: 20px;}
+
+.bottomText p {
+  font-size: 12px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+}
+
+.bottomText {
+  margin-top: 40px;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.bottomText button {
+  border-radius: 10px;
+  background-color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #00c1d8;
+  padding: 5px 15px;
+  border: 0;
+}
+
+.job-posting .info-link img {
+  max-width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.job-posting .info-link {
+  margin-right: 20px;
+}

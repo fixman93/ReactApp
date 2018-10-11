@@ -1,0 +1,46 @@
+body.mask:after {
+    content: '';
+    background: url('../../../assets/images/registerDetail_files/302168755.png');
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 99;
+    opacity: 0.3;
+    width: 100%;
+    height: 1420px;
+    background-size: 1440px 880px;
+    background-position: top center;
+}
+
+.login-page .firstStep .panel {
+    max-width: 430px;
+}
+
+.featured-title.title-white p {
+    margin-bottom: 41px;
+}
+
+.firstStep {
+    position: relative;
+}
+
+img.RegisterHand {
+    position: absolute;
+    left: 260px;
+    right: 0;
+    margin: auto;
+    bottom: -266px;
+    max-height: 392px;
+}
+
+
+@media (min-height: 920px) {
+    img.RegisterHand {
+        position: absolute;
+        left: 230px;
+        right: 0;
+        margin: auto;
+        bottom: -366px;
+        max-height: 512px;
+    }
+}

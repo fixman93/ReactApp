@@ -1,0 +1,38 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "globals": {
+    "React": true
+  },
+  "ecmaFeatures": {
+    "jsx": true
+  },
+  "plugins": [
+    "react",
+    "babel"
+  ],
+  "rules": {
+    "semi": [
+      2,
+      "never"
+    ],
+    "max-len": [
+      2,
+      120,
+      2
+    ],
+    "generator-star-spacing": 0,
+    "babel/generator-star-spacing": 1,
+    "react/jsx-no-bind": 0,
+    "no-return-assign": 0,
+    "no-warning-comments": [
+      0,
+      {
+        "location": "anywhere"
+      }
+    ]
+  }
+}

@@ -1,0 +1,150 @@
+@import './config.pcss';
+@import './muli-font.css';
+
+@font-face {
+  font-family: 'Avenir Black';
+  src: url(../fonts/avenir-black.otf);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: var(--body-font);
+  font-size: var(--text-font-size);
+  font-weight: var(--font-weight-light);
+  -webkit-appearance: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+html, body, #root {
+  min-height: 100% !important;
+  height: 100%;
+}
+
+body {
+  position: relative;
+  color: var(--dark);
+  height: 100%;
+}
+
+body h1 {
+  font-size: 48px;
+  color: #fff;
+  font-weight: 200;
+}
+
+body h1 span {
+  font-size: 48px;
+}
+
+body h1 strong {
+  font-size: 48px;
+  font-weight: bold;
+  font-style: italic;
+}
+
+body h2 {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+body h2 a {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+body h3 {
+  font-size: 32px;
+}
+
+body h4 {
+  font-size: 22px;
+}
+
+body h6 {
+  font-weight: bold;
+}
+
+body a {
+  color: var(--main-blue)
+}
+
+/* TITLES */
+.featured-title.title-white h3 {
+  font-weight: bold;
+}
+.featured-title.title-white * {
+  color: var(--white)
+}
+
+/* BUTTONS */
+.btn.btn-white {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px 0 rgba(255, 255, 255, 0.6);
+  color: var(--main-blue);
+  font-size: 12px;
+}
+.btn.btn-outlined {
+  border-radius: 10px;
+  background: transparent;
+  border: solid 1px var(--white);
+  color: var(--white);
+  font-size: 12px;
+}
+.btn.btn-orange {
+  border-radius: 10px;
+  background: var(--pastel-orange);
+  box-shadow: 0 4px 10px 0 rgba(203, 203, 203, 0.6);
+  color: var(--white);
+  font-size: 12px;
+  font-weight: bold;
+  padding: 10px;
+}
+.btn.btn-green {
+  border-radius: 10px;
+  background: var(--button-green);
+  box-shadow: 0 4px 10px 0 rgba(203, 203, 203, 0.6);
+  color: var(--white);
+  font-size: 12px;
+  font-weight: bold;
+  padding: 10px;
+}
+.btn.btn-red {
+  border-radius: 10px;
+  background: var(--button-red);
+  box-shadow: 0 4px 10px 0 rgba(203, 203, 203, 0.6);
+  color: var(--white);
+  font-size: 12px;
+  font-weight: bold;
+  padding: 10px;
+}
+.btn.btn-request {
+  border-radius: 10px;
+  background-color: #00c1d8;
+  box-shadow: 0 4px 10px 0 rgba(203, 203, 203, 0.6);
+  color: var(--white);
+  font-size: 12px;
+  font-weight: bold;
+  padding: 10px;
+}
+
+/* STYLES */
+input:hover, input:focus {
+  outline: none;
+}
+
+input[type='button'] {
+  cursor: pointer;
+}
+
+.small-text {
+  font-size: 12px;
+}
+
+.panel {
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 0 40px 0 rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}

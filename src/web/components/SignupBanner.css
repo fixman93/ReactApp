@@ -1,0 +1,54 @@
+.signup-banner {
+  height: 880px;
+}
+
+.signup-banner h2 {
+  padding-top: 140px;
+}
+
+.signup-banner .square {
+  width: 320px;
+  height: 215px;
+  border-radius: 20px;
+  background: #eee;
+  color: var(--white);
+  margin: 73px auto 0 auto;
+  position: relative;
+}
+
+.square.square-personal {
+  background-color: var(--pastel-orange)
+}
+.square.square-personal img {
+  position: absolute;
+  right: -30px;
+  bottom: 0;
+}
+
+.square.square-accurate {
+  background-color: var(--main-blue)
+}
+.square.square-accurate img {
+  position: absolute;
+  right: -20px;
+  top: 0;
+}
+
+.square.square-transparent {
+  background-color: var(--teal-blue)
+}
+.square.square-transparent img {
+  position: absolute;
+  right: -20px;
+  bottom: 0;
+}
+
+.square .square-info {
+  position: absolute;
+  top: 50px;
+  left: 40px;
+}
+
+.signup-banner .quotes {
+  margin-top: 85px;
+}

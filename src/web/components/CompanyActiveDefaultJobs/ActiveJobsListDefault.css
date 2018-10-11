@@ -1,0 +1,25 @@
+.DefaultJobs ul li span {
+    font-size: 16px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #ffffff;
+    display: block;
+    margin-top: 15px;
+    text-align: center;
+}
+.DefaultJobs ul {
+    display: flex;
+    flex-flow: wrap;
+    text-align: center;
+    justify-content: center;
+}
+
+.DefaultJobs ul li {
+    text-align: center;
+    margin: 0 0 45px 0;
+    width: auto;
+    padding: 13px;
+}

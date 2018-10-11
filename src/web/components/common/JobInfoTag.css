@@ -1,0 +1,20 @@
+.info-tag .red {
+  display: inline-block;
+  margin: 30px 20px 30px 0;
+}
+
+.info-text {
+  font-size: 12px;
+  font-weight: bold;
+  font-family: 'Muli', sans-serif;
+  color: #000;
+}
+
+.red {
+  color: #ff7e5f;
+}
+
+.info-text .info-tag-img {
+  width: 20px;
+  height: 20px;
+}

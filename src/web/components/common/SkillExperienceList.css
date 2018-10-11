@@ -1,0 +1,16 @@
+#postFormSkills .radio-input-container .skill-experience-group {
+  display: flex;
+  flex-wrap: wrap;
+  color: #000;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+#postFormSkills .radio-input-container .skill-experience-group-desc {
+  flex: 1 0 100%;
+}
+
+#postFormSkills .radio-input-container .skill-experience-group [type="radio"]:checked + label:before,
+[type="radio"]:not(:checked) + label:before {
+  transform: translateY(10px);
+}

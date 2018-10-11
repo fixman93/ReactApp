@@ -1,0 +1,30 @@
+.menu-header {
+  padding-top: 41px;
+  padding-right: 25px;
+}
+.menu-header .logo {
+  color: var(--white);
+  padding-left: 25px;
+}
+.menu-header .logo:hover {
+  text-decoration: none;
+}
+.menu-header .logo span {
+  margin-left: 15px;
+  font-family: var(--steps-font);
+  font-size: 16px;
+}
+.menu-header ul {
+  margin: 5px 0 0 0;
+}
+.menu-header li {
+  list-style: none;
+  display: inline-block;
+}
+.menu-header .btn-holder .btn-outlined {
+  margin-left: 20px;
+}
+.menu-header span {
+  color: var(--white);
+  font-size: 12px;
+}

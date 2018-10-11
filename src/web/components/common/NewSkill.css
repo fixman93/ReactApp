@@ -1,0 +1,26 @@
+.new-skill-container {
+  display: inline-block;
+  position: relative;
+  margin-bottom: 11px;
+}
+
+.new-skill-input {
+  font-size: 12px;
+  font-family: 'Muli', sans-serif;
+  padding: 10px 15px;
+  max-width: 180px;
+  border-radius: 14px;
+  border: 1px solid var(--main);
+  color: var(--main);
+}
+
+.new-skill-input::placeholder {
+  color: var(--main);
+  font-size: 12px;
+}
+
+.new-skill-icon {
+  position: absolute;
+  right: 0;
+  transform: translateY(-27px) translateX(-15px);
+}

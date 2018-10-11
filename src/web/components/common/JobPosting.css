@@ -1,0 +1,63 @@
+.job-posting .row {
+  display: flex;
+  align-items: center;
+}
+
+.job-posting .row:first-child {
+  padding-top: 40px;
+}
+
+.job-posting .row:last-child {
+  padding-bottom: 40px;
+}
+
+.job-posting img {
+  width: 60px;
+  height: 60px;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
+.job-posting .row > .btn {
+  margin-left: auto;
+}
+
+.job-btn-container {
+  margin-left: auto;
+}
+
+.job-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.job-info > p {
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+  color: #000;
+}
+
+.job-info > small {
+  margin: 0;
+  font-size: 12px;
+}
+
+.job-posting .btn {
+  margin-left: 15px;
+  padding: 2px 10px 2px 10px;
+  min-height: 35px;
+}
+
+.btn-count {
+  display: inline-block;
+  padding: 7px 15px;
+  font-size: 10px;
+  border-radius: 10px;
+  border-radius: 25%;
+}
+
+.info-tag p img {
+  border-radius: 0;
+}

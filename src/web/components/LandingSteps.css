@@ -1,0 +1,102 @@
+.landing-steps .background-line {
+  position: absolute;
+  left: 0;
+  width: 10px;
+  background: var(--white);
+  opacity: 0.3;
+  height: 880px;
+}
+
+.landing-steps .preparation-line {
+  position: absolute;
+  width: 10px;
+  background: rgba(255,255,255,0);
+  height: 275px;
+  left: 0;
+}
+
+.landing-steps .preparation-line span {
+  position: absolute;
+  color: var(--white);
+  font-weight: bolder;
+  top: 240px;
+  left: 30px;
+  opacity: 0.5;
+}
+
+.landing-steps .preparation-line.active {
+  background: rgba(255,255,255,1);
+}
+
+.landing-steps .preparation-line.active span {
+  opacity: 1;
+}
+
+.landing-steps .landing-step.active:after {
+  content: ' ';
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--white);
+  position: absolute;
+  top: 275px;
+  left: -5px;
+}
+
+.landing-steps .application-line {
+  position: absolute;
+  width: 10px;
+  background: rgba(255,255,255,0);
+  height: 585px;
+  left: 0;
+}
+
+.landing-steps .application-line.active:after {
+  top: 585px;
+}
+
+.landing-steps .application-line.active {
+  background: rgba(255,255,255,1);
+}
+
+.landing-steps .application-line span {
+  position: absolute;
+  color: var(--white);
+  font-weight: bolder;
+  top: 534px;
+  left: 30px;
+  opacity: 0.5;
+}
+
+.landing-steps .application-line.active span {
+  opacity: 1;
+}
+
+.landing-steps .interviews-line {
+  position: absolute;
+  width: 10px;
+  background: rgba(255,255,255,0);
+  height: 860px;
+  left: 0;
+}
+
+.landing-steps .interviews-line.active:after {
+  top: 860px;
+}
+
+.landing-steps .interviews-line.active {
+  background: rgba(255,255,255,1);
+}
+
+.landing-steps .interviews-line span {
+  position: absolute;
+  color: var(--white);
+  font-weight: bolder;
+  top: 829px;
+  left: 30px;
+  opacity: 0.5;
+}
+
+.landing-steps .interviews-line.active span {
+  opacity: 1;
+}

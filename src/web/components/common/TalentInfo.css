@@ -1,0 +1,202 @@
+.TalentProgress ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.panel ul {
+    list-style: none;
+    padding: 0;
+}
+
+.panel ul li {
+    margin-right: 30px;
+}
+
+.TopApply {
+    border-radius: 5px;
+    background-color: #ffffff;
+    border: solid 1px #00b233;
+    text-align: center;
+    position: relative;
+    padding: 2px 20px;
+    margin-bottom: 15px;
+}
+
+.TopApply:before {
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 1px;
+    background: #00b233;
+    right: -31px;
+    top: 50%;
+}
+
+.BottomApply span {
+    display: block;
+    font-size: 12px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #000000;
+}
+
+.BottomApply {
+    padding: 0 14px;
+}
+
+.BottomApply b {
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #000000;
+}
+
+.BottomApply p {
+    font-size: 12px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #00b233;
+}
+
+.rotateImg:after {
+    content: "";
+    background: url('../../../assets/images/Company/rotateImg.png');
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-size: 100% 100%;
+    transform: rotate(0deg);
+}
+
+.rotateImg {
+    position: relative;
+    margin-right: 20px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.rotateImg:hover:after {
+    -webkit-animation: spin 2s  linear;
+    animation: spin 2s  linear;
+}
+
+.rotateImg:before {
+    content: "";
+    background: url('../../../assets/images/Company/play-video.png');
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    margin: auto;
+    background-size: 100%;
+    border-radius: 50%;
+    transition: all .4s;
+    z-index: 99;
+}
+
+.rotateImg:hover:before {
+    content: "";
+    -webkit-box-shadow: 0 4px 10px 0 rgba(203, 203, 203, 0.6);
+    box-shadow: 0 4px 10px 0 rgba(203, 203, 203, 0.6);
+}
+
+.rotateImg img {
+    margin: 0;
+}
+
+.TalentProgress ul li .offer {margin-left: auto;}
+
+.TalentProgress ul li.offer {
+    margin-left: auto;
+    width: 100%;
+    margin-right: 0;
+}
+
+.TalentProgress ul li {
+    min-width: 160px;
+}
+
+.TalentProgress ul li:first-child {
+    min-width: inherit;
+}
+
+.TalentProgress ul li.offer .TopApply {
+    display: flex;
+    border: 0;
+    padding: 0;
+}
+
+.TalentProgress .offer .TopApply:before {
+    right: inherit;
+    left: -30px;
+    background: #d8d8d8;
+    width: 100%;
+}
+
+.TalentProgress ul li .TopApply span {
+    font-size: 12px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #00b233;
+}
+
+.TalentProgress ul li.offer .TopApply span {
+    display: inline-block;
+    border-radius: 5px;
+    background-color: #ffffff;
+    border: solid 1px #d8d8d8;
+    text-align: center;
+    position: relative;
+    padding: 5px 20px;
+    margin-left: auto;
+    color: #d8d8d8;
+}
+
+.TalentProgress ul li:nth-last-child(2) .TopApply {border-color: #00c1d8;}
+
+.TalentProgress ul li:nth-last-child(2) .TopApply span {
+    color: #00c1d8;
+}
+
+.TalentProgress ul li:nth-last-child(2) .BottomApply p {
+    color: #00c1d8;
+}
+
+.ProgressingTalent .panel hr {
+    border-top: 0;
+    margin-bottom: 30px;
+}
+
+@keyframes spin {
+    0%  {-webkit-transform: rotate(0deg);}
+    20%  {-webkit-transform: rotate(45deg);}
+    40%  {-webkit-transform: rotate(20deg);}
+    50%  {-webkit-transform: rotate(90deg);}
+	100% {-webkit-transform: rotate(270deg);}	
+}
+
+@-webkit-keyframes spin {
+    0%  {-webkit-transform: rotate(0deg);}
+    20%  {-webkit-transform: rotate(45deg);}
+    40%  {-webkit-transform: rotate(20deg);}
+    50%  {-webkit-transform: rotate(90deg);}
+	100% {-webkit-transform: rotate(270deg);}	
+}

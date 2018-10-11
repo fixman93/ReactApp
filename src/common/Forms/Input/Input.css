@@ -1,0 +1,46 @@
+label {
+  display: block;
+  margin: 0;
+  margin-bottom: 15px;
+  font-family: 'Muli', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+label > span {
+  color: #000;
+  font-size: 14px;
+}
+
+input {
+  display: block;
+  margin: 0;
+  margin-bottom: 15px;
+  background-color: inherit;
+  border: 0;
+  font-size: 12px;
+  color: #666;
+}
+
+input::placeholder {
+  font-family: 'Muli', sans-serif;
+  font-size: 12px;
+}
+
+.input-form input {
+  color: #00c1d8;
+  font-weight: 900;
+  font-size: 12px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #00c1d8;
+  width: 100%;
+  padding: 3px 2px;
+}
+
+.input-form input:focus {
+  font-weight: 300;
+}

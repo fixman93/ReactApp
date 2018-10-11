@@ -1,0 +1,50 @@
+.login-page .form-input-group {
+  padding-bottom: 56px;
+}
+
+.form .panel > .form-input-group:first-child {
+  padding-top: 60px;
+}
+
+.login-page .button {
+  padding: 10px 15px;
+  border: 0;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px 0 rgba(255, 255, 255, 0.6);
+  color: var(--main-blue);
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  flex-grow: 0;
+  margin-bottom: 30px;
+  flex-shrink: 0;
+}
+
+.login-button-container {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-button-container a {
+  flex-grow: 0;
+  flex-shrink: 0;
+  margin-right: 60px;
+  color: #fff;
+  font-weight: bold;
+  font-family: 'Muli', sans-serif;
+  font-size: 12px;
+  text-decoration: underline;
+}
+
+.loginForm {
+  max-width: 430px;
+  width: 100%;
+  margin: auto;
+}
+
+.login-page .login-button-container .button {
+  margin-bottom: 0;
+}
