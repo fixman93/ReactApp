@@ -4,21 +4,21 @@ import { withRouter } from 'react-router-dom'
 import { Link } from "react-router-dom"
 import whiteLogo from 'assets/images/logo-white.svg'
 import blueLogo from 'assets/images/logo-blue.svg'
-import  './TalentHeader.css'
+import './TalentHeader.css'
 
 export class TalentHeader extends Component {
     render() {
-        const {match} = this.props
+        const { match } = this.props
         return (
             <div className='menu-header  TalentHeader'>
                 <div className='container'>
                     <div className="row">
                         <div className='col'>
                             <Link
-                            className='logo'
-                            to='/'><img src={blueLogo}
-                            alt='OneApp Logotype'
-                            />
+                                className='logo'
+                                to='/'><img src={blueLogo}
+                                    alt='OneApp Logotype'
+                                />
                             </Link>{/*  <span>OneApp</span> if you want to use logo text */}
                         </div>
                         <div className='col-6 text-center'></div>
