@@ -1,3 +1,7 @@
 .TalentRegistration .post-page {
     background: var(--main-blue);
 }
+
+.TalentRegistration .TalentHeader {
+    background: transparent;
+}

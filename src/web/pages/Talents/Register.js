@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PostPage from "../../../web/pages/PostPage";
 import { Mutation, Query } from "react-apollo";
-import PostHeader from "../../../common/PostHeader";
+import TalentHeader from "../../../common/TalentHeader";
 import RegisterRole from "../../components/Talents/Register";
 import RegisterDetail from "../../components/Talents/RegisterDetail";
 import { ADD_TALENT } from "services/mutations";
@@ -67,13 +67,11 @@ class TalentRegister extends Component {
           return (
             <div className="TalentRegistration">
               <PostPage>
-                <PostHeader activeId={page} />
+                <TalentHeader activeId={page} />
                 {page === 1 && (
                   <RegisterRole
                     heading={{
-                      title: "What are you looking for?",
-                      desc:
-                        "Please fill out the information below so we can help with your search",
+                      title: "Welcome, let’s figure you out",
                       color: "white"
                     }}
                     onBack={this.prevPage}

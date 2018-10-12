@@ -16,7 +16,7 @@ export class PostHeader extends Component {
     activeId: 1
   }
 
-  render () {
+  render() {
     const { match, activeId } = this.props
     return (
       <div className='postHeader menu-header row'>
