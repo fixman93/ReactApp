@@ -6,6 +6,7 @@ import { Link } from "react-router-dom"
 import Steps from './Steps'
 import whiteLogo from 'assets/images/logo-white.svg'
 import blueLogo from 'assets/images/logo-blue.svg'
+import CompanyLogo from '../../assets/images/Company/1@3x.png'
 import './TalentHeader.css'
 
 export class TalentHeader extends Component {
@@ -17,6 +18,27 @@ export class TalentHeader extends Component {
     static defaultProps = {
         activeId: 1
     }
+
+    state = {
+        show: false,
+        userId: ''
+    }
+
+    handleMenu = () => {
+        this.setState(prevState => ({
+            show: !prevState.show
+        }))
+    }
+
+    componentDidMount = () => {
+        this.setState({
+            userId: localStorage.getItem('userId')
+        })
+    }
+
+    logout() {
+        localStorage.clear()
+    }
     render() {
         const { match, activeId } = this.props
         return (
@@ -27,9 +49,10 @@ export class TalentHeader extends Component {
                             <Link
                                 className='logo'
                                 to='/'>
-                                {match.path === '/talent/register' ? (
-                                    <img src={whiteLogo} alt='OneApp Logo' />
-                                ) : <img src={blueLogo} alt='OneApp Logo' />}
+                                {match.path === '/talent/register' ||
+                                    match.path === '/talent/profile' ? (
+                                        <img src={whiteLogo} alt='OneApp Logo' />
+                                    ) : <img src={blueLogo} alt='OneApp Logo' />}
                             </Link>{/*  <span>OneApp</span> if you want to use logo text */}
                         </div>
                         <div className='col-6 text-center'>
@@ -37,15 +60,31 @@ export class TalentHeader extends Component {
                                 <Steps activeId={activeId} />
                             )}
                         </div>
-                        <div className='col btn-holder text-right'>
-                            <ul>
-                                <li>
-                                    {match.path === '/talent/register' ? (
-                                        <Link className='btn btn-close' to='/'>close</Link>
-                                    ) : <MenuButton path='/' name='Complete Profile' match={this.props.match} />}
-                                </li>
-                            </ul>
-                        </div>
+                        {
+                            match.path === '/talent/complite-profile' ? (
+                                <div className='col btn-holder text-right'>
+                                    <ul>
+                                        <li>
+                                            {match.path === '/talent/register' ? (
+                                                <Link className='btn btn-close' to='/'>close</Link>
+                                            ) : <MenuButton path='/' name='Complete Profile' match={this.props.match} />}
+                                        </li>
+                                    </ul>
+                                </div>
+                            ) : <div>
+                                    <div className="activeUser">
+                                        <div className="userDropdown">
+                                            <img src={CompanyLogo} onClick={this.handleMenu} alt="User Logo" />
+
+                                            {this.state.show && (
+                                                <ul>
+                                                    <li><Link to="/talent/profile">Edit Account</Link></li>
+                                                    <li><Link to="/login" onClick={() => this.logout()}>Log Out</Link></li>
+                                                </ul>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>}
                     </div>
                 </div>
             </div>

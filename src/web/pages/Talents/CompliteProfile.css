@@ -2,13 +2,7 @@
   margin-top: 243px;
 }
 
-.Profile {
-  background: white;
-  position: relative;
-  padding-bottom: 40px;
-}
-
-.Profile-image-link {
+.CompliteProfile .Profile-image-link {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -17,16 +11,34 @@
   position: relative;
 }
 
+.Profile {
+  background: white;
+  position: relative;
+  padding-bottom: 40px;
+}
+
+.Profile .Profile-image-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  top: -100px;
+  margin-bottom: -40px;
+  position: relative;
+}
+
 .ProfileImage:after {
   content: "";
-  background: url('../../../assets/images/Company/rotateImg.png');
   position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
   background-size: 100% 100%;
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
   transform: rotate(0deg);
+  border: 2px dashed #ff955a;
+  border-radius: 100%;
 }
 
 .ProfileImage {

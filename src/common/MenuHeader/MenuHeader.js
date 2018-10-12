@@ -58,7 +58,6 @@ export class MenuHeader extends Component {
             {
               this.state.userId ? (
                 <div>
-
                   <div className="activeUser">
                     {/* <Link to='/login' className='btn btn-outlined' onClick={() => this.logout()}>Log Out</Link> */}
                     <Link className="btn btn-white" to="/company/post/create">
