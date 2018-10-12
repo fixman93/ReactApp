@@ -45,6 +45,7 @@ class LoginForm extends Component {
         onCompleted={async data => {
           await localStorage.setItem('token', data.tokenAuth.token)
           await localStorage.setItem('userId', data.tokenAuth.id)
+          await localStorage.setItem('type', 'Company')
           await history.push('/company/profile')
         }}
       >

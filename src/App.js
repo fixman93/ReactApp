@@ -21,7 +21,7 @@ import 'assets/styles/main.css'
 import PrivateRoute from './containers/PrivateRoute'
 
 class App extends Component {
-  render () {
+  render() {
     return (
       <Router>
         <Switch>

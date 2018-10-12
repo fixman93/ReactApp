@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { Link } from "react-router-dom"
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
@@ -30,8 +30,8 @@ export class MenuHeader extends Component {
   logout() {
     localStorage.clear()
   }
-  render () {
-    const {match} = this.props
+  render() {
+    const { match } = this.props
     if (match.path === '/' || match.path === '/company-landing') {
       return (
         <div className='menu-header row'>
@@ -39,8 +39,8 @@ export class MenuHeader extends Component {
             <Link
               className='logo'
               to='/'><img src={whiteLogo}
-              alt='OneApp Logotype'
-            />
+                alt='OneApp Logotype'
+              />
             </Link>{/*  <span>OneApp</span> if you want to use logo text */}
           </div>
           <div className='col-6 text-center'>
@@ -54,18 +54,18 @@ export class MenuHeader extends Component {
             }
           </div>
           <div className='col btn-holder text-right'>
-            
+
             {
               this.state.userId ? (
                 <div>
-                  
+
                   <div className="activeUser">
-                  {/* <Link to='/login' className='btn btn-outlined' onClick={() => this.logout()}>Log Out</Link> */}
+                    {/* <Link to='/login' className='btn btn-outlined' onClick={() => this.logout()}>Log Out</Link> */}
                     <Link className="btn btn-white" to="/company/post/create">
                       Post Job
                     </Link>
                     <div className="userDropdown">
-                      <img src={CompanyLogo} onClick={this.handleMenu} alt="User Logo"  />
+                      <img src={CompanyLogo} onClick={this.handleMenu} alt="User Logo" />
 
                       {this.state.show && (
                         <ul>
@@ -78,29 +78,29 @@ export class MenuHeader extends Component {
                   </div>
                 </div>
               ) : <span>
-                <Link
-                  className="btn btn-white" 
-                  to={
-                    match.path === '/company-landing'
-                      ? '/company/register'
-                      : '/talent/register'
-                  }
-                >
-                  {match.path === '/company-landing'
-                    ? 'Company Sign Up'
-                    : 'Talent Sign Up'
-                  }
-                </Link>
-                <Link 
-                className='btn btn-outlined'
-                to={
-                  match.path === '/company-landing'
-                    ? '/login'
-                    : '/talent/login'
-                } >Log In</Link>
-              </span>
+                  <Link
+                    className="btn btn-white"
+                    to={
+                      match.path === '/company-landing'
+                        ? '/company/register'
+                        : '/talent/register'
+                    }
+                  >
+                    {match.path === '/company-landing'
+                      ? 'Company Sign Up'
+                      : 'Talent Sign Up'
+                    }
+                  </Link>
+                  <Link
+                    className='btn btn-outlined'
+                    to={
+                      match.path === '/company-landing'
+                        ? '/login'
+                        : '/talent/login'
+                    } >Log In</Link>
+                </span>
             }
-            
+
           </div>
         </div>
       )
