@@ -41,54 +41,107 @@ export class TalentHeader extends Component {
     }
     render() {
         const { match, activeId } = this.props
-        return (
-            <div className='menu-header  TalentHeader'>
-                <div className='container'>
-                    <div className="row">
-                        <div className='col'>
-                            <Link
-                                className='logo'
-                                to='/'>
-                                {match.path === '/talent/register' ||
-                                    match.path === '/talent/profile' ? (
-                                        <img src={whiteLogo} alt='OneApp Logo' />
-                                    ) : <img src={blueLogo} alt='OneApp Logo' />}
-                            </Link>{/*  <span>OneApp</span> if you want to use logo text */}
-                        </div>
-                        <div className='col-6 text-center'>
-                            {match.path === '/talent/register' && (
-                                <Steps activeId={activeId} />
-                            )}
-                        </div>
-                        {
-                            match.path === '/talent/complite-profile' ? (
-                                <div className='col btn-holder text-right'>
-                                    <ul>
-                                        <li>
-                                            {match.path === '/talent/register' ? (
-                                                <Link className='btn btn-close' to='/'>close</Link>
-                                            ) : <MenuButton path='/' name='Complete Profile' match={this.props.match} />}
-                                        </li>
-                                    </ul>
-                                </div>
-                            ) : <div>
-                                    <div className="activeUser">
-                                        <div className="userDropdown">
-                                            <img src={CompanyLogo} onClick={this.handleMenu} alt="User Logo" />
+        if (this.state.userId) {
+            return (
+                <div className='menu-header  TalentHeader'>
+                    <div className='container'>
+                        <div className="row">
+                            <div className='col'>
+                                <Link
+                                    className='logo'
+                                    to='/'>
+                                    {match.path === '/talent/register' ||
+                                        match.path === '/talent/profile' ? (
+                                            <img src={whiteLogo} alt='OneApp Logo' />
+                                        ) : <img src={blueLogo} alt='OneApp Logo' />}
+                                </Link>{/*  <span>OneApp</span> if you want to use logo text */}
+                            </div>
+                            <div className='col-6 text-center'>
+                                {
+                                    match.path === '/talent/register'
+                                    && (
+                                        <Steps activeId={activeId} />
+                                    )}
+                            </div>
+                            {
+                                match.path === '/talent/complite-profile'
+                                    ? (
+                                        <div className='col btn-holder text-right'>
+                                            <ul>
+                                                <li>
+                                                    {match.path === '/talent/register' ? (
+                                                        <Link className='btn btn-close' to='/'>close</Link>
+                                                    ) : <MenuButton path='/' name='Complete Profile' match={this.props.match} />}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    ) :
+                                    <div className="col">
+                                        <div className="activeUser">
+                                            <div className="userDropdown">
+                                                <img src={CompanyLogo} onClick={this.handleMenu} alt="User Logo" />
 
-                                            {this.state.show && (
-                                                <ul>
-                                                    <li><Link to="/talent/profile">Edit Account</Link></li>
-                                                    <li><Link to="/login" onClick={() => this.logout()}>Log Out</Link></li>
-                                                </ul>
-                                            )}
+                                                {this.state.show && (
+                                                    <ul>
+                                                        <li><Link to="/talent/profile">Edit Account</Link></li>
+                                                        <li><Link to="/login" onClick={() => this.logout()}>Log Out</Link></li>
+                                                    </ul>
+                                                )}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>}
+                            }
+                        </div>
                     </div>
                 </div>
-            </div>
-        )
+            )
+        }
+        else {
+            return (
+                <div className='menu-header  TalentHeader'>
+                    <div className='container'>
+                        <div className="row">
+                            <div className='col'>
+                                <Link
+                                    className='logo'
+                                    to='/'>
+                                    {match.path === '/talent/register' ||
+                                        match.path === '/talent/profile' ? (
+                                            <img src={whiteLogo} alt='OneApp Logo' />
+                                        ) : <img src={blueLogo} alt='OneApp Logo' />}
+                                </Link>{/*  <span>OneApp</span> if you want to use logo text */}
+                            </div>
+                            <div className='col-6 text-center'>
+                                {
+                                    match.path === '/talent/register'
+                                    && (
+                                        <Steps activeId={activeId} />
+                                    )}
+                            </div>
+                            {
+                                match.path === '/talent/complite-profile' ||
+                                    match.path === '/talent/register'
+                                    ? (
+                                        <div className='col btn-holder text-right'>
+                                            <ul>
+                                                <li>
+                                                    {match.path === '/talent/register' ? (
+                                                        <Link className='btn btn-close' to='/'>close</Link>
+                                                    ) : <MenuButton path='/' name='Complete Profile' match={this.props.match} />}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    ) :
+                                    <div className="col">
+
+                                    </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+
     }
 }
 
