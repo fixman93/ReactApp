@@ -241,7 +241,14 @@ export class CompanyInformation extends Component {
                           </div>
                         </div>
                         <div className="uploadLogo">
-                          <button type="submit" className="btn">Upload Image</button>
+                          <Input
+                            id='logo'
+                            type='file'
+                            name='logo'
+                            className='AboutCompany'
+                            defaultValue={employer && employer.logo}
+                            propsRef={this.containerRef}
+                          />
                         </div>
                       </div>
                       <div className="login-button-container">

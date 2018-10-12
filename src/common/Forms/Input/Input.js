@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import './Input.css'
 
@@ -13,7 +13,7 @@ export class Input extends Component {
     className: PropTypes.string
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       value: '',
@@ -46,7 +46,7 @@ export class Input extends Component {
     this.inputRef.current.focus()
   }
 
-  render () {
+  render() {
     const {
       id,
       label,
@@ -75,11 +75,11 @@ export class Input extends Component {
             value={this.state.value}
             onChange={this.handleChange}
           />
-        ): (
-          <p onClick={() => this.handleInputActivate()}>{defaultValue}</p>
-        )}
+        ) : (
+            <p onClick={() => this.handleInputActivate()}>{defaultValue}</p>
+          )}
       </div>
-    )   
+    )
   }
 }
 
