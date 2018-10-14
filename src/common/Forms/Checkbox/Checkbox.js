@@ -15,9 +15,9 @@ class Checkbox extends Component {
     nameClass: PropTypes.string
   }
 
-  handleChange = value => {
+  handleChange = () => {
     this.setState({
-      value
+      value: !this.state.value
     })
   }
 

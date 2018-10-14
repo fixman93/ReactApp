@@ -20,21 +20,22 @@ allCompanies {
 export const AllAplications = () => (
   <div>
     <Query query={ALL_APLICATIONS}>
-    {({ loading, error, data }) => {
-      if (loading) return "Loading..."
-      if (error) return `Error! ${error.message}`
-      console.log(data.allCompanies.edges)
-      return (
-        <select name="jobs" >
-          {data.allCompanies.edges.map(job => (
-            <option key={job.node.id} value={job.node.id}>
-              {job.node.id}
-            </option>
-          ))}
-        </select>
-      )
-    }}
-  </Query>
+      {({ loading, error, data }) => {
+        if (loading) return "Loading..."
+        if (error) return `Error! ${error.message}`
+        console.log(data.allCompanies.edges)
+        return (
+          <select name="jobs" >
+            {data.allCompanies.edges.map(job => (
+              <option key={job.node.id} value={job.node.id}>
+                {job.node.id}
+                {job.node.skill}
+              </option>
+            ))}
+          </select>
+        )
+      }}
+    </Query>
     <TalentApplication
       candidate={{
         name: 'James Peterson',
@@ -53,7 +54,7 @@ export const AllAplications = () => (
         skills: ['Sketch', 'Adobe Photoshop', 'Adobe Illustrator', 'Adobe InDesign', 'User Experience', 'User Interface', 'Managin Team', 'Prototyping', 'iOS App', 'Android App', 'Principle', 'Axure', 'Basic HTML/CSS', 'Wordpress']
       }}
     />
-    <TalentApplication 
+    <TalentApplication
       candidate={{
         name: 'Peter Smith',
         position: 'UI & UX Designer at Microsoft | Available in 2 weeks',

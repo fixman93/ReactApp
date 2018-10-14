@@ -35,6 +35,7 @@ class TalentRegister extends Component {
   };
 
   handleStep = (formRef, optionalData) => {
+    console.log(formRef)
     const { userId } = this.state;
     let data = {};
     const elements = formRef.current.elements;

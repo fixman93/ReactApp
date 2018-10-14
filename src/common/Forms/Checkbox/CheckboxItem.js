@@ -8,7 +8,7 @@ const CheckboxItem = ({ option, onChange, defaultValue }) => (
       id={option.id}
       name={option.name}
       value={option.value}
-      onChange={() => onChange(option.value)}
+      onChange={() => onChange()}
       checked={option.value === defaultValue}
     />
     <label htmlFor={option.id}>

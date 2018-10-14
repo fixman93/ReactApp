@@ -71,13 +71,32 @@ export class CompanyInformation extends Component {
     }
   }
 
-  handleSubmit = () => {
+  handleSubmit = async () => {
+
     const elements = this.formRef.current.elements
     let data = {}
     for (let i = 0; i < elements.length; i++) {
       if (elements[i].value !== '') {
-        data[elements[i].name] = elements[i].value
+        if (elements[i].name === 'logo') {
+          const reader = new FileReader();
+          reader.readAsDataURL(elements[i].files[0]);
+          reader.onload = async () => {
+            //console.log(reader.result);
+            data['logo'] = await reader.result;
+            // setTimeout(() => {
+            //   console.log('data', data);
+            //   data[elements[i].name] = reader.result;
+            // }, 2000);
+          };
+          reader.onerror = function (error) {
+            console.log('Error: ', error);
+          };
+        } else {
+          data[elements[i].name] = elements[i].value
+        }
       }
+
+      console.log('elements', elements)
     }
     this.setState({
       input: {

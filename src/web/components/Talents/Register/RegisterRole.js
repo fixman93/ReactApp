@@ -48,22 +48,6 @@ class RegisterRole extends Component {
     });
   };
 
-  handleSubmit = async () => {
-    const elements = this.formRef.current.elements;
-    let data = {};
-    for (let i = 0; i < elements.length; i++) {
-      if (elements[i].value !== "") {
-        data[elements[i].name] = elements[i].value;
-      }
-    }
-    this.setState(prevState => ({
-      input: {
-        ...prevState.input,
-        ...data
-      }
-    }));
-  };
-
   handleError = (inputName, value, checked) => {
     if (!value) {
       console.log('error', inputName)
@@ -81,7 +65,6 @@ class RegisterRole extends Component {
     return (
       <Query query={GET_SKILLS}>
         {data => {
-          console.log(data);
           //   const skills = data && data.data && data.data.allSkills;
           // data.data.allSkills.edges;
 
@@ -91,11 +74,7 @@ class RegisterRole extends Component {
               className="form"
               onSubmit={async e => {
                 e.preventDefault();
-                await this.handleSubmit();
-                await onSubmit(this.formRef, {
-                  roleId: this.state.roleId,
-                  employerId: this.state.userId
-                });
+                await onSubmit(this.formRef);
               }}
             >
               <FeaturedTitle
@@ -130,25 +109,20 @@ class RegisterRole extends Component {
                   id='employmentType'
                   name='contractLength'
                   options={[
-                    { name: 'permanent', id: 'permanent', label: 'Permanent (Full Time)', value: true },
+                    { name: 'permanent', id: 'permanent', label: 'Permanent (Full Time)', value: true }
+                  ]}
+                  errors={errors.contractLength}
+                />
+                <Checkbox
+                  label='1. What type of employment are you looking for?'
+                  desc='(Select if apply)'
+                  id='employmentType'
+                  name='contractLength'
+                  options={[
                     { name: 'contract', id: 'contract', label: 'Contract (Fixed Term)', value: true }
                   ]}
                   errors={errors.contractLength}
                 />
-                <input
-                  type="checkbox"
-                  name="permanentl"
-                  value={true}
-                  id="permanentl"
-                />
-                <label htmlFor="permanentl">Permanent</label>
-                <input
-                  type="checkbox"
-                  name="contractl"
-                  value={true}
-                  id="contractl"
-                />
-                <label htmlFor="contractl">Contract</label>
                 <SkillList
                   skills={skills}
                   onRemove={this.handleRemoveSkill}
