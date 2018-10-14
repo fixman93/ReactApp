@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
+import { withRouter } from 'react-router-dom'
 import Input from "common/Forms/Input"
 import UIContainer from "common/UIContainer"
 import FeaturedTitle from "common/FeaturedTitle"
@@ -78,4 +79,4 @@ export class RegisterDetail extends Component {
   }
 }
 
-export default RegisterDetail;
+export default withRouter(RegisterDetail)

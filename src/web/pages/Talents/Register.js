@@ -54,6 +54,8 @@ class TalentRegister extends Component {
     this.nextPage();
   };
 
+
+
   // @TODO: figure out if each step should save the data to the server
   render() {
     const { input, page } = this.state;
