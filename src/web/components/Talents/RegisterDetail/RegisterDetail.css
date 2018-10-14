@@ -1,0 +1,19 @@
+.TalentRegistration .mainContainer .panel.RegisterDetail {
+  max-width: 430px;
+  margin: auto;
+  min-height: inherit;
+}
+
+.TalentRegistration img.RegisterHand {
+  bottom: -372px;
+}
+
+.TalentRegistration .form .panel.RegisterDetail > .form-input-group {
+  padding-bottom: 56px;
+}
+
+@media (max-height: 920px) {
+  .TalentRegistration img.RegisterHand {
+    bottom: -273px;
+  }
+}
