@@ -4,6 +4,7 @@ import MenuButton from 'common/MenuButton'
 import { withRouter } from 'react-router-dom'
 import { Link } from "react-router-dom"
 import Steps from './Steps'
+import RegisterSteps from './RegisterSteps'
 import whiteLogo from 'assets/images/logo-white.svg'
 import blueLogo from 'assets/images/logo-blue.svg'
 import CompanyLogo from '../../assets/images/Company/1@3x.png'
@@ -51,7 +52,8 @@ export class TalentHeader extends Component {
                                     className='logo'
                                     to='/'>
                                     {match.path === '/talent/register' ||
-                                        match.path === '/talent/profile' ? (
+                                        match.path === '/talent/profile' ||
+                                        match.path === '/talent/complite-registration' ? (
                                             <img src={whiteLogo} alt='OneApp Logo' />
                                         ) : <img src={blueLogo} alt='OneApp Logo' />}
                                 </Link>{/*  <span>OneApp</span> if you want to use logo text */}
@@ -61,6 +63,11 @@ export class TalentHeader extends Component {
                                     match.path === '/talent/register'
                                     && (
                                         <Steps activeId={activeId} />
+                                    )}
+                                {
+                                    match.path === '/talent/complite-registration'
+                                    && (
+                                        <RegisterSteps activeId={activeId} />
                                     )}
                             </div>
                             {

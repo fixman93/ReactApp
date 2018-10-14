@@ -18,6 +18,7 @@ import TalentRegister from 'web/pages/Talents/Register'
 import CompliteProfile from './web/pages/Talents/CompliteProfile'
 import TalentProfile from './web/pages/Talents/Profile/Profile'
 import RegisterEmail from './web/components/Talents/RegisterEmail'
+import CompliteProfileForm from './web/pages/Talents/CompliteRegistration/CompliteRegistration'
 import 'bootstrap-css-only'
 import 'assets/styles/main.css'
 import PrivateRoute from './containers/PrivateRoute'
@@ -47,6 +48,7 @@ class App extends Component {
           <Route path='/talent/complite-profile' component={CompliteProfile} />
           <Route path='/talent/email' component={RegisterEmail} />
           <PrivateRoute path='/talent/profile' component={TalentProfile} />
+          <PrivateRoute path='/talent/complite-registration' component={CompliteProfileForm} />
           {/* End of Talent pages */}
           <Route path='/' component={TalentLanding} />
           <Redirect to='/' />

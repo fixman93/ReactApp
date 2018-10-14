@@ -6,13 +6,13 @@ import PropTypes from 'prop-types'
 
 
 
-const UserTalent = ({ heading, children, match }) => (
-  
-  <div className='talent-page'>
+const UserTalent = ({ heading, children, match, CompliteProfileClass }) => (
+
+  <div className={'talent-page ' + CompliteProfileClass}>
     <div className={
       match.path === '/talent/complite-profile'
-      ? 'container-fluid'
-      : 'container'
+        ? 'container-fluid'
+        : 'container'
     }>
       <TalentHeader match={match} />
       <FeaturedTitle
