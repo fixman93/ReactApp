@@ -1,5 +1,7 @@
 .TalentRegistration .post-page {
     background: var(--main-blue);
+    min-height: 100vh;
+    overflow: hidden;
 }
 
 .TalentRegistration .TalentHeader {

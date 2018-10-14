@@ -92,3 +92,18 @@
 .talent-page .container-fluid .featured-title {
     padding-bottom: 45px;
 }
+
+.menu-header.TalentHeader .btn:not(:last-child) {
+    margin-right: 30px;
+}
+
+.menu-header.TalentHeader .btn.btn-outline-orange.active {
+    color: #00c1d8;
+    opacity: 1;
+    background-color: white;
+}
+
+.menu-header.TalentHeader .btn.btn-outline-orange {
+    background-color: transparent;
+    opacity: 0.5;;
+}

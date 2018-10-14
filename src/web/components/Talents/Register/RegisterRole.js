@@ -7,6 +7,7 @@ import Checkbox from "common/Forms/Checkbox"
 import { Query } from "react-apollo";
 import SkillList from "web/components/common/SkillList";
 import NewSkill from "web/components/common/NewSkill";
+import BlueArrow from '../../../../assets/images/blue-arrow.svg'
 import "./RegisterRole.css";
 import { GET_SKILLS } from "../../../../services/queries";
 
@@ -109,43 +110,37 @@ class RegisterRole extends Component {
                   id='employmentType'
                   name='contractLength'
                   options={[
-                    { name: 'permanent', id: 'permanent', label: 'Permanent (Full Time)', value: true }
-                  ]}
-                  errors={errors.contractLength}
-                />
-                <Checkbox
-                  label='1. What type of employment are you looking for?'
-                  desc='(Select if apply)'
-                  id='employmentType'
-                  name='contractLength'
-                  options={[
+                    { name: 'permanent', id: 'permanent', label: 'Permanent (Full Time)', value: true },
                     { name: 'contract', id: 'contract', label: 'Contract (Fixed Term)', value: true }
                   ]}
                   errors={errors.contractLength}
                 />
-                <SkillList
-                  skills={skills}
-                  onRemove={this.handleRemoveSkill}
-                  onClick={this.handleSkillDropdownClick}
-                />
-                {newSkillInputActive && (
-                  <NewSkill
-                    placeholder="Enter new skill..."
-                    data={data}
-                    onAdd={this.handleAddSkill}
+                <div className="SelectSkills form-input-group">
+                  <label>2. What are your skills? <span>Tag a maximum of 15, include technical, soft & management skills</span></label>
+                  <SkillList
+                    skills={skills}
+                    onRemove={this.handleRemoveSkill}
+                    onClick={this.handleSkillDropdownClick}
                   />
-                )}
+                  {newSkillInputActive && (
+                    <NewSkill
+                      placeholder="Enter new skill..."
+                      data={data}
+                      onAdd={this.handleAddSkill}
+                    />
+                  )}
+                </div>
               </UIContainer>
               <div className="button-container">
-                <button
+                {/* <button
                   type="button"
                   className="btn btn-white-orange no-background"
                   onClick={() => onBack()}
                 >
                   Back
-                </button>
-                <button type="submit" className="btn btn-white-orange">
-                  Next
+                </button> */}
+                <button type="submit" className="btn btn-white-blue">
+                  Next <img src={BlueArrow} />
                 </button>
               </div>
             </form>

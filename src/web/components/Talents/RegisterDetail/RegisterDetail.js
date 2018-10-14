@@ -1,10 +1,11 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import Input from "common/Forms/Input";
-import UIContainer from "common/UIContainer";
-import FeaturedTitle from "common/FeaturedTitle";
-import ErrorMessage from "common/Error/ErrorMessage";
+import React, { Component } from "react"
+import PropTypes from "prop-types"
+import Input from "common/Forms/Input"
+import UIContainer from "common/UIContainer"
+import FeaturedTitle from "common/FeaturedTitle"
+import ErrorMessage from "common/Error/ErrorMessage"
 import RegisterHand from "../../../../assets/images/CompanyRegistration/hands-holding@3x.png";
+import './RegisterDetail.css'
 
 export class RegisterDetail extends Component {
   static propTypes = {
@@ -42,7 +43,7 @@ export class RegisterDetail extends Component {
           desc={heading.desc}
           color={heading.color}
         />
-        <UIContainer>
+        <UIContainer className="RegisterDetail">
           <Input
             id="FullName"
             label="1. Full name"
@@ -65,13 +66,13 @@ export class RegisterDetail extends Component {
             name="password"
           />
           {error && <ErrorMessage message={error} />}
-          <div className="login-button-container">
-            <button type="submit" className="button">
-              Create Profile
-            </button>
-          </div>
-          <img src={RegisterHand} alt="Company Hand" className="RegisterHand" />
         </UIContainer>
+        <div className="login-button-container">
+          <button type="submit" className="btn btn-white-blue">
+            Create Profile
+            </button>
+        </div>
+        <img src={RegisterHand} alt="Company Hand" className="RegisterHand" />
       </form>
     );
   }

@@ -1,0 +1,26 @@
+.SelectSkills {
+  margin-top: 30px;
+}
+
+.TalentRegistration .mainContainer .panel {
+  min-height: 500px;
+  padding: 0px 60px 50px;
+}
+
+.TalentRegistration .featured-title {
+  margin: 40px 0 0;
+}
+
+.TalentRegistration .mainContainer {
+    margin-top: 41px;
+}
+
+button.btn.btn-white-blue {
+  font-size: 12px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #00c1d8;
+}
