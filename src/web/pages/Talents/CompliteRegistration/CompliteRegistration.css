@@ -5,3 +5,197 @@
 .talent-page.TalentComplete-Registration .featured-title {
   background: transparent;
 }
+
+.videoBox {
+  position: relative;
+  max-width: 410px;
+  width: 100%;
+  margin: auto;
+  top: -155px;
+  margin-bottom: -60px;
+  border-radius: 10px;
+  max-height: 205px;
+  z-index: 100;
+}
+
+.Video {
+  text-align: center;
+  position: relative;
+}
+
+.videoImage {
+  position: absolute;
+  max-width: 410px;
+  width: 100%;
+  margin: auto;
+  top: -155px;
+  margin-bottom: -60px;
+  left: 0;
+  right: 0;
+  height: 205px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.videoImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.Video .StartRecording {
+  border-radius: 10px;
+  box-shadow: 0 4px 10px 0 rgba(203, 203, 203, 0.6);
+  background-color: #ff955a;
+  font-size: 12px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+}
+
+.Video .StopRecording {
+  border-radius: 10px;
+  box-shadow: 0 4px 10px 0 rgba(203, 203, 203, 0.6);
+  background-color: #f52435;
+  font-size: 12px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+}
+
+.panel.StepFive {
+  margin-top: 188px;
+  padding-bottom: 50px;
+}
+
+.Video h2 {
+  width: 353px;
+  font-family: Muli;
+  font-size: 32px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #333333;
+  margin: auto;
+  margin-bottom: 30px;
+}
+
+.login-page.talent-page .featured-title h3 {
+  font-size: 32px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #ffffff;
+}
+
+.login-page.talent-page .featured-title p {
+  font-size: 16px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 0;
+}
+
+.talent-page .mainContainer {
+  margin-top: 40px;
+}
+
+.TalentComplete-Registration .talent-page .mainContainer .panel > div:first-child {
+  padding-top: 60px;
+}
+
+.talent-page.TalentComplete-Registration .dropdown {
+  min-width: 210px;
+}
+
+.TalentComplete-Registration .login-page .panel {
+  min-height: 505px;
+}
+
+.TalentComplete-Registration .login-page  .button-container {
+  padding-bottom: 40px;
+}
+
+.videoExample {
+  text-align: center;
+  margin-top: 40px;
+  width: 654px;
+  height: 368px;
+  margin: 40px auto 0;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 5px solid white;
+  position: relative;
+}
+
+.videoExample iframe {
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+}
+
+.videoExample:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.55);
+  top: 0;
+  left: 0;
+}
+
+.video-content {
+  position: absolute;
+  top: 0;
+  z-index: 10;
+  color: white;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  height: 80px;
+}
+
+.video-content h2 {
+  font-size: 32px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 0px;
+}
+
+.video-content p {
+  font-size: 16px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+}
+
+.panel.StepFive {
+  margin-bottom: 40px;
+}

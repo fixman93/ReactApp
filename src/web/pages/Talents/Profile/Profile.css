@@ -19,3 +19,7 @@
   letter-spacing: normal;
   color: #000000;
 }
+
+.ProfileLink a img {
+  margin-right: 10px;
+}

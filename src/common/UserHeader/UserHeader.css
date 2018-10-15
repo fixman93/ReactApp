@@ -37,6 +37,8 @@
   max-width: 40px;
   margin-left: 20px;
   cursor: pointer;
+  border: 3px solid white;
+  border-radius: 50%;
 }
 
 .userDropdown {

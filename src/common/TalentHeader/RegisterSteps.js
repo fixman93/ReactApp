@@ -15,27 +15,27 @@ class Steps extends Component {
         <StepButton
           activeId={activeId}
           id={1}
-          text='Role'
+          text='Preferences'
         />
         <StepButton
           activeId={activeId}
           id={2}
-          text='Details'
+          text='Current'
         />
         <StepButton
           activeId={activeId}
           id={3}
-          text='Details'
+          text='Skills'
         />
         <StepButton
           activeId={activeId}
           id={4}
-          text='Details'
+          text='Links'
         />
         <StepButton
           activeId={activeId}
           id={5}
-          text='Details'
+          text='Video'
         />
       </Fragment>
     )

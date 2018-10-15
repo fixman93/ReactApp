@@ -7,7 +7,7 @@ import Steps from './Steps'
 import RegisterSteps from './RegisterSteps'
 import whiteLogo from 'assets/images/logo-white.svg'
 import blueLogo from 'assets/images/logo-blue.svg'
-import CompanyLogo from '../../assets/images/Company/1@3x.png'
+import CompanyLogo from '../../assets/images/userProfile.png'
 import './TalentHeader.css'
 
 export class TalentHeader extends Component {

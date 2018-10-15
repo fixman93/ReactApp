@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import TalentHeader from '../../../../common/TalentHeader'
 import ProfileImage from 'assets/images/Talents/5.png'
+import LinkImage from 'assets/images/portfolio.svg'
 import Pound from 'assets/images/pound.png'
 import './Profile.css'
 
@@ -17,7 +18,7 @@ export class Profile extends Component {
                 <img src={ProfileImage} alt="profile image" />
               </div>
               <div className="ProfileLink">
-                <a href="http://www.google.com">Portfolio</a>
+                <a href="http://www.google.com"><img src={LinkImage} />Portfolio</a>
               </div>
             </div>
             <div className="UserInfo row">
