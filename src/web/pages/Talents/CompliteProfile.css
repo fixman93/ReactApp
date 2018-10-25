@@ -37,7 +37,7 @@
   -webkit-transform: rotate(0deg);
   -ms-transform: rotate(0deg);
   transform: rotate(0deg);
-  border: 2px dashed #ff955a;
+  border: 2px dashed #00c1d8;
   border-radius: 100%;
 }
 
@@ -46,6 +46,8 @@
   margin-right: 20px;
   padding: 12px;
   cursor: pointer;
+  width: 185px;
+  height: 185px;
 }
 
 .ProfileImage:hover:after {
@@ -86,7 +88,7 @@
   font-stretch: normal;
   line-height: normal;
   letter-spacing: normal;
-  color: #333333;
+  color: #fff;
   margin-bottom: 10px;
 }
 
@@ -97,7 +99,7 @@
   font-stretch: normal;
   line-height: normal;
   letter-spacing: normal;
-  color: #333333;
+  color: #fff;
   margin-bottom: 20px;
 }
 
@@ -108,7 +110,7 @@
   font-stretch: normal;
   line-height: normal;
   letter-spacing: normal;
-  color: #000000;
+  color: #fff;
 }
 
 .UserInfo .experience b {
@@ -118,7 +120,7 @@
   font-stretch: normal;
   line-height: normal;
   letter-spacing: normal;
-  color: #000000;
+  color: #fff;
   margin-left: 5px;
 }
 
@@ -137,7 +139,7 @@
   font-stretch: normal;
   line-height: normal;
   letter-spacing: normal;
-  color: #000000;
+  color: #fff;
   margin-bottom: 15px;
 }
 
@@ -168,7 +170,7 @@
   font-stretch: normal;
   line-height: normal;
   letter-spacing: normal;
-  color: #000000;
+  color: #fff;
 }
 
 .seeking ul li b {
@@ -178,7 +180,7 @@
   font-stretch: normal;
   line-height: normal;
   letter-spacing: normal;
-  color: #000000;
+  color: #fff;
 }
 
 .skills h3 {
@@ -188,7 +190,7 @@
   font-stretch: normal;
   line-height: normal;
   letter-spacing: normal;
-  color: #000000;
+  color: #fff;
   margin-bottom: 15px;
 }
 
@@ -209,7 +211,7 @@
   font-stretch: normal;
   line-height: normal;
   letter-spacing: normal;
-  color: #000000;
+  color: #fff;
   padding: 4px 10px;
 }
 

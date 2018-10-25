@@ -1,9 +1,27 @@
 import React, { Component } from 'react'
+import { Radar } from 'react-chartjs-2';
 import TalentHeader from '../../../../common/TalentHeader'
 import ProfileImage from 'assets/images/Talents/5.png'
 import LinkImage from 'assets/images/portfolio.svg'
 import Pound from 'assets/images/pound.png'
 import './Profile.css'
+
+
+const data = {
+  labels: ['Axure', 'Team management', 'User Research', 'User Testing', 'Responsive Design ', 'App Native design', 'Sketch', 'Uxpin'],
+  datasets: [
+    {
+      label: '',
+      backgroundColor: 'rgba(0, 193, 216, 0.5)',
+      borderColor: 'white',
+      pointBackgroundColor: 'rgba(179,181,198,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(179,181,198,1)',
+      data: [3, 2.5, 2.5, 2.5, 1, 3, 3, 2.5]
+    }
+  ]
+};
 
 export class Profile extends Component {
   render() {
@@ -13,17 +31,12 @@ export class Profile extends Component {
         <TalentHeader match={match} />
         <div className="Profile">
           <div className="container">
-            <div className="Profile-image-link">
-              <div className="ProfileImage">
-                <img src={ProfileImage} alt="profile image" />
-              </div>
-              <div className="ProfileLink">
-                <a href="http://www.google.com"><img src={LinkImage} />Portfolio</a>
-              </div>
-            </div>
             <div className="UserInfo row">
               <div className="col-sm-6">
-                <h2>Sarah Peterson</h2>
+                <div className="ProfileImage">
+                  <img src={ProfileImage} alt="profile image" />
+                </div>
+                <h2>Sarah Peterson <a href="http://www.google.com">Portfolio</a></h2>
                 <h3>User Experience Designer at Google Laboratories</h3>
                 <div className="experience">
                   <span>Experience in</span>
@@ -35,11 +48,12 @@ export class Profile extends Component {
                 </div>
               </div>
               <div className="col-sm-6">
-                <video width="360" height="200" controls>
+                {/* <video width="360" height="200" controls>
                   <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
                   <source src="mov_bbb.ogg" type="video/ogg" />
                   Your browser does not support HTML5 video.
-                      </video>
+                      </video> */}
+                <Radar data={data} />
               </div>
             </div>
             <div className="seeking">

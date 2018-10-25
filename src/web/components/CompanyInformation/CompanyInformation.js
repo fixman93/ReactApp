@@ -131,6 +131,7 @@ export class CompanyInformation extends Component {
                       ref={this.formRef}
                       className="form"
                       onSubmit={async e => {
+                        console.log('employer info', data)
                         e.preventDefault()
                         await this.setState({ loading: true })
                         await this.handleSubmit()

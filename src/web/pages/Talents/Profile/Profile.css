@@ -1,6 +1,10 @@
 .ProfilePage .menu-header.TalentHeader {
-  background-color: #00c1d8;
+  background-color: #0082b4;
   padding-bottom: 158px;
+}
+
+.ProfilePage .Profile {
+  background: #0082b4;
 }
 
 .Profile-image-link .ProfileLink {
