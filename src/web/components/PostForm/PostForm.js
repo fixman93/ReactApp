@@ -9,6 +9,7 @@ import Input from 'common/Forms/Input'
 import { ALL_ROLES } from 'services/queries'
 import { ADD_JOB } from 'services/mutations'
 import './PostForm.css'
+import ErrorMessage from '../../../common/Error/ErrorMessage';
 
 export class PostForm extends Component {
   static propTypes = {
@@ -61,41 +62,77 @@ export class PostForm extends Component {
     }
   }
 
-  handleSubmit = async () => {
-    const elements = this.formRef.current.elements
-    let data = {}
-    for (let i = 0; i < elements.length; i++) {
-      let element = elements[i]
-      if (element.value !== '') {
-        this.handleError(element.name, element.value)
-        data[element.name] = element.value
-      } else if (element.type === 'radio') {
-        this.handleError(element.name, element.value, element.checked)
-      }
-    }
+  setInputProperty = (element) => {
     this.setState(prevState => ({
-      input: {
-        ...prevState.input,
-        ...data
-      }
+      input: Object.assign({}, prevState.input, { [element.name]: element.value })
     }))
   }
 
-  handleError = (inputName, value, checked) => {
-    if (!value) {
-      console.log('error', inputName)
-      this.setState(prevState => ({
-        errors: {
-          ...prevState.errors,
-          [inputName]: 'This field is required'
+  setError = (whichError, error) => {
+    this.setState(prevState => ({
+      errors: Object.assign({}, prevState.errors, { [whichError]: error })
+    }))
+  }
+
+
+  handleSubmit = async () => {
+    const list = Array.from(this.formRef.current.elements);
+
+    // clear the errors
+    await this.setState({
+      errors: {}
+    })
+
+
+    // map through dom elements
+    await list.map(element => {
+
+      // if radio input, check if is checked and add to input object
+      if (element.type === 'radio') {
+        if (element.checked) {
+          this.setInputProperty(element);
         }
-      }))
+      } else {
+        // if is not radio input check if it has value
+        if (element.value !== '') {
+          // if it's roleiD add role title to input object
+
+          this.setState(prevState => ({
+            input: Object.assign({}, prevState.input, { [element.name]: element.value })
+
+          }))
+
+          // check element name and if number add else add error
+        } else if (element.name === 'remuneration') {
+          if (/^\d+$/.test(element.value)) {
+            this.setInputProperty(element);
+          } else {
+            this.setError("number", "Please type a number without spaces")
+          }
+
+        } else {
+          //else add error
+          if (element.name !== '') {
+            this.setError("global", "Please fill the form")
+          }
+
+
+        }
+      }
+
+    })
+
+    if (Object.keys(this.state.errors).length === 0) {
+      this.props.onSubmit(Object.assign({},
+        this.state.input, { roleId: this.state.roleId }));
     }
   }
 
+
+
   render() {
     const { dropdownActive, dropdownValue, input, userId, roleId, errors } = this.state
-    const { heading, onSubmit, onBack, propsData } = this.props
+    const { heading, onBack } = this.props
     return (
       <Query
         query={ALL_ROLES}
@@ -131,21 +168,17 @@ export class PostForm extends Component {
                     onSubmit={async e => {
                       e.preventDefault()
                       await this.handleSubmit()
-                      if (Object.keys(this.state.errors).length === 0) {
-                        await onSubmit(this.formRef, {
-                          roleId: this.state.roleId,
-                          employerId: this.state.userId
-                        })
-                      }
+
                     }}
                   >
                     <UIContainer className='post-form'>
+                      {errors['global'] && <ErrorMessage message={errors['global']} />}
                       <Dropdown
                         label={`1. What's the role`}
                         id='role'
                         type='text'
                         placeholder='Select from the list'
-                        name='roleId'
+                        name='role'
                         onItemClick={this.handleDropdownItemClick}
                         onInputClick={this.handleDropdownClick}
                         dropdownActive={dropdownActive}
@@ -155,6 +188,7 @@ export class PostForm extends Component {
                         refProp={this.dropdownRef}
                         errors={errors.roleId}
                       />
+
                       <Radio
                         label='2. Type of employment?'
                         desc='(Select one)'
@@ -166,6 +200,7 @@ export class PostForm extends Component {
                         ]}
                         errors={errors.contractLength}
                       />
+
                       <Radio
                         label='3. Minimum years of experience?'
                         desc='(Select one)'
@@ -181,6 +216,7 @@ export class PostForm extends Component {
                         ]}
                         errors={errors.experience}
                       />
+
                       <Input
                         label='Maximum budget for the role'
                         desc='(e.g. &pound;50,000 or &pound;400 per day)'
@@ -190,6 +226,7 @@ export class PostForm extends Component {
                         id='budget'
                         errors={errors.remuneration}
                       />
+                      {errors['number'] && <ErrorMessage message={errors['number']} />}
                       <Radio
                         label='5. How many interview stages will there be for this role?'
                         desc='(Select one)'
@@ -204,6 +241,7 @@ export class PostForm extends Component {
                         ]}
                         errors={errors.interviewStages}
                       />
+
                       <Radio
                         label='6. Expected new start date?'
                         desc='(Select one)'
@@ -219,6 +257,7 @@ export class PostForm extends Component {
                         ]}
                         errors={errors.startIn}
                       />
+
                     </UIContainer>
                     <div className="button-container">
                       <button

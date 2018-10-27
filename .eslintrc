@@ -15,10 +15,7 @@
     "babel"
   ],
   "rules": {
-    "semi": [
-      2,
-      "never"
-    ],
+    "semi": "off",
     "max-len": [
       2,
       120,

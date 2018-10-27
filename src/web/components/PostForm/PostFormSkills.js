@@ -45,8 +45,9 @@ export class PostForm extends Component {
   };
 
   render() {
-    const { heading, onBack, onSubmit } = this.props;
+    const { heading, onBack, onSubmit, propsData } = this.props;
     const { skills, newSkillInputActive } = this.state;
+
     return (
       <Query query={GET_SKILLS}>
         {data => {
@@ -64,8 +65,8 @@ export class PostForm extends Component {
                 onSubmit={async e => {
                   e.preventDefault();
                   await this.skillIds();
-                  await onSubmit(this.formRef, {
-                    skill: [...this.state.skillIds]
+                  await onSubmit({
+                    skills: [...this.state.skillIds]
                   });
                 }}
               >

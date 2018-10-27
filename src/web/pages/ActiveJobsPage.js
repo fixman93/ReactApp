@@ -3,7 +3,7 @@ import UserPage from './UserPage'
 import { ActiveJobs } from '../components/CompanyActiveJobs'
 import './LoginPage.css'
 
-export const ActiveJobsPage = ({user, match}) => (
+export const ActiveJobsPage = ({ user, match }) => (
   <UserPage
     heading={{
       title: 'Welcome Sarah!',

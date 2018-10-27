@@ -31,7 +31,6 @@ class DynamicRadio extends Component {
       <div className='form-input-group'>
         <label>{label} <span>{desc}</span></label>
         {options.answer.edges.map((option, index) => {
-          console.log(option)
           return (
             <div key={index} className='radio-input-container'>
               <input

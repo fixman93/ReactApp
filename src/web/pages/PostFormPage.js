@@ -41,37 +41,21 @@ class PostFormPage extends Component {
     }
   }
 
-  additionalData = data => {
-    console.log('ADDITIONAL DATA', data)
-    this.setState(prevState => ({
-      input: {
-        ...prevState.input,
-        jobofferSet: {
-          ...data,
-        }
-      }
-    }))
-  }
 
-  handleStep = (formRef, optionalData) => {
+
+  handleStep = (data) => {
+    console.log(this.state.input, data)
     const { userId } = this.state
-    let data = {}
-    const elements = formRef.current.elements
-    for (let i = 0; i < elements.length; i++) {
-      if (elements[i].value !== '') {
-        data[elements[i].name] = elements[i].value
-      }
-    }
     this.setState(prevState => ({
       input: {
         ...prevState.input,
         id: userId,
-        // jobofferSet: {
-        ...prevState.input.jobofferSet,
-        ...data,
-        ...optionalData,
-        // postcode: "novi sad"
-        // }
+        jobofferSet: {
+          ...prevState.input.jobofferSet,
+          ...data,
+
+          // postcode: "novi sad"
+        }
       }
     }))
     this.nextPage()
@@ -86,28 +70,18 @@ class PostFormPage extends Component {
         variables={{ id: localStorage.getItem('userId') }}
       >
         {data => {
+          const employerId = data && data.data &&
+            data.data.employer && data.data.employer.id
           const postcode = data && data.data &&
             data.data.employer && data.data.employer.postcode
-          console.log(data)
           return (
             <Mutation
               mutation={ADD_JOB}
-              variables={{
-                userId: input.id,
-                roleId: input.roleId,
-                employerId: input.id,
-                educationLevelId: input.educationLevelId,
-                contractLength: input.contractLength,
-                experience: input.experience,
-                remuneration: input.remuneration,
-                postcode: postcode,
-                spec: input.spec,
-                interviewStages: input.interviewStages,
-                startIn: input.startIn,
-                jobofferresponseSet: input.jobofferresponseSet,
-                permanent: false,
-              }}
-              onCompleted={data => this.props.history.push('/company/jobs/active')}
+
+              onCompleted={data => {
+                this.props.history.push('/company/jobs/active')
+              }
+              }
             >
               {addJobMutation => (
                 <PostPage>
@@ -151,19 +125,22 @@ class PostFormPage extends Component {
                   )}
                   {page === 4 && (
                     <PostFormPreview
-                      data={input}
+                      propsData={input}
                       queryData={data}
                       onBack={this.prevPage}
-                      handleAddData={this.additionalData}
                       onSubmit={() => {
-                        console.log(this.state)
-                        addJobMutation(
-                          // input.educationLevelId,
-                          // input.permanent,
-                          // "novi sad"
-                          // input.postcode,
-                          // input.
-                        )
+                        console.log(input.jobofferSet)
+                        addJobMutation({
+                          variables: {
+                            employerId,
+                            roleId: input.jobofferSet.roleId,
+                            educationLevelId: input.jobofferSet.educationLevelId,
+                            permanent: false,
+                            userId: this.state.userId,
+                            postcode,
+                            ...input.jobofferSet
+                          }
+                        })
                       }}
                     />
                   )}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import RadioItem from './RadioItem'
+import ErrorMessage from '../../Error/ErrorMessage';
 import './Radio.css'
 
 class Radio extends Component {
@@ -12,7 +13,7 @@ class Radio extends Component {
     label: PropTypes.string,
     options: PropTypes.array.isRequired,
     desc: PropTypes.string,
-    nameClass: PropTypes.string
+    nameClass: PropTypes.string,
   }
 
   handleChange = value => {
