@@ -5,8 +5,9 @@ import './LoginPage.css'
 import { Query } from 'react-apollo';
 import { GET_EMPLOYER } from '../../services/queries';
 
-export const ActiveJobsPage = ({ user, match }) => (
-  <Query query={GET_EMPLOYER} variables={{ id: 'RW1wbG95ZXJOb2RlOjIw' }}>
+export const ActiveJobsPage = ({ user, match }) => {
+  console.log(user)
+  return (<Query query={GET_EMPLOYER} variables={{ id: user }}>
     {({ data, loading, error }) => {
       return <React.Fragment>
         < UserPage
@@ -23,7 +24,7 @@ export const ActiveJobsPage = ({ user, match }) => (
 
       </React.Fragment>
     }}
-  </Query >
-)
+  </Query >)
+}
 
 export default ActiveJobsPage

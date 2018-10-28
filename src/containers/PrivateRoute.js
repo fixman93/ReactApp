@@ -4,17 +4,17 @@ import { Route, Redirect } from 'react-router-dom'
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
-    render={props => 
+    render={props =>
       localStorage.getItem('token') ? (
-        <Component {...props} />
-    ) : (
-      <Redirect
-        to={{
-          pathname: '/login',
-          state: { from: props.location }
-        }}
-      />
-    )
+        <Component {...props} user={localStorage.getItem('userId')} />
+      ) : (
+          <Redirect
+            to={{
+              pathname: '/login',
+              state: { from: props.location }
+            }}
+          />
+        )
     }
   />
 )
