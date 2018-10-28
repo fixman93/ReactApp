@@ -27,7 +27,8 @@ export class PostForm extends Component {
       dropdownValue: '',
       input: {},
       userId: null,
-      errors: {}
+      errors: {},
+      roleId: ""
     }
     this.formRef = React.createRef()
     this.dropdownRef = React.createRef()
@@ -73,10 +74,11 @@ export class PostForm extends Component {
   }
 
   handleDropdownItemClick = (value, id) => {
+    console.log(value, id)
     this.setState({
       dropdownValue: value,
       dropdownActive: false,
-      roleId: id
+      roleId: id,
     })
   }
 
@@ -139,7 +141,7 @@ export class PostForm extends Component {
 
             this.setState(prevState => ({
               input: Object.assign({}, prevState.input,
-                { [name]: this.state.dropdownValue })
+                { "role": this.state.dropdownValue, "roleId": this.state.roleId })
             }))
 
           } else {
@@ -155,13 +157,19 @@ export class PostForm extends Component {
           let toAdd = list.find(el => el.name == name);
 
           if (ifHasValue) {
+            if(/^[0-9\s]*$/.test(toAdd.value)) {
 
-            this.setState(prevState => ({
-              input: Object.assign({}, prevState.input, { [toAdd.name]: toAdd.value })
-            }))
+              this.setState(prevState => ({
+                input: Object.assign({}, prevState.input, { [toAdd.name]: toAdd.value })
+              }))
+            } else {
+              this.setState(prevState => ({
+                errors: Object.assign({}, prevState.errors, { [name]: 'Only numbers allowed' })
+              }))
+            }
 
           } else {
-
+            
             this.setState(prevState => ({
               errors: Object.assign({}, prevState.errors, { [name]: 'Please add budget' })
             }))
