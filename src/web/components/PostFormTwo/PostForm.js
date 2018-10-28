@@ -34,6 +34,7 @@ export class PostForm extends Component {
 
 
   handleSubmit = async () => {
+    let names = ['educationLevelId', 'managing', 'remote', 'travel', 'offer', 'spec']
     const list = Array.from(this.formRef.current.elements);
 
     // clear the errors
@@ -42,28 +43,47 @@ export class PostForm extends Component {
     })
 
 
-    // map through dom elements
-    await list.map(element => {
-      // if radio input, check if is checked and add to input object
-      if (element.type === 'radio' && element.name !== '') {
-        if (element.checked) {
-          this.setInputProperty(element);
-        }
-      } else {
-        // if is not radio input check if it has value
-        if (element.value !== '') {
-          this.setInputProperty(element);
+    await names.map(name => {
+      if (name !== 'spec') {
+
+        let isAtLeastOneChecked = list.filter(el => el.name == name && el.checked == true).length == 1 ? true : false;
+        let toAdd = list.find(el => el.name == name && el.checked);
+        console.log(isAtLeastOneChecked, name)
+        if (isAtLeastOneChecked) {
+
+          this.setState(prevState => ({
+            input: Object.assign({}, prevState.input,
+              { [toAdd.name]: toAdd.value })
+          }))
+
         } else {
-          //else add error
-          if (element.name !== '') {
-            this.setError("global", "Please fill the form")
-          }
+          this.setState(prevState => ({
+            errors: Object.assign({}, prevState.errors, { [name]: 'Please select one option' })
+          }))
+
+        }
+
+      } else {
+
+        let ifHasValue = list.find(el => el.name == name && el.value !== '') ? true : false;
+        let toAdd = list.find(el => el.name == name);
+
+        if (ifHasValue) {
+
+          this.setState(prevState => ({
+            input: Object.assign({}, prevState.input, { [toAdd.name]: toAdd.value })
+          }))
+
+        } else {
+
+          this.setState(prevState => ({
+            errors: Object.assign({}, prevState.errors, { [name]: 'Please add job specifications' })
+          }))
+
         }
       }
 
     })
-
-
   }
 
 
@@ -105,7 +125,7 @@ export class PostForm extends Component {
                 }}
               >
                 <UIContainer className='post-form'>
-                  {errors['global'] && <ErrorMessage message={errors['global']} />}
+
                   {educationLevels && (
                     <EducationRadio
                       label='1. Highest level of education?'
@@ -115,6 +135,7 @@ export class PostForm extends Component {
                       options={educationLevels}
                     />
                   )}
+                  {errors.educationLevelId && <ErrorMessage message={errors.educationLevelId} />}
                   {questions && questions[0] && (
                     <DynamicRadio
                       label={`2. ${questions[0].node.question.standardquestion.question.question}`}
@@ -124,6 +145,7 @@ export class PostForm extends Component {
                       options={questions[0].node.question}
                     />
                   )}
+                  {errors.remote && <ErrorMessage message={errors.remote} />}
                   {questions && questions[1] && (
                     <DynamicRadio
                       label={`3. ${questions[1].node.question.standardquestion.question.question}`}
@@ -133,6 +155,7 @@ export class PostForm extends Component {
                       options={questions[1].node.question}
                     />
                   )}
+                  {errors.managing && <ErrorMessage message={errors.managing} />}
                   {questions && questions[2] && (
                     <DynamicRadio
                       label={`4. ${questions[2].node.question.standardquestion.question.question}`}
@@ -142,17 +165,19 @@ export class PostForm extends Component {
                       options={questions[2].node.question}
                     />
                   )}
+                  {errors.travel && <ErrorMessage message={errors.travel} />}
 
                   <Radio
                     label='5. Will you offer Visa sponsorship?'
                     desc='(Select one)'
                     id='experience'
-                    name='offersSponsorship'
+                    name='offer'
                     options={[
                       { id: '8', label: 'Yes', value: true, name: 'offer' },
                       { id: '9', label: 'No', value: false, name: 'offer' }
                     ]}
                   />
+                  {errors.offer && <ErrorMessage message={errors.offer} />}
                   <Input
                     label='6. Any additional comments?'
                     desc='(On the talent you’re looking for or the role specifications)'
@@ -161,6 +186,7 @@ export class PostForm extends Component {
                     type='text'
                     id='spec'
                   />
+                  {errors.spec && <ErrorMessage message={errors.spec} />}
                 </UIContainer>
                 <div className="button-container">
                   <button

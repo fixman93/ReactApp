@@ -110,47 +110,67 @@ export class PostForm extends Component {
       errors: {}
     })
 
-    await console.log(list.filter(el => el.name == 'contractLength'))
 
-    // map through dom elements
-    await list.map(element => {
+    await names.map(name => {
+      if (name !== 'remuneration' && name !== 'roleId') {
 
-      // if radio input, check if is checked and add to input object
-      if (element.type === 'radio') {
-        if (element.checked) {
-          this.setInputProperty(element);
-        }
-      } else {
-        // if is not radio input check if it has value
-        if (element.name === 'remuneration') {
-          if (/^\d+$/.test(element.value)) {
-            this.setInputProperty(element);
-          } else {
-            this.setError("number", "Please type a number without spaces")
-          }
-        }
-        else if (element.value !== '') {
-          // if it's roleiD add role title to input object
+        let isAtLeastOneChecked = list.filter(el => el.name == name && el.checked == true).length == 1 ? true : false;
+        let toAdd = list.find(el => el.name == name && el.checked);
+
+        if (isAtLeastOneChecked) {
 
           this.setState(prevState => ({
-            input: Object.assign({}, prevState.input, { [element.name]: element.value })
-
+            input: Object.assign({}, prevState.input,
+              { [toAdd.name]: toAdd.value })
           }))
 
-          // check element name and if number add else add error
-
-
         } else {
-          //else add error
-          if (element.name !== '') {
-            this.setError("global", "Please fill the form")
-          }
-
+          this.setState(prevState => ({
+            errors: Object.assign({}, prevState.errors, { [name]: 'Please select one option' })
+          }))
 
         }
-      }
 
-    })
+      } else {
+        if (name === 'roleId') {
+          let hasDropdownValue = this.state.dropdownValue !== "" ? true : false
+
+          if (hasDropdownValue) {
+
+            this.setState(prevState => ({
+              input: Object.assign({}, prevState.input,
+                { [name]: this.state.dropdownValue })
+            }))
+
+          } else {
+
+            this.setState(prevState => ({
+              errors: Object.assign({}, prevState.errors, { [name]: 'Please add role' })
+            }))
+
+          }
+        } else {
+
+          let ifHasValue = list.find(el => el.name == name && el.value !== '') ? true : false;
+          let toAdd = list.find(el => el.name == name);
+
+          if (ifHasValue) {
+
+            this.setState(prevState => ({
+              input: Object.assign({}, prevState.input, { [toAdd.name]: toAdd.value })
+            }))
+
+          } else {
+
+            this.setState(prevState => ({
+              errors: Object.assign({}, prevState.errors, { [name]: 'Please add budget' })
+            }))
+
+          }
+        }
+      }
+    });
+
 
     if (Object.keys(this.state.errors).length === 0) {
       this.props.onSubmit(Object.assign({},
@@ -202,7 +222,7 @@ export class PostForm extends Component {
                     }}
                   >
                     <UIContainer className='post-form'>
-                      {errors['global'] && <ErrorMessage message={errors['global']} />}
+
                       <Dropdown
                         label={`1. What's the role`}
                         id='role'
@@ -218,7 +238,7 @@ export class PostForm extends Component {
                         refProp={this.dropdownRef}
                         errors={errors.roleId}
                       />
-
+                      {errors.roleId && <ErrorMessage message={errors.roleId} />}
                       <Radio
                         label='2. Type of employment?'
                         desc='(Select one)'
@@ -230,7 +250,7 @@ export class PostForm extends Component {
                         ]}
                         errors={errors.contractLength}
                       />
-
+                      {errors.contractLength && <ErrorMessage message={errors.contractLength} />}
                       <Radio
                         label='3. Minimum years of experience?'
                         desc='(Select one)'
@@ -246,7 +266,7 @@ export class PostForm extends Component {
                         ]}
                         errors={errors.experience}
                       />
-
+                      {errors.experience && <ErrorMessage message={errors.experience} />}
                       <Input
                         label='Maximum budget for the role'
                         desc='(e.g. &pound;50000 or &pound;400 per day)'
@@ -256,7 +276,8 @@ export class PostForm extends Component {
                         id='budget'
                         errors={errors.remuneration}
                       />
-                      {errors['number'] && <ErrorMessage message={errors['number']} />}
+
+                      {errors.remuneration && <ErrorMessage message={errors.remuneration} />}
                       <Radio
                         label='5. How many interview stages will there be for this role?'
                         desc='(Select one)'
@@ -271,7 +292,7 @@ export class PostForm extends Component {
                         ]}
                         errors={errors.interviewStages}
                       />
-
+                      {errors.interviewStages && <ErrorMessage message={errors.interviewStages} />}
                       <Radio
                         label='6. Expected new start date?'
                         desc='(Select one)'
@@ -287,7 +308,7 @@ export class PostForm extends Component {
                         ]}
                         errors={errors.startIn}
                       />
-
+                      {errors.startIn && <ErrorMessage message={errors.startIn} />}
                     </UIContainer>
                     <div className="button-container">
                       <button
