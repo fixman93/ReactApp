@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
+
 import PropTypes from 'prop-types'
 import { Query, Mutation } from 'react-apollo'
 import UIContainer from 'common/UIContainer'
@@ -36,6 +38,28 @@ export class PostForm extends Component {
     this.setState({
       userId: localStorage.getItem('userId')
     })
+
+    /*if (Object.keys(this.props.input).length > 0) {
+      const elements = this.formRef.current.elements;
+      const IDs = ['startIn', 'remuneration', 'interviewStages', 'contractLength', 'role', 'experience']
+      IDs.map(id => {
+        if (elements[id]) {
+          if (Array.from(elements[id]).length > 1) {
+            let radio = Array.from(elements[id]).find(el => el.value == this.props.input.jobofferSet[id])
+             let r = ReactDOM.findDOMNode(radio);
+             r.checked = true;
+          } else {
+            if (id === 'role') {
+              this.setState({
+                dropdownValue: this.props.input.jobofferSet[id]
+              })
+            }
+            let r = ReactDOM.findDOMNode(elements[id]);
+             r.value = this.props.input.jobofferSet[id]
+          }
+        }
+      })
+    }*/
   }
 
   componentWillUnmount = () => {
@@ -64,7 +88,9 @@ export class PostForm extends Component {
 
   setInputProperty = (element) => {
     this.setState(prevState => ({
-      input: Object.assign({}, prevState.input, { [element.name]: element.value })
+      input: Object.assign({},
+        prevState.input,
+        { [element.name]: element.value })
     }))
   }
 
@@ -76,6 +102,7 @@ export class PostForm extends Component {
 
 
   handleSubmit = async () => {
+    let names = ['contractLength', 'experience', 'roleId', 'remuneration', 'interviewStages', 'startIn']
     const list = Array.from(this.formRef.current.elements);
 
     // clear the errors
@@ -83,6 +110,7 @@ export class PostForm extends Component {
       errors: {}
     })
 
+    await console.log(list.filter(el => el.name == 'contractLength'))
 
     // map through dom elements
     await list.map(element => {
@@ -94,7 +122,14 @@ export class PostForm extends Component {
         }
       } else {
         // if is not radio input check if it has value
-        if (element.value !== '') {
+        if (element.name === 'remuneration') {
+          if (/^\d+$/.test(element.value)) {
+            this.setInputProperty(element);
+          } else {
+            this.setError("number", "Please type a number without spaces")
+          }
+        }
+        else if (element.value !== '') {
           // if it's roleiD add role title to input object
 
           this.setState(prevState => ({
@@ -103,12 +138,7 @@ export class PostForm extends Component {
           }))
 
           // check element name and if number add else add error
-        } else if (element.name === 'remuneration') {
-          if (/^\d+$/.test(element.value)) {
-            this.setInputProperty(element);
-          } else {
-            this.setError("number", "Please type a number without spaces")
-          }
+
 
         } else {
           //else add error
@@ -219,7 +249,7 @@ export class PostForm extends Component {
 
                       <Input
                         label='Maximum budget for the role'
-                        desc='(e.g. &pound;50,000 or &pound;400 per day)'
+                        desc='(e.g. &pound;50000 or &pound;400 per day)'
                         name='remuneration'
                         placeholder='Enter number'
                         type='text'

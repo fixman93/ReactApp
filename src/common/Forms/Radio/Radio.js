@@ -26,7 +26,8 @@ class Radio extends Component {
     const {
       label,
       desc,
-      options
+      options,
+      prop
     } = this.props
 
     return (

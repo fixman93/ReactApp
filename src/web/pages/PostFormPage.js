@@ -15,7 +15,9 @@ class PostFormPage extends Component {
     this.state = {
       input: {},
       page: 1,
-      userId: null
+      userId: null,
+      questions: {},
+      educations: {}
     }
   }
 
@@ -44,8 +46,7 @@ class PostFormPage extends Component {
 
 
   handleStep = (data) => {
-    console.log(this.state.input, data)
-    const { userId } = this.state
+    const { userId } = this.state;
     this.setState(prevState => ({
       input: {
         ...prevState.input,
@@ -54,9 +55,11 @@ class PostFormPage extends Component {
           ...prevState.input.jobofferSet,
           ...data,
 
-          // postcode: "novi sad"
+
         }
-      }
+      },
+      educations: { ...data.educations },
+      questions: { ...data.questions }
     }))
     this.nextPage()
   }
@@ -74,6 +77,7 @@ class PostFormPage extends Component {
             data.data.employer && data.data.employer.id
           const postcode = data && data.data &&
             data.data.employer && data.data.employer.postcode
+          const jobofferResponseSet = data && data.employer && data.employer.jobofferSet
           return (
             <Mutation
               mutation={ADD_JOB}
@@ -129,7 +133,6 @@ class PostFormPage extends Component {
                       queryData={data}
                       onBack={this.prevPage}
                       onSubmit={() => {
-                        console.log(input.jobofferSet)
                         addJobMutation({
                           variables: {
                             employerId,
@@ -138,7 +141,14 @@ class PostFormPage extends Component {
                             permanent: false,
                             userId: this.state.userId,
                             postcode,
-                            ...input.jobofferSet
+                            experience: input.jobofferSet.experience,
+                            skills: [...input.jobofferSet.skillsIds],
+                            contractLength: input.jobofferSet.contractLength,
+                            offerSponsorship: input.jobofferSet.offer,
+                            spec: input.jobofferSet.spec,
+                            remuneration: input.jobofferSet.remuneration,
+                            interviewStages: input.jobofferSet.interviewStages,
+                            startIn: input.jobofferSet.startIn
                           }
                         })
                       }}

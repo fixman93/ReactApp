@@ -1,17 +1,18 @@
 import React from 'react'
 import JobPosting from '../common/JobPosting'
 
-export const ActiveJobsList = () => (
-  <div>
-    <JobPosting
-      title='Full Stack Developer'
-      postedAt='Posted on 28/11/2017'
-    />
-    <JobPosting
-      title='UX Designer'
-      postedAt='Posted on 22/07/2017'
-    />
-  </div>
-)
+const ActiveJobsList = ({ data: { employer } }) => {
+  return (<div>
+    {employer && employer.jobofferSet.edges.map(job => {
+      return <JobPosting
+        key={job.node.id}
+        address={employer.address}
+        title={job.node.role.name}
+        remuneration={job.node.remuneration}
+        interviewStages={job.node.interviewStages}
+      />
+    })}
+  </div>);
+}
 
 export default ActiveJobsList

@@ -7,7 +7,7 @@ import pound from 'assets/images/pound.svg'
 import './JobPosting.css'
 
 
-const JobPosting = ({ title, postedAt, imgSrc }) => (
+const JobPosting = ({ title, postedAt, imgSrc, remuneration, address, interviewStages }) => (
   <UIContainer>
     <div className='col job-posting'>
       <div className='row'>
@@ -24,9 +24,9 @@ const JobPosting = ({ title, postedAt, imgSrc }) => (
       </div>
       <hr />
       <div className='row'>
-        <JobInfoTag imgSrc={pound} text='82,000 per annum' />
-        <JobInfoTag text='3 interview stages' />
-        <JobInfoTag text='London Bridge, London' />
+        <JobInfoTag imgSrc={pound} text={remuneration.toString()} />
+        <JobInfoTag text={interviewStages + ' interview stages'} />
+        <JobInfoTag text={address} />
         <div className="job-btn-container">
           <Button
             className='btn-green text-bold'

@@ -45,16 +45,18 @@ export const GET_EMPLOYER = gql`
                 }
               }
             }
-            # educationLevel
-            # permanent
-            # experience
-            # postcode
-            # startIn
-            # interviewStages
-            # remuneration
+             educationLevel {
+               name
+             }
+             permanent
+             experience
+             postcode
+             startIn
+             interviewStages
+             remuneration
             spec
-            # contractLength
-            # offersSponsorship
+             contractLength
+             offersSponsorship
           }
         }
       }

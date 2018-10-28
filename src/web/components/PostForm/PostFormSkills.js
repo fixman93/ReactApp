@@ -6,6 +6,7 @@ import SkillList from "../common/SkillList";
 import { GET_SKILLS } from "services/queries";
 import { Query } from "react-apollo";
 import "./PostForm.css";
+import ErrorMessage from "../../../common/Error/ErrorMessage";
 
 export class PostForm extends Component {
   constructor(props) {
@@ -13,16 +14,23 @@ export class PostForm extends Component {
     this.state = {
       skills: [],
       skillIds: [],
-      newSkillInputActive: true
+      newSkillInputActive: true,
+      error: ""
     };
     this.formRef = React.createRef();
   }
 
   handleAddSkill = name => {
-    this.setState(prevState => ({
-      skills: [...prevState.skills, name],
-      newSkillInputActive: false
-    }));
+    let skills = [...this.state.skills];
+
+    if (skills.includes(name)) {
+      return;
+    } else {
+      this.setState(prevState => ({
+        skills: [...prevState.skills, name],
+        newSkillInputActive: false
+      }))
+    }
   };
 
   handleRemoveSkill = name => {
@@ -44,9 +52,28 @@ export class PostForm extends Component {
     });
   };
 
+  handleSubmit = async (e) => {
+    e.preventDefault();
+
+    this.setState({ error: "" }, async () => {
+      if(this.state.skills.length < 5) {
+        await this.setState({ error: "You need to have at least 5 skills"})
+      } else {
+        await this.setState({ error: ""})
+        await this.skillIds();
+        await this.props.onSubmit({
+          skills: [...this.state.skills],
+          skillsIds: [...this.state.skillIds]
+        });
+      }
+    })
+
+    
+  }
+    
   render() {
     const { heading, onBack, onSubmit, propsData } = this.props;
-    const { skills, newSkillInputActive } = this.state;
+    const { skills, newSkillInputActive, error } = this.state;
 
     return (
       <Query query={GET_SKILLS}>
@@ -62,15 +89,11 @@ export class PostForm extends Component {
                 ref={this.formRef}
                 id="postFormSkills"
                 className="form"
-                onSubmit={async e => {
-                  e.preventDefault();
-                  await this.skillIds();
-                  await onSubmit({
-                    skills: [...this.state.skillIds]
-                  });
-                }}
-              >
+                onSubmit={this.handleSubmit}>
+             >
+                  
                 <UIContainer className="post-form">
+                  {error !== "" && <ErrorMessage message={error} />}
                   <SkillList
                     skills={skills}
                     onRemove={this.handleRemoveSkill}

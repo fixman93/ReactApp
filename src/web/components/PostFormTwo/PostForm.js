@@ -44,7 +44,6 @@ export class PostForm extends Component {
 
     // map through dom elements
     await list.map(element => {
-
       // if radio input, check if is checked and add to input object
       if (element.type === 'radio' && element.name !== '') {
         if (element.checked) {
@@ -64,9 +63,7 @@ export class PostForm extends Component {
 
     })
 
-    if (Object.keys(this.state.errors).length === 0) {
-      this.props.onSubmit({ ...this.state.input, ...this.props.propsData });
-    }
+
   }
 
 
@@ -94,9 +91,17 @@ export class PostForm extends Component {
               <form
                 ref={this.formRef}
                 className='form'
-                onSubmit={e => {
+                onSubmit={async e => {
                   e.preventDefault()
-                  this.handleSubmit()
+                  await this.handleSubmit()
+                  if (Object.keys(this.state.errors).length === 0) {
+                    await this.props.onSubmit({
+                      ...this.state.input,
+                      ...this.props.propsData,
+                      educations: { ...educationLevels },
+                      questions: { ...questions }
+                    });
+                  }
                 }}
               >
                 <UIContainer className='post-form'>
@@ -110,15 +115,6 @@ export class PostForm extends Component {
                       options={educationLevels}
                     />
                   )}
-                  {/* {questions && questions.map((question, index) => (
-                  <DynamicRadio
-                    key={question.node.id}
-                    label={`${index + 2}. ${question.node.question.standardquestion.question.question}`}
-                    desc='(Select one)'
-                    options={question.node.question}
-                    name={index}
-                  />
-                ))} */}
                   {questions && questions[0] && (
                     <DynamicRadio
                       label={`2. ${questions[0].node.question.standardquestion.question.question}`}
@@ -142,41 +138,11 @@ export class PostForm extends Component {
                       label={`4. ${questions[2].node.question.standardquestion.question.question}`}
                       desc='(Select one)'
                       id='thirdQuestion'
-                      name="exp"
+                      name="travel"
                       options={questions[2].node.question}
                     />
                   )}
-                  {/* <Radio
-                  label='2. Remote working?'
-                  desc='(Select one)'
-                  id='Remote'
-                  name='Remote'
-                  options={[
-                    {id: '1', label: 'Yes', value: 'Yes', name: 'working'},
-                    {id: '2', label: 'No', value: 'No', name: 'working'},
-                    {id: '3', label: 'Only Remote', value: 'Only Remote', name: 'working'}
-                  ]}
-                />
-                <Radio
-                  label='3. Experience managing a team?'
-                  desc='(Select one)'
-                  id='managing'
-                  name='managing'
-                  options={[
-                    {id: '4', label: 'Yes', value: 'Yes', name: 'managing'},
-                    {id: '5', label: 'No', value: 'No', name: 'managing'}
-                  ]}
-                />
-                <Radio
-                  label='4. Willing to travel abroad for business?'
-                  desc='(Select one)'
-                  id='experience'
-                  name='experience'
-                  options={[
-                    {id: '6', label: 'Yes', value: 'Yes', name: 'travel'},
-                    {id: '7', label: 'No', value: 'No', name: 'travel'}
-                  ]}
-                /> */}
+
                   <Radio
                     label='5. Will you offer Visa sponsorship?'
                     desc='(Select one)'
