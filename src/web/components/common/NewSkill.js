@@ -8,10 +8,11 @@ class NewSkill extends Component {
   static propTypes = {
     placeholder: PropTypes.string.isRequired,
     onAdd: PropTypes.func.isRequired,
-    data: PropTypes.object.isRequired
+    data: PropTypes.object.isRequired,
+    companies: PropTypes.bool
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       value: '',
@@ -55,20 +56,37 @@ class NewSkill extends Component {
     })
   }
 
-  handleAutocomplete = () => {
-    const { data } = this.props
-    const skills = data &&
-      data.data && 
-      data.data.allSkills && 
-      data.data.allSkills.edges
-    this.setState(prevState => ({
-      skills: skills.filter(item => (
-        item.node.skill.toLowerCase().includes(this.state.value.toLowerCase())
-      ))
-    }))
+  handleAutocomplete = async () => {
+    let skills;
+    const { data, companies } = this.props
+    if (companies) {
+      skills = data &&
+        data.data.allCompanies &&
+        data.data.allCompanies.edges
+
+      await this.setState(prevState => ({
+        skills: skills.filter(item => (
+          item.node.name.toLowerCase().includes(this.state.value.toLowerCase())
+        ))
+      }))
+
+    } else {
+
+      skills = data &&
+        data.data &&
+        data.data.allSkills &&
+        data.data.allSkills.edges
+
+      await this.setState(prevState => ({
+
+        skills: skills.filter(item => (
+          item.node.skill.toLowerCase().includes(this.state.value.toLowerCase())
+        ))
+      }))
+    }
   }
 
-  render () {
+  render() {
     const { placeholder, onAdd } = this.props
     const { dropdownActive, skills, value } = this.state
     return (
@@ -87,8 +105,8 @@ class NewSkill extends Component {
           <SkillDropdown
             skills={skills}
             onClick={async (item) => {
-                await onAdd(item.node)
-                await this.closeDropdown()
+              await onAdd(item.node)
+              await this.closeDropdown()
             }}
           />
         )}

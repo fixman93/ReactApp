@@ -12,6 +12,7 @@ import { ALL_ROLES } from 'services/queries'
 import { ADD_JOB } from 'services/mutations'
 import './PostForm.css'
 import ErrorMessage from '../../../common/Error/ErrorMessage';
+import { setInput, setError } from '../../../common/Forms/helpers';
 
 export class PostForm extends Component {
   static propTypes = {
@@ -39,28 +40,6 @@ export class PostForm extends Component {
     this.setState({
       userId: localStorage.getItem('userId')
     })
-
-    /*if (Object.keys(this.props.input).length > 0) {
-      const elements = this.formRef.current.elements;
-      const IDs = ['startIn', 'remuneration', 'interviewStages', 'contractLength', 'role', 'experience']
-      IDs.map(id => {
-        if (elements[id]) {
-          if (Array.from(elements[id]).length > 1) {
-            let radio = Array.from(elements[id]).find(el => el.value == this.props.input.jobofferSet[id])
-             let r = ReactDOM.findDOMNode(radio);
-             r.checked = true;
-          } else {
-            if (id === 'role') {
-              this.setState({
-                dropdownValue: this.props.input.jobofferSet[id]
-              })
-            }
-            let r = ReactDOM.findDOMNode(elements[id]);
-             r.value = this.props.input.jobofferSet[id]
-          }
-        }
-      })
-    }*/
   }
 
   componentWillUnmount = () => {
@@ -74,7 +53,7 @@ export class PostForm extends Component {
   }
 
   handleDropdownItemClick = (value, id) => {
-    console.log(value, id)
+
     this.setState({
       dropdownValue: value,
       dropdownActive: false,
@@ -88,19 +67,6 @@ export class PostForm extends Component {
     }
   }
 
-  setInputProperty = (element) => {
-    this.setState(prevState => ({
-      input: Object.assign({},
-        prevState.input,
-        { [element.name]: element.value })
-    }))
-  }
-
-  setError = (whichError, error) => {
-    this.setState(prevState => ({
-      errors: Object.assign({}, prevState.errors, { [whichError]: error })
-    }))
-  }
 
 
   handleSubmit = async () => {
@@ -112,74 +78,70 @@ export class PostForm extends Component {
       errors: {}
     })
 
-
+    // loop through element names
     await names.map(name => {
       if (name !== 'remuneration' && name !== 'roleId') {
+        // if it's radio input - remuneration and roleId are not radio inputs
 
-        let isAtLeastOneChecked = list.filter(el => el.name == name && el.checked == true).length == 1 ? true : false;
+        // checks if at least one of radio inputs are checked with the same name
+        let isAtLeastOneChecked = list.filter(el => el.name === name && el.checked === true).length === 1 ? true : false;
+
+        // finds checked radio input
         let toAdd = list.find(el => el.name == name && el.checked);
 
         if (isAtLeastOneChecked) {
-
-          this.setState(prevState => ({
-            input: Object.assign({}, prevState.input,
-              { [toAdd.name]: toAdd.value })
-          }))
+          // if one is checked, add it to input object
+          setInput(this, name, toAdd.value)
 
         } else {
-          this.setState(prevState => ({
-            errors: Object.assign({}, prevState.errors, { [name]: 'Please select one option' })
-          }))
+          // else add error to select one option
+          setError(this, name, 'Please select one option')
 
         }
 
       } else {
+        // if roleId, it's dropdown
         if (name === 'roleId') {
           let hasDropdownValue = this.state.dropdownValue !== "" ? true : false
-
+          // check if dropdownValue isn't blank, if it's selected
           if (hasDropdownValue) {
-
+            // if has value, add to input object
             this.setState(prevState => ({
               input: Object.assign({}, prevState.input,
                 { "role": this.state.dropdownValue, "roleId": this.state.roleId })
             }))
 
           } else {
-
-            this.setState(prevState => ({
-              errors: Object.assign({}, prevState.errors, { [name]: 'Please add role' })
-            }))
+            // else add error to add roleId
+            setError(this, name, 'Please add role')
 
           }
         } else {
-
+          // else, it's remuneration name, check if it has value, and find the element
           let ifHasValue = list.find(el => el.name == name && el.value !== '') ? true : false;
           let toAdd = list.find(el => el.name == name);
 
           if (ifHasValue) {
-            if(/^[0-9\s]*$/.test(toAdd.value)) {
+            // if it has value and if it's number
+            if (/^[0-9\s]*$/.test(toAdd.value)) {
 
-              this.setState(prevState => ({
-                input: Object.assign({}, prevState.input, { [toAdd.name]: toAdd.value })
-              }))
+              // add it to input object
+              setInput(this, name, toAdd.name)
             } else {
-              this.setState(prevState => ({
-                errors: Object.assign({}, prevState.errors, { [name]: 'Only numbers allowed' })
-              }))
+              // else add error to errors object
+              setError(this, name, 'Only numbers allowed')
             }
 
           } else {
-            
-            this.setState(prevState => ({
-              errors: Object.assign({}, prevState.errors, { [name]: 'Please add budget' })
-            }))
+            // it doesn't have value, add this error
+            setError(this, name, 'Please add budget')
 
           }
         }
       }
     });
 
-
+    // checks if errors object is empty, then call onSubmit function with input and roleId
     if (Object.keys(this.state.errors).length === 0) {
       this.props.onSubmit(Object.assign({},
         this.state.input, { roleId: this.state.roleId }));
@@ -190,7 +152,7 @@ export class PostForm extends Component {
 
   render() {
     const { dropdownActive, dropdownValue, input, userId, roleId, errors } = this.state
-    const { heading, onBack } = this.props
+    const { heading, onBack, propsData } = this.props
     return (
       <Query
         query={ALL_ROLES}
@@ -252,6 +214,7 @@ export class PostForm extends Component {
                         desc='(Select one)'
                         id='employment'
                         name='contractLength'
+                        val={propsData.contractLength ? propsData.contractLength : ""}
                         options={[
                           { id: 'permanent', label: 'Permanent (Full Time)', value: '1', name: 'contractLength' },
                           { id: 'contract', label: 'Contract (Fixed Term)', value: '0', name: 'contractLength' }
@@ -263,6 +226,7 @@ export class PostForm extends Component {
                         label='3. Minimum years of experience?'
                         desc='(Select one)'
                         id='experience'
+                        val={propsData.experience ? propsData.experience : ""}
                         name='experience'
                         options={[
                           { id: 'sixMonths', label: '6 months', value: 0.5, name: 'experience' },
@@ -279,6 +243,7 @@ export class PostForm extends Component {
                         label='Maximum budget for the role'
                         desc='(e.g. &pound;50000 or &pound;400 per day)'
                         name='remuneration'
+                        val={propsData.remuneration ? propsData.remuneration : ""}
                         placeholder='Enter number'
                         type='text'
                         id='budget'
@@ -290,6 +255,7 @@ export class PostForm extends Component {
                         label='5. How many interview stages will there be for this role?'
                         desc='(Select one)'
                         id='stages'
+                        val={propsData.interviewStages ? propsData.interviewStages : ""}
                         name='interviewStages'
                         options={[
                           { id: 'one', value: '1', label: '1', name: 'interviewStages' },
@@ -305,6 +271,7 @@ export class PostForm extends Component {
                         label='6. Expected new start date?'
                         desc='(Select one)'
                         id='startIn'
+                        val={propsData.startIn ? propsData.startIn : ""}
                         name='startIn'
                         options={[
                           { id: 'immediately', label: 'immediately', value: '0', name: 'startIn' },

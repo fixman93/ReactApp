@@ -22,6 +22,12 @@ export class CompliteProfile extends Component {
     };
   }
 
+  componentDidMount() {
+    this.setState({
+      userId: localStorage.getItem('userId')
+    })
+  }
+
   prevPage = () => {
     if (this.state.page > 1) {
       this.setState(prevState => ({
@@ -38,23 +44,15 @@ export class CompliteProfile extends Component {
     }
   };
 
-  handleStep = (formRef, optionalData) => {
-    console.log(formRef)
+  handleStep = (data) => {
     const { userId } = this.state;
-    let data = {};
-    const elements = formRef.current.elements;
-    for (let i = 0; i < elements.length; i++) {
-      if (elements[i].value !== "") {
-        data[elements[i].name] = elements[i].value;
-      }
-    }
     this.setState(prevState => ({
       input: {
         ...prevState.input,
         ...data
       }
     }));
-    console.log(this.state.input);
+    console.log("INPUT FROM MAIN PAGE: " + JSON.stringify(this.state.input));
     this.nextPage();
   };
 

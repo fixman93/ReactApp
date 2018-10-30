@@ -78,7 +78,7 @@ export class TalentHeader extends Component {
                                                 <li>
                                                     {match.path === '/talent/register' ? (
                                                         <Link className='btn btn-close' to='/'>close</Link>
-                                                    ) : <MenuButton path='/' name='Complete Profile' match={this.props.match} />}
+                                                    ) : <MenuButton path='/talent/complite-registration' name='Complete Profile' match={this.props.match} />}
                                                 </li>
                                             </ul>
                                         </div>
@@ -90,7 +90,7 @@ export class TalentHeader extends Component {
 
                                                 {this.state.show && (
                                                     <ul>
-                                                        <li><Link to="/talent/profile">Edit Account</Link></li>
+                                                        <li><Link to="/talent/complite-registration">Edit Account</Link></li>
                                                         <li><Link to="/login" onClick={() => this.logout()}>Log Out</Link></li>
                                                     </ul>
                                                 )}

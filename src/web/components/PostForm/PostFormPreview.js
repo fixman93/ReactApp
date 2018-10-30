@@ -30,28 +30,22 @@ class PostFormPreview extends React.Component {
     this.state = {
       requirements: [],
       educations: [],
-      answers: [],
-      questions: []
+      answers: []
     }
   }
 
   async componentDidMount() {
     const { propsData: { jobofferSet } } = this.props;
+
+    // adds education types from props
     await Object.values(jobofferSet.educations).map(d => {
       this.setState(prevState => ({
         educations: [...prevState.educations, d.node]
       }))
     })
 
-    await Object.values(jobofferSet.questions).map(d => {
 
-      this.setState(prevState => ({
-        questions: [...prevState.questions, d.node.question]
-      }))
-
-    })
-
-
+    // sets requirements array in order to display requirements list
     await this.setState({
       requirements: [
         {
@@ -60,14 +54,17 @@ class PostFormPreview extends React.Component {
         },
         {
           title: 'Remote job?',
-          value: jobofferSet.remote.slice(-1) === 'x' ? 'Yes' :
-            jobofferSet.remote.slice(-1) === 'y' ? 'No' : 'Only Remote'
+          // set answer based on ID - QW5zd2VyTm9kZTox means it's yes
+          value: jobofferSet.remote === 'QW5zd2VyTm9kZTox' ? 'Yes' :
+            jobofferSet.remote === 'QW5zd2VyTm9kZToy' ? 'No' : 'Only Remote'
         },
         {
+          // start is array with all options to answer when you expect to start
           title: 'Expected start',
           value: start.find(p => p.value == jobofferSet.startIn).label
         },
         {
+          // find education based on educationLevelId, and pass its name
           title: 'Qualifications',
           value: this.state.educations.find(e => e.id === jobofferSet.educationLevelId).name
         },
@@ -77,7 +74,8 @@ class PostFormPreview extends React.Component {
         },
         {
           title: 'Travel for business',
-          value: jobofferSet.remote.slice(-1) === 'x' ? 'Yes' : 'No'
+          // set answer based on answer id - QW5zd2VyTm9kZTox means Yes otherwise No
+          value: jobofferSet.remote === 'QW5zd2VyTm9kZTox' ? 'Yes' : 'No'
         }
       ]
     })
@@ -85,7 +83,7 @@ class PostFormPreview extends React.Component {
   }
 
   render() {
-    const { onSubmit, onBack, history, propsData, handleAddData } = this.props;
+    const { onSubmit, onBack, propsData } = this.props;
     return (<Query
       query={GET_EMPLOYER}
       variables={{ id: localStorage.getItem('userId') }}
@@ -103,7 +101,6 @@ class PostFormPreview extends React.Component {
           <form
             onSubmit={async e => {
               e.preventDefault()
-              //handleAddData(jobofferSet)
               await onSubmit()
             }}
           >

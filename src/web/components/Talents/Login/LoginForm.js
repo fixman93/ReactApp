@@ -40,10 +40,9 @@ export class LoginForm extends Component {
         }}
         onError={errors => this.setState({ errors: errors.graphQLErrors })}
         onCompleted={async data => {
-          console.log(data)
           await localStorage.setItem('token', data.tokenAuth.token)
           await localStorage.setItem('userId', data.tokenAuth.id)
-          await history.push('/talent/profile')
+          await history.push('/talent/complite-profile')
         }}
       >
         {loginUser => (

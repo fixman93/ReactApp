@@ -29,30 +29,30 @@ class SkillListItem extends Component {
   }
 
   render() {
-    const { data, onRemove } = this.props
+    const { data, onRemove, companies } = this.props
     const { experience, experienceActive } = this.state
     return data ? (
       <React.Fragment>
         <li className='skill-list-item'>
-          {data.skill}
+          {data.name ? data.name : data.skill}
           {' '}
-          <span
+          {!data.name && <span
             onClick={this.toggleExp}
             className='skill-list-span'
           >
             {experience || 'Select level'}
-          </span>
+          </span>}
           <span
-            onClick={() => onRemove(data.skill)}
+            onClick={() => onRemove(data.name ? data.name : data.skill)}
           >
             <img src={x} alt='' />
           </span>
         </li>
-        {experienceActive && (
+        {(experienceActive && !companies) ? (
           <SkillExperienceList
             onExperienceClick={this.handleExperienceClick}
           />
-        )}
+        ) : this.props.onClick}
       </React.Fragment>
     ) : null
   }

@@ -7,7 +7,9 @@ import Input from 'common/Forms/Input'
 import SkillList from "web/components/common/SkillList";
 import NewSkill from "web/components/common/NewSkill";
 import BlueArrow from '../../../../assets/images/blue-arrow.svg'
-import { GET_SKILLS } from "../../../../services/queries";
+import { ALL_COMPANIES } from "../../../../services/queries";
+import ErrorMessage from "../../../../common/Error/ErrorMessage";
+import { setInput, setError } from "../../../../common/Forms/helpers";
 
 class StepFour extends Component {
   static propTypes = {
@@ -20,61 +22,69 @@ class StepFour extends Component {
     super(props);
     this.state = {
       input: {},
-      skills: [],
+      companies: [],
       userId: null,
-      newSkillInputActive: true,
+      newCompanyAdd: true,
       errors: {}
     };
     this.formRef = React.createRef();
   }
 
-  handleAddSkill = name => {
+  handleAddCompany = name => {
     this.setState(prevState => ({
-      skills: [...prevState.skills, name],
-      newSkillInputActive: false
+      companies: [...prevState.companies, name],
+      newCompanyAdd: false
     }));
   };
 
-  handleRemoveSkill = name => {
+  handleRemoveCompany = name => {
     this.setState(prevState => ({
-      skills: prevState.skills.filter(item => item.skill !== name)
+      companies: prevState.companies.filter(item => item.name !== name)
     }));
   };
 
-  handleSkillDropdownClick = value => {
+  handleCompanyDropdownClick = value => {
     this.setState({
-      newSkillInputActive: true
+      newCompanyAdd: true
     });
   };
 
-  handleError = (inputName, value, checked) => {
-    if (!value) {
-      console.log('error', inputName)
-      this.setState(prevState => ({
-        errors: {
-          ...prevState.errors,
-          [inputName]: 'This field is required'
-        }
-      }))
+  handleSubmit = async (e) => {
+    e.preventDefault();
+
+    let list = Array.from(this.formRef.current.elements);
+
+    // clear errors
+    await this.setState({ errors: {} });
+
+    let item = list.find(item => item.name === 'portfolio')
+    if (item && item.value) {
+      await setInput(this, 'portfolio', item.value)
+    } else {
+      await setError(this, 'portfolio', 'Please add your portfolio')
     }
+
+
+
+    if (Object.keys(this.state.errors).length === 0) {
+      await this.props.onSubmit({ ...this.state.input, companies: this.state.companies })
+    }
+
   }
+
+
   render() {
-    const { heading, onSubmit, onBack, propsData } = this.props;
-    const { newSkillInputActive, skills, errors } = this.state;
+    const { heading, onBack, } = this.props;
+    const { newCompanyAdd, errors, companies } = this.state;
     return (
-      <Query query={GET_SKILLS}>
+      <Query query={ALL_COMPANIES}>
         {data => {
-          //   const skills = data && data.data && data.data.allSkills;
-          // data.data.allSkills.edges;
 
           return (
             <form
               ref={this.formRef}
               className="form"
-              onSubmit={async e => {
-                e.preventDefault();
-                await onSubmit(this.formRef);
-              }}
+              onSubmit={this.handleSubmit}
             >
               <FeaturedTitle
                 title={heading.title}
@@ -83,24 +93,30 @@ class StepFour extends Component {
               />
               <UIContainer>
                 <Input
-                  id='postcode'
+                  id='portfolio'
                   label='1. Portfolio website'
                   type='text'
                   placeholder='Enter portfolio URL your own, behance, dribbble, github)'
-                  name='postcode'
+                  name='portfolio'
                 />
+                {errors.portfolio && <ErrorMessage message={errors.portfolio} />}
+                {errors.skills && <ErrorMessage message={errors.skills} />}
                 <div className="SelectSkills form-input-group">
                   <label>2. Previous companies and clients</label>
                   <SkillList
-                    skills={skills}
-                    onRemove={this.handleRemoveSkill}
-                    onClick={this.handleSkillDropdownClick}
+
+                    companies={true}
+                    skills={companies}
+                    onRemove={this.handleRemoveCompany}
+                    onClick={this.handleCompanyDropdownClick}
                   />
-                  {newSkillInputActive && (
+                  {newCompanyAdd && (
                     <NewSkill
-                      placeholder="Enter new skill..."
+
+                      companies={true}
+                      placeholder="Enter new client"
                       data={data}
-                      onAdd={this.handleAddSkill}
+                      onAdd={this.handleAddCompany}
                     />
                   )}
                 </div>

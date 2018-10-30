@@ -9,6 +9,7 @@ import Input from 'common/Forms/Input'
 import './PostForm.css'
 import { ALL_QUESTIONS } from '../../../services/queries'
 import ErrorMessage from '../../../common/Error/ErrorMessage';
+import { setInput, setError } from '../../../common/Forms/helpers';
 
 export class PostForm extends Component {
   constructor(props) {
@@ -20,17 +21,6 @@ export class PostForm extends Component {
     }
   }
 
-  setInputProperty = (element) => {
-    this.setState(prevState => ({
-      input: Object.assign({}, prevState.input, { [element.name]: element.value })
-    }))
-  }
-
-  setError = (whichError, error) => {
-    this.setState(prevState => ({
-      errors: Object.assign({}, prevState.errors, { [whichError]: error })
-    }))
-  }
 
 
   handleSubmit = async () => {
@@ -42,43 +32,35 @@ export class PostForm extends Component {
       errors: {}
     })
 
-
+    // map throught element names
     await names.map(name => {
       if (name !== 'spec') {
-
-        let isAtLeastOneChecked = list.filter(el => el.name == name && el.checked == true).length == 1 ? true : false;
-        let toAdd = list.find(el => el.name == name && el.checked);
-        console.log(isAtLeastOneChecked, name)
+        // if name is not spec - it's radio input
+        // checks if is at least one checked with the name
+        let isAtLeastOneChecked = list.filter(el => el.name === name && el.checked === true).length == 1 ? true : false;
+        // find checked one
+        let toAdd = list.find(el => el.name === name && el.checked);
         if (isAtLeastOneChecked) {
-
-          this.setState(prevState => ({
-            input: Object.assign({}, prevState.input,
-              { [toAdd.name]: toAdd.value })
-          }))
-
+          // if one is checked, add it to input object
+          setInput(this, name, toAdd.value)
         } else {
-          this.setState(prevState => ({
-            errors: Object.assign({}, prevState.errors, { [name]: 'Please select one option' })
-          }))
+          // add error
+          setError(this, name, 'Please select one option')
 
         }
 
       } else {
-
+        // it's spec - input
         let ifHasValue = list.find(el => el.name == name && el.value !== '') ? true : false;
         let toAdd = list.find(el => el.name == name);
 
         if (ifHasValue) {
-
-          this.setState(prevState => ({
-            input: Object.assign({}, prevState.input, { [toAdd.name]: toAdd.value })
-          }))
+          // if value, add to input object
+          setInput(this, name, toAdd.value)
 
         } else {
-
-          this.setState(prevState => ({
-            errors: Object.assign({}, prevState.errors, { [name]: 'Please add job specifications' })
-          }))
+          // else add error
+          setError(this, name, 'Please add job specifications')
 
         }
       }
@@ -118,8 +100,7 @@ export class PostForm extends Component {
                     await this.props.onSubmit({
                       ...this.state.input,
                       ...this.props.propsData,
-                      educations: { ...educationLevels },
-                      questions: { ...questions }
+                      educations: { ...educationLevels }
                     });
                   }
                 }}

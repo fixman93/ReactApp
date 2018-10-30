@@ -58,13 +58,12 @@ class PostFormPage extends Component {
 
         }
       },
-      educations: { ...data.educations },
-      questions: { ...data.questions }
+      // educations to be able to display education names in PostPreviewPage
+      educations: { ...data.educations }
     }))
     this.nextPage()
   }
 
-  // @TODO: figure out if each step should save the data to the server
   render() {
     const { input, page } = this.state
     return (
@@ -77,7 +76,6 @@ class PostFormPage extends Component {
             data.data.employer && data.data.employer.id
           const postcode = data && data.data &&
             data.data.employer && data.data.employer.postcode
-          const jobofferResponseSet = data && data.employer && data.employer.jobofferSet
           return (
             <Mutation
               mutation={ADD_JOB}
@@ -99,7 +97,7 @@ class PostFormPage extends Component {
                         desc: 'Please fill out the information below so we can help with your search',
                         color: 'white'
                       }}
-                      input={this.state.input}
+                      propsData={this.state.input}
                       onBack={this.prevPage}
                       onSubmit={this.handleStep}
                     />
@@ -123,6 +121,7 @@ class PostFormPage extends Component {
                         desc: 'Please fill out the information below so we can help with your search',
                         color: 'white'
                       }}
+                      propsData={this.state.input}
                       onBack={this.prevPage}
                       onSubmit={this.handleStep}
                     />
@@ -138,7 +137,7 @@ class PostFormPage extends Component {
                             employerId,
                             roleId: input.jobofferSet.roleId,
                             educationLevelId: input.jobofferSet.educationLevelId,
-                            permanent: false,
+                            permanent: input.jobofferSet.contractLength === 1 ? true : false,
                             userId: this.state.userId,
                             postcode,
                             experience: input.jobofferSet.experience,

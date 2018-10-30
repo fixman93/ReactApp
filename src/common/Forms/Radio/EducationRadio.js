@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import RadioItem from './RadioItem'
+import ErrorMessage from '../../Error/ErrorMessage'
 import './Radio.css'
 
 class EducationRadio extends Component {
@@ -12,7 +13,8 @@ class EducationRadio extends Component {
     label: PropTypes.string,
     options: PropTypes.array.isRequired,
     desc: PropTypes.string,
-    className: PropTypes.string
+    className: PropTypes.string,
+    error: PropTypes.string
   }
 
   handleChange = value => {
@@ -25,10 +27,12 @@ class EducationRadio extends Component {
     const {
       label,
       desc,
-      options
+      options,
+      error
     } = this.props
     return (
       <div className='form-input-group'>
+        {error && <ErrorMessage message={error} />}
         <label>{label} <span>{desc}</span></label>
         {options.map((option, index) => {
           return (

@@ -7,6 +7,7 @@ import RegisterDetail from "../../components/Talents/RegisterDetail";
 import { ADD_TALENT } from "services/mutations";
 
 import "./Register.css";
+import ErrorMessage from "../../../common/Error/ErrorMessage";
 
 class TalentRegister extends Component {
   constructor(props) {
@@ -14,9 +15,11 @@ class TalentRegister extends Component {
     this.state = {
       input: {},
       page: 1,
-      userId: null
+      serverErrorResponse: []
     };
   }
+
+
 
   prevPage = () => {
     if (this.state.page > 1) {
@@ -34,36 +37,24 @@ class TalentRegister extends Component {
     }
   };
 
-  handleStep = (formRef, optionalData) => {
-    console.log(formRef)
-    const { userId } = this.state;
-    let data = {};
-    const elements = formRef.current.elements;
-    for (let i = 0; i < elements.length; i++) {
-      if (elements[i].value !== "") {
-        data[elements[i].name] = elements[i].value;
-      }
-    }
+  handleStep = (data) => {
     this.setState(prevState => ({
       input: {
         ...prevState.input,
         ...data
       }
     }));
-    console.log(this.state.input);
     this.nextPage();
   };
 
-
-
-  // @TODO: figure out if each step should save the data to the server
   render() {
-    const { input, page } = this.state;
+    const { input, page, serverErrorResponse } = this.state;
     return (
       <Mutation
         mutation={ADD_TALENT}
-        variables={{
-          input
+        onCompleted={this.props.history.push('/talent/email')}
+        onError={(errors) => {
+          this.setState({ serverErrorResponse: errors.graphQLErrors });
         }}
       >
         {addTalent => {
@@ -90,10 +81,37 @@ class TalentRegister extends Component {
                     }}
                     onStep={this.handleStep}
                     onBack={this.prevPage}
-                    onSubmit={addTalent}
+                    serverErrors={serverErrorResponse}
+                    onSubmit={() => {
+                      addTalent({
+                        variables: {
+                          input: {
+                            fullName: input.fullName,
+                            email: input.email,
+                            password: input.password,
+                            contract: input.contractLength === 1 ? false : true,
+                            permanent: input.contractLength !== 1 ? false : true,
+                            //skills: input.skills.map(sk => sk.id)
+                            rolesoughtSet: [
+                              {
+                                id: "101",
+                                candidateId: "1",
+                                roleId: input.roleId,
+                                order: 1,
+                                experience: 1
+                              }
+                            ]
+                          }
+
+                        }
+                      })
+                    }}
+
                   />
                 )}
+
               </PostPage>
+
             </div>
           );
         }}

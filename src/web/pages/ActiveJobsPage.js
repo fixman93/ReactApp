@@ -6,7 +6,6 @@ import { Query } from 'react-apollo';
 import { GET_EMPLOYER } from '../../services/queries';
 
 export const ActiveJobsPage = ({ user, match }) => {
-  console.log(user)
   return (<Query query={GET_EMPLOYER} variables={{ id: user }}>
     {({ data, loading, error }) => {
       return <React.Fragment>

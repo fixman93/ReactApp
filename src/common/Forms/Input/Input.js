@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import './Input.css'
+import ErrorMessage from '../../Error/ErrorMessage';
 
 export class Input extends Component {
   static propTypes = {
@@ -10,7 +11,8 @@ export class Input extends Component {
     placeholder: PropTypes.string,
     type: PropTypes.string.isRequired,
     desc: PropTypes.string,
-    className: PropTypes.string
+    className: PropTypes.string,
+    error: PropTypes.string
   }
 
   constructor(props) {
@@ -46,6 +48,8 @@ export class Input extends Component {
     this.inputRef.current.focus()
   }
 
+
+
   render() {
     const {
       id,
@@ -56,7 +60,8 @@ export class Input extends Component {
       desc,
       className,
       defaultValue,
-      propsRef
+      propsRef,
+      error
     } = this.props
     const { inputActive } = this.state
     return (
@@ -64,6 +69,7 @@ export class Input extends Component {
         ref={propsRef}
         className={`input-form form-input-group ${className}`.trim()}
       >
+        {error && <ErrorMessage message={error} />}
         <label htmlFor={id}>{label} <span>{desc}</span></label>
         {inputActive ? (
           <input

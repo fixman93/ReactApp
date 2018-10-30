@@ -9,7 +9,7 @@ class SkillDropdown extends Component {
     // onRemove: PropTypes.func.isRequired
   }
 
-  render () {
+  render() {
     const { skills, onClick } = this.props
     return (
       <dl className='skill-group-container'>
@@ -17,13 +17,13 @@ class SkillDropdown extends Component {
           return (
             <dd
               key={item.node.id}
-              value={item.node.skill}
+              value={item.node.name ? item.node.name : item.node.skill}
               onClick={() => onClick(item)}
               className='skill-group-item'
             >
-              {item.node.skill}
+              {item.node.name ? item.node.name : item.node.skill}
             </dd>
-          ) 
+          )
         })}
       </dl>
     )

@@ -23,9 +23,12 @@ export class PostForm extends Component {
   handleAddSkill = name => {
     let skills = [...this.state.skills];
 
+    // can't add same skill twice
     if (skills.includes(name)) {
+      // it will close the menu
       return;
     } else {
+      // else add it to skills array
       this.setState(prevState => ({
         skills: [...prevState.skills, name],
         newSkillInputActive: false
@@ -54,11 +57,14 @@ export class PostForm extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-
+    // rest error to blank
     this.setState({ error: "" }, async () => {
+      // then checks if there are at least 5 skills added
       if(this.state.skills.length < 5) {
+        // if not add error
         await this.setState({ error: "You need to have at least 5 skills"})
       } else {
+        // else resets the error, pass skills and ids to onSubmit function
         await this.setState({ error: ""})
         await this.skillIds();
         await this.props.onSubmit({
@@ -72,7 +78,7 @@ export class PostForm extends Component {
   }
     
   render() {
-    const { heading, onBack, onSubmit, propsData } = this.props;
+    const { heading, onBack } = this.props;
     const { skills, newSkillInputActive, error } = this.state;
 
     return (

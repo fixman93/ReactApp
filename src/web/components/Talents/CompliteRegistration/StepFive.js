@@ -24,10 +24,9 @@ class StepFive extends Component {
     super(props);
     this.state = {
       input: {},
-      skills: [],
       userId: null,
-      newSkillInputActive: true,
       errors: {},
+      videoSrc: null,
       granted: false,
       rejectedReason: '',
       recording: false,
@@ -46,6 +45,8 @@ class StepFive extends Component {
     this.downloadVideo = this.downloadVideo.bind(this);
   }
 
+
+
   handleGranted() {
     this.setState({ granted: true });
     console.log('Permission Granted!');
@@ -63,7 +64,7 @@ class StepFive extends Component {
     this.setStreamToVideo(stream);
     console.log('Recording Started.');
   }
-  handleStop(blob) {
+  handleStop() {
     this.setState({
       recording: false,
       startshow: true
@@ -72,7 +73,14 @@ class StepFive extends Component {
     this.releaseStreamFromVideo();
 
     console.log('Recording Stopped.');
-    this.downloadVideo(blob);
+
+    var URL = window.URL || window.webkitURL;
+    var file = new Blob(
+      [this.state.videoSrc],
+      { "type": "video/mp4" });
+    var value = URL.createObjectURL(file);
+
+    this.downloadVideo(value);
   }
   handlePause() {
     this.releaseStreamFromVideo();
@@ -92,59 +100,36 @@ class StepFive extends Component {
     console.log(err);
   }
   setStreamToVideo(stream) {
-    let video = this.refs.app.querySelector('video');
 
     if (window.URL) {
-      video.src = window.URL.createObjectURL(stream);
+      this.setState({
+        videoSrc: window.URL.createObjectURL(stream)
+      })
     }
     else {
-      video.src = stream;
+      this.setState({
+        videoSrc: stream
+      })
     }
   }
   releaseStreamFromVideo() {
-    this.refs.app.querySelector('video').src = '';
-  }
-  downloadVideo(blob) {
-    let url = URL.createObjectURL(blob);
-    let a = document.createElement('a');
-    a.style.display = 'none';
-    a.href = url;
-    a.target = '_blank';
-    document.body.appendChild(a);
-
-    a.click();
-  }
-
-  handleAddSkill = name => {
-    this.setState(prevState => ({
-      skills: [...prevState.skills, name],
-      newSkillInputActive: false
-    }));
-  };
-
-  handleRemoveSkill = name => {
-    this.setState(prevState => ({
-      skills: prevState.skills.filter(item => item.skill !== name)
-    }));
-  };
-
-  handleSkillDropdownClick = value => {
     this.setState({
-      newSkillInputActive: true
-    });
-  };
-
-  handleError = (inputName, value, checked) => {
-    if (!value) {
-      console.log('error', inputName)
-      this.setState(prevState => ({
-        errors: {
-          ...prevState.errors,
-          [inputName]: 'This field is required'
-        }
-      }))
-    }
+      videoSrc: {}
+    })
   }
+  downloadVideo(val) {
+
+    const url = val;
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'mov.mp4');
+    document.body.appendChild(link);
+    link.click();
+
+
+
+  }
+
 
   render() {
     const { heading, onSubmit, onBack, propsData } = this.props;
@@ -172,9 +157,9 @@ class StepFive extends Component {
               onPause={this.handlePause}
               onResume={this.handleResume}
               onError={this.handleError}
-              render={({ start, stop, pause, resume }) =>
+              render={({ start, stop, pause, resume, request, granted }) =>
                 <div className="Video">
-                  <video className="videoBox" autoPlay></video>
+                  {this.state.videoSrc && <video className="videoBox" src={this.state.videoSrc} autoPlay></video>}
                   <div className="videoImage">
                     <img src={VideoExample} />
                   </div>
@@ -185,8 +170,13 @@ class StepFive extends Component {
                   <p>Recording: {recording.toString()}</p>
                   <p>Paused: {paused.toString()}</p> */}
                   {this.state.startshow ? (
-                    <a className="StartRecording btn" onClick={start}>Start Recording</a>
-                  ) : <a className="StopRecording btn" onClick={stop}>Stop Recording</a>}
+                    <a className="StartRecording btn" onClick={
+                      async () => {
+                        navigator.getUserMedia({ video: true }, this.handleStart, this.handleStop)
+
+                      }}
+                    >Start Recording</a>
+                  ) : <a className="StopRecording btn" onClick={this.handleStop}>Stop Recording</a>}
 
                   {/* <a onClick={pause}>Pause</a>
                   <a onClick={resume}>Resume</a> */}
@@ -194,7 +184,7 @@ class StepFive extends Component {
               } />
           </div>
         </UIContainer>
-      </div>
+      </div >
     )
   }
 }

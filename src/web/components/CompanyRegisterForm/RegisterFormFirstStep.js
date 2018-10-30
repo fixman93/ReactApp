@@ -1,5 +1,5 @@
-import React, {Component} from 'react'
-import {Mutation} from 'react-apollo'
+import React, { Component } from 'react'
+import { Mutation } from 'react-apollo'
 import PropTypes from 'prop-types'
 import Input from 'common/Forms/Input'
 import ErrorMessage from 'common/Error/ErrorMessage'
@@ -13,7 +13,7 @@ export class RegisterFormFirstStep extends Component {
     history: PropTypes.object.isRequired
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       input: {},
@@ -34,10 +34,11 @@ export class RegisterFormFirstStep extends Component {
     })
   }
 
-  render () {
-    const {history} = this.props
-    const {input, errors} = this.state
+  render() {
+    const { history } = this.props
+    const { input, errors } = this.state
     const error = errors && errors[0] && errors[0].message
+    errors && console.log(errors)
     return (
       <Mutation
         mutation={ADD_COMPANY}
@@ -56,7 +57,7 @@ export class RegisterFormFirstStep extends Component {
             }}
           >
             <div className='panel'>
-              <Input 
+              <Input
                 id="companyName"
                 label="1. Company name"
                 type="text"
@@ -79,7 +80,7 @@ export class RegisterFormFirstStep extends Component {
               />
               {error && <ErrorMessage message={error} />}
             </div>
-            <div className='login-button-container'>         
+            <div className='login-button-container'>
               <button
                 type='submit'
                 className='button'

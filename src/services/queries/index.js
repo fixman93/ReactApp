@@ -83,6 +83,19 @@ export const ALL_ROLES = gql`
   }
 `
 
+export const ALL_COMPANIES = gql`
+  query {
+    allCompanies {
+      edges {
+        node {
+          id
+          name
+        }
+      }
+    }
+  }
+`
+
 export const ALL_EDUCATION_LEVELS = gql`
   query {
     allEducationLevels {
@@ -131,6 +144,16 @@ export const ALL_QUESTIONS = gql`
           name
         }
       }
+    }
+  }
+`
+
+
+export const GET_CANDIDATE = gql`
+  query candidate($id: ID!) {
+    candidate(id: $id) {
+      fullName,
+      id
     }
   }
 `

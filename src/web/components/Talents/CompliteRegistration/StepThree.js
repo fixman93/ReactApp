@@ -2,13 +2,12 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import UIContainer from "common/UIContainer";
 import FeaturedTitle from "common/FeaturedTitle";
-import Radio from "common/Forms/Radio";
-import Checkbox from "common/Forms/Checkbox"
 import { Query } from "react-apollo";
 import SkillList from "web/components/common/SkillList";
 import NewSkill from "web/components/common/NewSkill";
 import BlueArrow from '../../../../assets/images/blue-arrow.svg'
 import { GET_SKILLS } from "../../../../services/queries";
+import ErrorMessage from "../../../../common/Error/ErrorMessage";
 
 class StepThree extends Component {
   static propTypes = {
@@ -22,18 +21,27 @@ class StepThree extends Component {
     this.state = {
       input: {},
       skills: [],
-      userId: null,
+      skillIds: [],
       newSkillInputActive: true,
-      errors: {}
+      error: ""
     };
     this.formRef = React.createRef();
   }
 
   handleAddSkill = name => {
-    this.setState(prevState => ({
-      skills: [...prevState.skills, name],
-      newSkillInputActive: false
-    }));
+    let skills = [...this.state.skills];
+
+    // can't add same skill twice
+    if (skills.includes(name)) {
+      // it will close the menu
+      return;
+    } else {
+      // else add it to skills array
+      this.setState(prevState => ({
+        skills: [...prevState.skills, name],
+        newSkillInputActive: false
+      }))
+    }
   };
 
   handleRemoveSkill = name => {
@@ -42,40 +50,52 @@ class StepThree extends Component {
     }));
   };
 
+  skillIds = () => {
+    let skillIds = this.state.skills.map(skill => skill.id);
+    this.setState({
+      skillIds: skillIds
+    });
+  };
+
   handleSkillDropdownClick = value => {
     this.setState({
       newSkillInputActive: true
     });
   };
 
-  handleError = (inputName, value, checked) => {
-    if (!value) {
-      console.log('error', inputName)
-      this.setState(prevState => ({
-        errors: {
-          ...prevState.errors,
-          [inputName]: 'This field is required'
-        }
-      }))
-    }
+  handleSubmit = async (e) => {
+    e.preventDefault();
+    // rest error to blank
+    this.setState({ error: "" }, async () => {
+      // then checks if there are at least 5 skills added
+      if (this.state.skills.length < 5) {
+        // if not add error
+        await this.setState({ error: "You need to have at least 5 skills" })
+      } else {
+        // else resets the error, pass skills and ids to onSubmit function
+        await this.setState({ error: "" })
+        await this.skillIds();
+        await this.props.onSubmit({
+          skills: [...this.state.skills],
+          skillsIds: [...this.state.skillIds]
+        });
+      }
+    })
   }
+
+
   render() {
-    const { heading, onSubmit, onBack, propsData } = this.props;
-    const { newSkillInputActive, skills, errors } = this.state;
+    const { heading, onBack } = this.props;
+    const { newSkillInputActive, skills, error } = this.state;
     return (
       <Query query={GET_SKILLS}>
         {data => {
-          //   const skills = data && data.data && data.data.allSkills;
-          // data.data.allSkills.edges;
 
           return (
             <form
               ref={this.formRef}
               className="form"
-              onSubmit={async e => {
-                e.preventDefault();
-                await onSubmit(this.formRef);
-              }}
+              onSubmit={this.handleSubmit}
             >
               <FeaturedTitle
                 title={heading.title}
@@ -83,6 +103,7 @@ class StepThree extends Component {
                 color={heading.color}
               />
               <UIContainer>
+                {error !== '' && <ErrorMessage message={error} />}
                 <div className="SelectSkills form-input-group">
                   <SkillList
                     skills={skills}
