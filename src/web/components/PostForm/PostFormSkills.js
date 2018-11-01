@@ -20,6 +20,15 @@ export class PostForm extends Component {
     this.formRef = React.createRef();
   }
 
+  componentDidMount() {
+    if(this.props.propsData.jobofferSet.skills) {
+      this.setState({
+        skills: this.props.propsData.jobofferSet.skills,
+        skillIds: this.props.propsData.jobofferSet.skillIds,
+      })
+    }
+  }
+
   handleAddSkill = name => {
     let skills = [...this.state.skills];
 

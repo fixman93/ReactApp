@@ -33,22 +33,26 @@ class StepOne extends Component {
         {
           name: "roleId",
           dropdownActive: false,
-          dropdownValue: ""
+          dropdownValue: "",
+          id: ""
         },
         {
           name: "roleId_primary",
           dropdownActive: false,
-          dropdownValue: ""
+          dropdownValue: "",
+          id: ""
         },
         {
           name: "roleId_secondary",
           dropdownActive: false,
-          dropdownValue: ""
+          dropdownValue: "",
+          id: ""
         },
         {
           name: "educationLevelId",
           dropdownActive: false,
-          dropdownValue: ""
+          dropdownValue: "",
+          id: ""
         },
         {
           name: "yearObtained",
@@ -97,7 +101,6 @@ class StepOne extends Component {
    } */
 
   handleDropdownClick = (name) => {
-
     if (!this.state.dropdowns.find(d => d.name === name).dropdownActive) {
       let drop = this.state.dropdowns.find(d => d.name === name);
       drop['dropdownActive'] = true;
@@ -113,11 +116,12 @@ class StepOne extends Component {
     }
   }
 
-  handleDropdownItemClick = (name, value) => {
+  handleDropdownItemClick = async (name, value, id) => {
     let drop = this.state.dropdowns.find(d => d.name === name);
     drop['dropdownValue'] = value;
+    drop['id'] = id
     drop['dropdownActive'] = false;
-    this.setState({
+    await this.setState({
       [this.state.dropdowns.find(d => d.name === name)]: drop
     })
   }
@@ -133,18 +137,30 @@ class StepOne extends Component {
 
     // map through names
     names.map(async name => {
-
       // if one of these is name - it's dropdown
-      if (name === ('roleId' || 'roleId_primary' || 'roleID_secondary' || 'educationLevelId' || 'yearObtained')) {
+      if (name === 'roleId' || name === 'roleId_primary' || name === 'roleId_secondary' || name === 'educationLevelId' || name === 'yearObtained') {
         // find the dropdown from array, pass the dropdown value from found dropdown
-        if (name !== ('roleId')) {
+        if (name !== 'roleId') {
           if (this.state.dropdowns.find(dd => dd.name === name).dropdownValue !== "") {
-            await setInput(this, name, this.state.dropdowns.find(dd => dd.name === name).dropdownValue)
+
+            await setInput(this, name,
+              Object.assign({},
+                {
+                  name: this.state.dropdowns.find(dd => dd.name === name).dropdownValue,
+                  id: this.state.dropdowns.find(dd => dd.name === name).id
+                }
+              ))
           } else {
             await setError(this, name, "Please select one option")
           }
         } else {
-          await setInput(this, name, this.state.dropdowns.find(dd => dd.name === name).dropdownValue)
+          await setInput(this, name,
+            Object.assign({},
+              {
+                name: this.state.dropdowns.find(dd => dd.name === name).dropdownValue,
+                id: this.state.dropdowns.find(dd => dd.name === name).id
+              }
+            ))
         }
       }
 
@@ -169,7 +185,6 @@ class StepOne extends Component {
         }
       }
     })
-
     if (Object.keys(this.state.errors).length === 0) {
       await this.props.onSubmit({ ...this.state.input })
     }
@@ -207,8 +222,8 @@ class StepOne extends Component {
               type='text'
               placeholder='Select from the list'
               name='roleId'
-              onItemClick={(e) => {
-                this.handleDropdownItemClick("roleId", e)
+              onItemClick={(e, id) => {
+                this.handleDropdownItemClick("roleId", e, id)
               }}
               onInputClick={() => this.handleDropdownClick("roleId")}
               dropdownActive={dropdowns.find(d => d.name === 'roleId').dropdownActive}
@@ -236,7 +251,9 @@ class StepOne extends Component {
               type='text'
               placeholder='Select from the list'
               name='roleId_primary'
-              onItemClick={(e) => this.handleDropdownItemClick("roleId_primary", e)}
+              onItemClick={(e, id) => {
+                this.handleDropdownItemClick("roleId_primary", e, id)
+              }}
               onInputClick={() => this.handleDropdownClick("roleId_primary")}
               dropdownActive={dropdowns.find(d => d.name === 'roleId_primary').dropdownActive}
               defaultValue={dropdowns.find(d => d.name === 'roleId_primary').dropdownValue}
@@ -251,7 +268,6 @@ class StepOne extends Component {
               id='experience'
               name='experience'
               options={[
-                { id: 'sixMonths', label: '6 months', value: 0.5, name: 'experience' },
                 { id: 'oneYear', label: '1 year', value: 1, name: 'experience' },
                 { id: 'twoYears', label: '2 years', value: 2, name: 'experience' },
                 { id: 'threeYears', label: '3 years', value: 3, name: 'experience' },
@@ -269,7 +285,9 @@ class StepOne extends Component {
               type='text'
               placeholder='Select secondary role'
               name='roleId_secondary'
-              onItemClick={(e) => this.handleDropdownItemClick("roleId_secondary", e)}
+              onItemClick={(e, id) => {
+                this.handleDropdownItemClick("roleId_secondary", e, id)
+              }}
               onInputClick={() => this.handleDropdownClick("roleId_secondary")}
               dropdownActive={dropdowns.find(d => d.name === 'roleId_secondary').dropdownActive}
               defaultValue={dropdowns.find(d => d.name === 'roleId_secondary').dropdownValue}
@@ -283,10 +301,6 @@ class StepOne extends Component {
               id='experience_secondary'
               name='experience_secondary'
               options={[
-                {
-                  id: 'sixMonths_secondary',
-                  label: '6 months', value: 0.5, name: 'experience_secondary'
-                },
                 {
                   id: 'oneYear_secondary',
                   label: '1 year', value: 1, name: 'experience_secondary'
@@ -319,7 +333,9 @@ class StepOne extends Component {
               type='text'
               placeholder='Select from the list'
               name='educationLevelId'
-              onItemClick={(e) => this.handleDropdownItemClick("educationLevelId", e)}
+              onItemClick={(e, id) => {
+                this.handleDropdownItemClick("educationLevelId", e, id)
+              }}
               onInputClick={() => this.handleDropdownClick("educationLevelId")}
               dropdownActive={dropdowns.find(d => d.name === 'educationLevelId').dropdownActive}
               defaultValue={dropdowns.find(d => d.name === 'educationLevelId').dropdownValue}
@@ -335,7 +351,9 @@ class StepOne extends Component {
               type='text'
               placeholder='Select from the list'
               name='yearObtained'
-              onItemClick={(e) => this.handleDropdownItemClick("yearObtained", e)}
+              onItemClick={(e, id) => {
+                this.handleDropdownItemClick("yearObtained", e, e)
+              }}
               onInputClick={() => this.handleDropdownClick("yearObtained")}
               dropdownActive={dropdowns.find(d => d.name === 'yearObtained').dropdownActive}
               defaultValue={dropdowns.find(d => d.name === 'yearObtained').dropdownValue}

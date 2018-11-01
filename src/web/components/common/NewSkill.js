@@ -17,17 +17,18 @@ class NewSkill extends Component {
     this.state = {
       value: '',
       skills: [],
-      dropdownActive: false
+      dropdownActive: false,
+      mounted: false
     }
     this.dropdownRef = React.createRef()
   }
 
-  componentDidMount = () => {
+  componentWillMount = () => {
     window.addEventListener('click', this.handleOutsideDropdownClick)
   }
 
   componentWillUnmount = () => {
-    window.removeEventListener('click', this.handleOutsideDropdownClick)
+    window.removeEventListener('click', this.handleOutsideDropdownClick);
   }
 
   handleOutsideDropdownClick = e => {

@@ -28,9 +28,8 @@ class Dropdown extends Component {
     data: []
   }
 
-  shouldComponentUpdate(nextProps) {
-    return nextProps !== this.props;
-  }
+
+
 
   render() {
     const {

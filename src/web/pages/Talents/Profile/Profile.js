@@ -5,7 +5,6 @@ import ProfileImage from 'assets/images/Talents/5.png'
 import LinkImage from 'assets/images/portfolio.svg'
 import Pound from 'assets/images/pound.png'
 import './Profile.css'
-import graphql from 'graphql-anywhere';
 import { GET_CANDIDATE } from '../../../../services/queries';
 import { Query } from 'react-apollo';
 
@@ -49,6 +48,12 @@ export class Profile extends Component {
       {data => {
         console.log(data)
         const name = data && data.data.candidate && data.data.candidate.fullName
+        const skills = data && data.data.candidate && data.data.candidate.skill && data.data.candidate.skill.edges
+        const expectedSalary = data && data.data.candidate && data.data.candidate.desiredSalary
+        const positionsLookingFor = data && data.data.candidate && data.data.candidate.rolesoughtSet
+          && data.data.candidate.rolesoughtSet.edges
+        const previousClients = data && data.data.candidate && data.data.candidate.jobSet
+          && data.data.candidate.jobSet.edges
         return (<div className="ProfilePage">
           <TalentHeader match={match} />
           <div className="Profile">
@@ -61,12 +66,18 @@ export class Profile extends Component {
                   <h2>{name}<a href="http://www.google.com">Portfolio</a></h2>
                   <h3>User Experience Designer at Google Laboratories</h3>
                   <div className="experience">
-                    <span>Experience in</span>
-                    <b>User Experience Designer (2 years) & UI & UX Designer (4 years)</b>
+                    <span>Experience as</span>
+                    {positionsLookingFor && <b>{`${positionsLookingFor[0].node.role.name} (${
+                      positionsLookingFor[0].node.experience
+                      } years) & ${positionsLookingFor[1].node.role.name} (${
+                      positionsLookingFor[1].node.experience
+                      } years)`}</b>}
                   </div>
                   <div className="experience">
                     <span>Previous Clients</span>
-                    <b>Nike, Adidas, Barclays, HSBC, Amazon, Google</b>
+                    {previousClients && previousClients.map(pr => {
+                      return (<b>{pr.node.company.name}</b>)
+                    })}
                   </div>
                 </div>
                 <div className="col-sm-6">
@@ -81,94 +92,23 @@ export class Profile extends Component {
               <div className="seeking">
                 <h3>Seeking</h3>
                 <ul>
-                  <li>
+                  {expectedSalary && <li>
                     <img src={Pound} alt="Pound" />
                     <div>
                       <span>Annual Salary</span>
-                      <b>£70,000</b>
+                      <b>{expectedSalary.toString().slice(0, 2) +
+                        ' ' + expectedSalary.toString().slice(2)}</b>
                     </div>
-                  </li>
-                  <li>
-                    <img src={Pound} alt="Pound" />
-                    <div>
-                      <span>Annual Salary</span>
-                      <b>£70,000</b>
-                    </div>
-                  </li>
-                  <li>
-                    <img src={Pound} alt="Pound" />
-                    <div>
-                      <span>Annual Salary</span>
-                      <b>£70,000</b>
-                    </div>
-                  </li>
-                  <li>
-                    <img src={Pound} alt="Pound" />
-                    <div>
-                      <span>Annual Salary</span>
-                      <b>£70,000</b>
-                    </div>
-                  </li>
-                  <li>
-                    <img src={Pound} alt="Pound" />
-                    <div>
-                      <span>Annual Salary</span>
-                      <b>£70,000</b>
-                    </div>
-                  </li>
-                  <li>
-                    <img src={Pound} alt="Pound" />
-                    <div>
-                      <span>Annual Salary</span>
-                      <b>£70,000</b>
-                    </div>
-                  </li>
-                  <li>
-                    <img src={Pound} alt="Pound" />
-                    <div>
-                      <span>Annual Salary</span>
-                      <b>£70,000</b>
-                    </div>
-                  </li>
-                  <li>
-                    <img src={Pound} alt="Pound" />
-                    <div>
-                      <span>Annual Salary</span>
-                      <b>£70,000</b>
-                    </div>
-                  </li>
-                  <li>
-                    <img src={Pound} alt="Pound" />
-                    <div>
-                      <span>Annual Salary</span>
-                      <b>£70,000</b>
-                    </div>
-                  </li>
+                  </li>}
                 </ul>
               </div>
               <div className="skills">
                 <h3>Skills</h3>
                 <ul>
-                  <li>Sketch</li>
-                  <li>Adobe Photoshop</li>
-                  <li>Adobe InDesign</li>
-                  <li>UserExperience</li>
-                  <li>Managing Team</li>
-                  <li>Sketch</li>
-                  <li>Adobe Photoshop</li>
-                  <li>Adobe InDesign</li>
-                  <li>UserExperience</li>
-                  <li>Managing Team</li>
-                  <li>Sketch</li>
-                  <li>Adobe Photoshop</li>
-                  <li>Adobe InDesign</li>
-                  <li>UserExperience</li>
-                  <li>Managing Team</li>
-                  <li>Sketch</li>
-                  <li>Adobe Photoshop</li>
-                  <li>Adobe InDesign</li>
-                  <li>UserExperience</li>
-                  <li>Managing Team</li>
+                  {skills && skills.map(skill => {
+                    return <li key={skill.node.id}>{skill.node.skill}</li>
+                  })}
+
                 </ul>
               </div>
             </div>
@@ -180,4 +120,4 @@ export class Profile extends Component {
   }
 }
 
-export default (Profile);
+export default Profile;

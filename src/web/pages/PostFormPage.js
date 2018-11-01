@@ -76,6 +76,13 @@ class PostFormPage extends Component {
             data.data.employer && data.data.employer.id
           const postcode = data && data.data &&
             data.data.employer && data.data.employer.postcode
+          const employeesNumber = data && data.data &&
+            data.data.employer && data.data.employer.employeesNumber
+          const website = data && data.data &&
+            data.data.employer && data.data.employer.website
+          const employerJobs = data && data.data && data.data.employer
+            && data.data.employer.jobofferSet &&
+            data.data.employer.jobofferSet.edges.map(job => Object.assign({}, { "id": job.node.id }))
           return (
             <Mutation
               mutation={ADD_JOB}
@@ -97,7 +104,7 @@ class PostFormPage extends Component {
                         desc: 'Please fill out the information below so we can help with your search',
                         color: 'white'
                       }}
-                      propsData={this.state.input}
+                      propsData={input}
                       onBack={this.prevPage}
                       onSubmit={this.handleStep}
                     />
@@ -134,20 +141,27 @@ class PostFormPage extends Component {
                       onSubmit={() => {
                         addJobMutation({
                           variables: {
-                            employerId,
-                            roleId: input.jobofferSet.roleId,
-                            educationLevelId: input.jobofferSet.educationLevelId,
-                            permanent: input.jobofferSet.contractLength === 1 ? true : false,
-                            userId: this.state.userId,
-                            postcode,
-                            experience: input.jobofferSet.experience,
-                            skills: [...input.jobofferSet.skillsIds],
-                            contractLength: input.jobofferSet.contractLength,
-                            offerSponsorship: input.jobofferSet.offer,
-                            spec: input.jobofferSet.spec,
-                            remuneration: input.jobofferSet.remuneration,
-                            interviewStages: input.jobofferSet.interviewStages,
-                            startIn: input.jobofferSet.startIn
+                            input: {
+                              id: employerId,
+                              jobofferSet: [
+                                ...Object.values(employerJobs),
+                                {
+                                  postcode,
+                                  employerId,
+                                  roleId: input.jobofferSet.roleId,
+                                  educationLevelId: input.jobofferSet.educationLevelId,
+                                  permanent: input.jobofferSet.contractLength === 1 ? true : false,
+                                  experience: parseInt(input.jobofferSet.experience),
+                                  skill: input.jobofferSet.skillsIds.map(id => Object.assign({}, { "id": id })),
+                                  contractLength: parseInt(input.jobofferSet.contractLength),
+                                  offersSponsorship: input.jobofferSet.offer === "true" ? true : false,
+                                  spec: input.jobofferSet.spec,
+                                  remuneration: parseInt(input.jobofferSet.remuneration),
+                                  interviewStages: parseInt(input.jobofferSet.interviewStages),
+                                  startIn: parseInt(input.jobofferSet.startIn)
+
+                                }]
+                            }
                           }
                         })
                       }}

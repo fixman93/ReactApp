@@ -23,6 +23,7 @@ export class PostForm extends Component {
 
 
 
+
   handleSubmit = async () => {
     let names = ['educationLevelId', 'managing', 'remote', 'travel', 'offer', 'spec']
     const list = Array.from(this.formRef.current.elements);
@@ -70,7 +71,7 @@ export class PostForm extends Component {
 
 
   render() {
-    const { heading, onBack, } = this.props
+    const { heading, onBack, propsData } = this.props
     const { errors } = this.state;
     return (
       <Query
@@ -113,6 +114,7 @@ export class PostForm extends Component {
                       desc='(Select one)'
                       id='educationLevel'
                       name='educationLevelId'
+                      val={propsData.jobofferSet ? propsData.jobofferSet.educationLevelId : null}
                       options={educationLevels}
                     />
                   )}
@@ -123,6 +125,7 @@ export class PostForm extends Component {
                       desc='(Select one)'
                       id='firstQuestion'
                       name="remote"
+                      val={propsData.jobofferSet ? propsData.jobofferSet.remote : null}
                       options={questions[0].node.question}
                     />
                   )}
@@ -132,6 +135,7 @@ export class PostForm extends Component {
                       label={`3. ${questions[1].node.question.standardquestion.question.question}`}
                       desc='(Select one)'
                       id='secondQuestion'
+                      val={propsData.jobofferSet ? propsData.jobofferSet.managing : null}
                       name="managing"
                       options={questions[1].node.question}
                     />
@@ -143,6 +147,7 @@ export class PostForm extends Component {
                       desc='(Select one)'
                       id='thirdQuestion'
                       name="travel"
+                      val={propsData.jobofferSet ? propsData.jobofferSet.travel : null}
                       options={questions[2].node.question}
                     />
                   )}
@@ -153,6 +158,7 @@ export class PostForm extends Component {
                     desc='(Select one)'
                     id='experience'
                     name='offer'
+                    val={propsData.jobofferSet ? propsData.jobofferSet.offer : null}
                     options={[
                       { id: '8', label: 'Yes', value: true, name: 'offer' },
                       { id: '9', label: 'No', value: false, name: 'offer' }
@@ -163,6 +169,7 @@ export class PostForm extends Component {
                     label='6. Any additional comments?'
                     desc='(On the talent you’re looking for or the role specifications)'
                     name='spec'
+                    val={propsData.jobofferSet ? propsData.jobofferSet.spec : null}
                     placeholder='Provide further details…'
                     type='text'
                     id='spec'

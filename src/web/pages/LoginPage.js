@@ -9,7 +9,7 @@ export class LoginPage extends Component {
     history: PropTypes.object.isRequired
   }
 
-  render () {
+  render() {
     const { history } = this.props
     return (
       <GuestPage
@@ -19,7 +19,7 @@ export class LoginPage extends Component {
           color: 'white',
         }}
       >
-        <LoginForm history={history} />
+        <LoginForm history={history} type="company" />
       </GuestPage>
     )
   }

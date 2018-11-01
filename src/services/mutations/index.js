@@ -115,61 +115,73 @@ export const ACTIVATE_USER = gql`
  *
  * Component: PostFormPage
  */
+// export const ADD_JOB = gql`
+//   mutation employerDetails(
+//     # $input: EmployerDetailsMutationInput!,
+//     $userId: ID!
+//     # $postId: ID!,
+//     $employerId: ID
+//     $roleId: ID
+//     $skill: [SkillInput!]
+//     $educationLevelId: ID
+//     $permanent: Boolean
+//     $experience: Int
+//     $startIn: Int
+//     $postcode: String
+//     $interviewStages: Int
+//     $remuneration: Int
+//     $spec: String
+//     $contractLength: Int
+//     $offersSponsorship: Boolean
+//     $jobofferresponseSet: [JobOfferResponseInput!]
+//   ) {
+//     employerDetails(
+//       input: {
+//         id: $userId
+//         jobofferSet: {
+//           # id: $postId,
+//           jobofferresponseSet: $jobofferresponseSet
+//           employerId: $employerId
+//           roleId: $roleId
+//           skill: $skill
+//           educationLevelId: $educationLevelId
+//           permanent: $permanent
+//           experience: $experience
+//           postcode: $postcode
+//           startIn: $startIn
+//           interviewStages: $interviewStages
+//           remuneration: $remuneration
+//           spec: $spec
+//           contractLength: $contractLength
+//           offersSponsorship: $offersSponsorship
+//         }
+//       }
+//     ) {
+//       ok
+//       employer {
+//         id
+//         jobofferSet {
+//           edges {
+//             node {
+//               id
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// `
+
 export const ADD_JOB = gql`
-  mutation employerDetails(
-    # $input: EmployerDetailsMutationInput!,
-    $userId: ID!
-    # $postId: ID!,
-    $employerId: ID
-    $roleId: ID
-    $skill: [SkillInput!]
-    $educationLevelId: ID
-    $permanent: Boolean
-    $experience: Int
-    $startIn: Int
-    $postcode: String
-    $interviewStages: Int
-    $remuneration: Int
-    $spec: String
-    $contractLength: Int
-    $offersSponsorship: Boolean
-    $jobofferresponseSet: [JobOfferResponseInput!]
-  ) {
-    employerDetails(
-      input: {
-        id: $userId
-        jobofferSet: {
-          # id: $postId,
-          jobofferresponseSet: $jobofferresponseSet
-          employerId: $employerId
-          roleId: $roleId
-          skill: $skill
-          educationLevelId: $educationLevelId
-          permanent: $permanent
-          experience: $experience
-          postcode: $postcode
-          startIn: $startIn
-          interviewStages: $interviewStages
-          remuneration: $remuneration
-          spec: $spec
-          contractLength: $contractLength
-          offersSponsorship: $offersSponsorship
-        }
-      }
-    ) {
-      ok
-      employer {
-        id
-        jobofferSet {
-          edges {
-            node {
-              id
-            }
-          }
+    mutation employerDetails($input: EmployerDetailsMutationInput!) {
+      employerDetails(input: $input) {
+        ok, 
+        employer {
+          id
         }
       }
     }
-  }
+
 `
 
 // export const UPDATE_JOB = gql`
@@ -213,3 +225,16 @@ export const ADD_JOB = gql`
 //     })
 //   }
 // `
+
+
+export const CANDIDATE_DETAILS = gql`
+    mutation candidateDetails($input: CandidateDetailsMutationInput!) {
+      candidateDetails(input: $input) {
+        ok, 
+        candidate {
+          id
+        }
+      }
+    }
+
+`

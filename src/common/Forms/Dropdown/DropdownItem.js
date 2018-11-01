@@ -20,7 +20,8 @@ const DropdownItem = ({ data, onClick, dataToMap }) => (
 DropdownItem.propTypes = {
   onClick: PropTypes.func.isRequired,
   data: PropTypes.object.isRequired,
-  dataToMap: PropTypes.string
+  dataToMap: PropTypes.string,
+  defaultValue: PropTypes.object
 }
 
 export default DropdownItem

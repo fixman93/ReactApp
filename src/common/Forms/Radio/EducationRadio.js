@@ -17,6 +17,14 @@ class EducationRadio extends Component {
     error: PropTypes.string
   }
 
+  componentDidMount() {
+    if (this.props.val) {
+      this.setState({
+        value: this.props.val
+      })
+    }
+  }
+
   handleChange = value => {
     this.setState({
       value
@@ -32,7 +40,6 @@ class EducationRadio extends Component {
     } = this.props
     return (
       <div className='form-input-group'>
-        {error && <ErrorMessage message={error} />}
         <label>{label} <span>{desc}</span></label>
         {options.map((option, index) => {
           return (

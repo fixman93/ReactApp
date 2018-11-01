@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const RadioItem = ({ option, onChange, defaultValue }) => (
-  <div className='radio-input-container'>
+const RadioItem = ({ option, onChange, defaultValue }) => {
+  return (<div className='radio-input-container'>
     <input
       type='radio'
       id={option.id}
@@ -15,7 +15,8 @@ const RadioItem = ({ option, onChange, defaultValue }) => (
       {option.label}
     </label>
   </div>
-)
+  )
+}
 
 RadioItem.propTypes = {
   options: PropTypes.shape({

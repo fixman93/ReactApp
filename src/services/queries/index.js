@@ -153,7 +153,60 @@ export const GET_CANDIDATE = gql`
   query candidate($id: ID!) {
     candidate(id: $id) {
       fullName,
-      id
+      id,
+      user {
+        username
+      },
+      educationLevel {
+        name,
+        id
+      },
+      skill {
+        edges {
+          node {
+            skill,
+            id
+          }
+        }
+      },
+      fullName,
+      permanent,
+      contract,
+      needsSponsorship,
+      phoneNumber,
+      postcode,
+      maxCommute,
+      currentSalary,
+      desiredSalary,
+      portfolioSet {
+        edges {
+          node {
+            link
+          }
+        }
+      },
+      jobSet {
+        edges {
+          node {
+            role {
+              name,id
+            },
+            company {
+              name
+            }
+          }
+        }
+      },
+      rolesoughtSet {
+        edges {
+          node {
+            role {
+              name, id
+            }, 
+            experience
+          }
+        }
+      }
     }
   }
 `

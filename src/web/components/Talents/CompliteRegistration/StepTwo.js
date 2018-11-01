@@ -81,8 +81,8 @@ class StepTwo extends Component {
 
 
   render() {
-    const { heading, onSubmit, onBack, propsData } = this.props;
-    const { newSkillInputActive, skills, errors } = this.state;
+    const { heading, } = this.props;
+    const { errors } = this.state;
     return (
       <Query query={GET_SKILLS}>
         {data => {

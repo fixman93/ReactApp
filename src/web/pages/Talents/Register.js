@@ -52,7 +52,14 @@ class TalentRegister extends Component {
     return (
       <Mutation
         mutation={ADD_TALENT}
-        onCompleted={this.props.history.push('/talent/email')}
+        onCompleted={(data) => {
+          if (data.candidateJoin.ok) {
+
+            this.props.history.push({ pathName: '/talent/email', state: { registration: 'talent' } })
+          }
+        }
+        }
+
         onError={(errors) => {
           this.setState({ serverErrorResponse: errors.graphQLErrors });
         }}
@@ -94,8 +101,6 @@ class TalentRegister extends Component {
                             //skills: input.skills.map(sk => sk.id)
                             rolesoughtSet: [
                               {
-                                id: "101",
-                                candidateId: "1",
                                 roleId: input.roleId,
                                 order: 1,
                                 experience: 1

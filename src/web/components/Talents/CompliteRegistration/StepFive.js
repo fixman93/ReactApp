@@ -184,6 +184,11 @@ class StepFive extends Component {
               } />
           </div>
         </UIContainer>
+        <button
+          onClick={this.props.onSubmit}
+          className="btn btn-white-blue"
+        >
+          Finish <img src={BlueArrow} /></button>
       </div >
     )
   }

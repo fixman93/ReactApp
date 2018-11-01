@@ -7,16 +7,16 @@ export class TalentLogin extends Component {
     static propTypes = {
         history: PropTypes.object.isRequired
     }
-    render () {
+    render() {
         const { history } = this.props
         return (
             <GuestPage
                 heading={{
-                title: 'Log in into your account',
-                desc: 'Log in to see your applications and jobs',
-                color: 'white',
+                    title: 'Log in into your account',
+                    desc: 'Log in to see your applications and jobs',
+                    color: 'white',
                 }} >
-                <LoginForm history={history} />
+                <LoginForm history={history} type='talent' />
             </GuestPage>
         )
     }

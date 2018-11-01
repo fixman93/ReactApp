@@ -12,7 +12,8 @@ export class Input extends Component {
     type: PropTypes.string.isRequired,
     desc: PropTypes.string,
     className: PropTypes.string,
-    error: PropTypes.string
+    error: PropTypes.string,
+    val: PropTypes.string
   }
 
   constructor(props) {
@@ -23,6 +24,14 @@ export class Input extends Component {
       initialLoad: true
     }
     this.inputRef = React.createRef()
+  }
+
+  componentDidMount() {
+    if (this.props.val) {
+      this.setState({
+        value: this.props.val
+      })
+    }
   }
 
   componentDidUpdate = () => {

@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
-import { Mutation } from 'react-apollo'
+import { Mutation, compose, graphql, withApollo } from 'react-apollo'
 import { Link } from 'react-router-dom'
 import ErrorMessage from 'common/Error/ErrorMessage'
 import Input from 'common/Forms/Input'
 import { LOGIN_USER } from 'services/mutations'
+import { GET_CANDIDATE } from '../../../../services/queries';
+
 
 export class LoginForm extends Component {
   constructor(props) {
@@ -28,9 +30,10 @@ export class LoginForm extends Component {
   }
 
   render() {
-    const { history } = this.props
+    const { history, type } = this.props
     const { input, errors } = this.state
     const error = errors && errors[0] && errors[0].message
+    console.log(type)
     return (
       <Mutation
         mutation={LOGIN_USER}
@@ -42,17 +45,31 @@ export class LoginForm extends Component {
         onCompleted={async data => {
           await localStorage.setItem('token', data.tokenAuth.token)
           await localStorage.setItem('userId', data.tokenAuth.id)
-          await history.push('/talent/complite-profile')
+          if (data.tokenAuth.id) {
+            if (type === 'talent') {
+              await this.props.data.refetch({ id: data.tokenAuth.id })
+              if (this.props.data.candidate) {
+                if (this.props.data.candidate.desiredSalary) {
+                  await history.push('/talent/profile')
+                } else {
+                  await history.push('/talent/complite-profile')
+                }
+              }
+            } else {
+              await history.push('/company/profile')
+            }
+          }
         }}
       >
         {loginUser => (
-          <form
+          < form
             ref={this.formRef}
             className="form loginForm"
             onSubmit={async e => {
               e.preventDefault()
               await this.handleSubmit()
               await loginUser(input.username, input.password)
+
             }}
           >
             <div className='panel'>
@@ -77,10 +94,14 @@ export class LoginForm extends Component {
               <button type="submit" className="button">Log In</button>
             </div>
           </form>
-        )}
+        )
+        }
       </Mutation>
     )
   }
 }
 
-export default LoginForm
+
+export default graphql(GET_CANDIDATE, {
+  options: { variables: { id: 'r' } }
+})(LoginForm)

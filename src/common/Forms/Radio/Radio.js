@@ -18,6 +18,14 @@ class Radio extends Component {
   }
 
 
+  componentDidMount() {
+    if (this.props.val) {
+      this.setState({
+        value: this.props.val
+      })
+    }
+  }
+
 
   handleChange = value => {
     this.setState({

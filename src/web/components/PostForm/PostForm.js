@@ -40,6 +40,13 @@ export class PostForm extends Component {
     this.setState({
       userId: localStorage.getItem('userId')
     })
+    if (this.props.propsData.jobofferSet) {
+      this.setState({
+        dropdownValue: this.props.propsData.jobofferSet.role,
+        roleId: this.props.propsData.jobofferSet.roleId
+      })
+    }
+
   }
 
   componentWillUnmount = () => {
@@ -126,7 +133,7 @@ export class PostForm extends Component {
             if (/^[0-9\s]*$/.test(toAdd.value)) {
 
               // add it to input object
-              setInput(this, name, toAdd.name)
+              setInput(this, name, toAdd.value)
             } else {
               // else add error to errors object
               setError(this, name, 'Only numbers allowed')
@@ -214,7 +221,7 @@ export class PostForm extends Component {
                         desc='(Select one)'
                         id='employment'
                         name='contractLength'
-                        val={propsData.contractLength ? propsData.contractLength : ""}
+                        val={propsData.jobofferSet ? propsData.jobofferSet.contractLength : null}
                         options={[
                           { id: 'permanent', label: 'Permanent (Full Time)', value: '1', name: 'contractLength' },
                           { id: 'contract', label: 'Contract (Fixed Term)', value: '0', name: 'contractLength' }
@@ -226,7 +233,8 @@ export class PostForm extends Component {
                         label='3. Minimum years of experience?'
                         desc='(Select one)'
                         id='experience'
-                        val={propsData.experience ? propsData.experience : ""}
+
+                        val={propsData.jobofferSet ? propsData.jobofferSet.experience : null}
                         name='experience'
                         options={[
                           { id: 'sixMonths', label: '6 months', value: 0.5, name: 'experience' },
@@ -243,7 +251,7 @@ export class PostForm extends Component {
                         label='Maximum budget for the role'
                         desc='(e.g. &pound;50000 or &pound;400 per day)'
                         name='remuneration'
-                        val={propsData.remuneration ? propsData.remuneration : ""}
+                        val={propsData.jobofferSet ? propsData.jobofferSet['remuneration'] : null}
                         placeholder='Enter number'
                         type='text'
                         id='budget'
@@ -255,7 +263,7 @@ export class PostForm extends Component {
                         label='5. How many interview stages will there be for this role?'
                         desc='(Select one)'
                         id='stages'
-                        val={propsData.interviewStages ? propsData.interviewStages : ""}
+                        val={propsData.jobofferSet ? propsData.jobofferSet.interviewStages : null}
                         name='interviewStages'
                         options={[
                           { id: 'one', value: '1', label: '1', name: 'interviewStages' },
@@ -271,7 +279,7 @@ export class PostForm extends Component {
                         label='6. Expected new start date?'
                         desc='(Select one)'
                         id='startIn'
-                        val={propsData.startIn ? propsData.startIn : ""}
+                        val={propsData.jobofferSet ? propsData.jobofferSet.startIn : null}
                         name='startIn'
                         options={[
                           { id: 'immediately', label: 'immediately', value: '0', name: 'startIn' },
