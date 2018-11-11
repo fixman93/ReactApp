@@ -38,7 +38,7 @@ export class PostForm extends Component {
       if (name !== 'spec') {
         // if name is not spec - it's radio input
         // checks if is at least one checked with the name
-        let isAtLeastOneChecked = list.filter(el => el.name === name && el.checked === true).length == 1 ? true : false;
+        let isAtLeastOneChecked = list.filter(el => el.name === name && el.checked === true).length === 1 ? true : false;
         // find checked one
         let toAdd = list.find(el => el.name === name && el.checked);
         if (isAtLeastOneChecked) {
@@ -52,8 +52,8 @@ export class PostForm extends Component {
 
       } else {
         // it's spec - input
-        let ifHasValue = list.find(el => el.name == name && el.value !== '') ? true : false;
-        let toAdd = list.find(el => el.name == name);
+        let ifHasValue = list.find(el => el.name === name && el.value !== '') ? true : false;
+        let toAdd = list.find(el => el.name === name);
 
         if (ifHasValue) {
           // if value, add to input object
@@ -109,56 +109,83 @@ export class PostForm extends Component {
                 <UIContainer className='post-form'>
 
                   {educationLevels && (
-                    <EducationRadio
+                    <Radio
                       label='1. Highest level of education?'
                       desc='(Select one)'
                       id='educationLevel'
                       name='educationLevelId'
                       val={propsData.jobofferSet ? propsData.jobofferSet.educationLevelId : null}
-                      options={educationLevels}
+                      options={
+                        educationLevels.map(level =>
+                          Object.assign({}, {
+                            id: level.node.id,
+                            label: level.node.name,
+                            value: level.node.id,
+                            name: "educationLevelId"
+                          })
+                        )
+                      }
                     />
                   )}
-                  {errors.educationLevelId && <ErrorMessage message={errors.educationLevelId} />}
-                  {questions && questions[0] && (
-                    <DynamicRadio
-                      label={`2. ${questions[0].node.question.standardquestion.question.question}`}
-                      desc='(Select one)'
-                      id='firstQuestion'
-                      name="remote"
-                      val={propsData.jobofferSet ? propsData.jobofferSet.remote : null}
-                      options={questions[0].node.question}
-                    />
-                  )}
-                  {errors.remote && <ErrorMessage message={errors.remote} />}
-                  {questions && questions[1] && (
-                    <DynamicRadio
-                      label={`3. ${questions[1].node.question.standardquestion.question.question}`}
-                      desc='(Select one)'
-                      id='secondQuestion'
-                      val={propsData.jobofferSet ? propsData.jobofferSet.managing : null}
-                      name="managing"
-                      options={questions[1].node.question}
-                    />
-                  )}
-                  {errors.managing && <ErrorMessage message={errors.managing} />}
-                  {questions && questions[2] && (
-                    <DynamicRadio
-                      label={`4. ${questions[2].node.question.standardquestion.question.question}`}
-                      desc='(Select one)'
-                      id='thirdQuestion'
-                      name="travel"
-                      val={propsData.jobofferSet ? propsData.jobofferSet.travel : null}
-                      options={questions[2].node.question}
-                    />
-                  )}
-                  {errors.travel && <ErrorMessage message={errors.travel} />}
+
+
+                  {questions && questions.map((question, i) => {
+                    {/* map through questions */ }
+                    return <React.Fragment key={i}>
+                      {/* return radio for each question, they all are radio  */}
+                      <Radio
+                        /* set label based on question */
+                        label={`${i + 2}. ${question.node.question.standardquestion.question.question}`}
+                        desc='(Select one)'
+                        id={question.node.question.standardquestion.id}
+                        /* set question id to radio id
+                           there are three questions, first is about remote job so set remote as name
+                           second is about managing, name is managing
+                           last is about travelling so name is travel */
+                        name={
+                          question.node.question.standardquestion.id === questions[0].node.question.standardquestion.id ? 'remote' :
+                            question.node.question.standardquestion.id === questions[1].node.question.standardquestion.id ? 'managing' :
+                              'travel'
+                        }
+                        /* val helps to set answers when user clicks back on form */
+                        val={
+                          question.id === questions[0].id ?
+                            (propsData.jobofferSet ? propsData.jobofferSet.remote : null) :
+                            question.id === questions[1].id ?
+                              (propsData.jobofferSet ? propsData.jobofferSet.managing : null) :
+                              (propsData.jobofferSet ? propsData.jobofferSet.travel : null)}
+                        /* map through answers */
+                        options={Object.keys(question.node.question.standardquestion.answers).map((el, i) =>
+                          Object.assign({}, {
+                            /* ids for answers are repetetive so in front of them are names */
+                            id: question.node.question.standardquestion.id === questions[0].node.question.standardquestion.id ? `remote_${el}` :
+                              question.node.question.standardquestion.id === questions[1].node.question.standardquestion.id ? `managing_${el}` :
+                                `travel_${el}`,
+                            label: el,
+                            value: el,
+                            name: question.node.question.standardquestion.id === questions[0].node.question.standardquestion.id ? 'remote' :
+                              question.node.question.standardquestion.id === questions[1].node.question.standardquestion.id ? 'managing' :
+                                'travel'
+                          })
+                        )}
+                      />
+                      {question.id === questions[0].id ?
+                        (errors.remote && <ErrorMessage message={errors.remote} />) :
+                        question.id === questions[1].id ?
+                          (errors.managing && <ErrorMessage message={errors.managing} />) :
+                          errors.remote && <ErrorMessage message={errors.remote} />}
+                    </React.Fragment>
+
+                  })}
+
 
                   <Radio
                     label='5. Will you offer Visa sponsorship?'
                     desc='(Select one)'
-                    id='experience'
+                    id='offer'
                     name='offer'
-                    val={propsData.jobofferSet ? propsData.jobofferSet.offer : null}
+                    val={propsData.jobofferSet ?
+                      propsData.jobofferSet.offer === 'true' ? true : false : null}
                     options={[
                       { id: '8', label: 'Yes', value: true, name: 'offer' },
                       { id: '9', label: 'No', value: false, name: 'offer' }

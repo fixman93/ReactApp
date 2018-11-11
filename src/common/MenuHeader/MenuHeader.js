@@ -28,6 +28,10 @@ export class MenuHeader extends Component {
   }
 
   logout() {
+    if (localStorage.getItem('type') === 'talent') {
+      localStorage.clear()
+      this.props.history.push('/talent-landing')
+    }
     localStorage.clear()
   }
   render() {
@@ -43,6 +47,7 @@ export class MenuHeader extends Component {
               />
             </Link>{/*  <span>OneApp</span> if you want to use logo text */}
           </div>
+          {/* IF NOT LOGGED IN */}
           <div className='col-6 text-center'>
             {
               !this.state.userId ? (
@@ -53,6 +58,7 @@ export class MenuHeader extends Component {
               ) : null
             }
           </div>
+          {/* IF NOT LOGGED IN */}
           <div className='col btn-holder text-right'>
 
             {

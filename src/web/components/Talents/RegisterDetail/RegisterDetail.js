@@ -9,9 +9,6 @@ import RegisterHand from "../../../../assets/images/CompanyRegistration/hands-ho
 import './RegisterDetail.css'
 
 
-let emailRegex =
-  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
 export class RegisterDetail extends Component {
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
@@ -40,8 +37,8 @@ export class RegisterDetail extends Component {
 
     names.map(name => {
 
-      let hasValue = list.find(el => el.name == name).value.length !== 0 ? true : false;
-      let toAdd = list.find(el => el.name == name)
+      let hasValue = list.find(el => el.name === name).value.length !== 0 ? true : false;
+      let toAdd = list.find(el => el.name === name)
 
       if (hasValue) {
         if (name === 'email') {
@@ -127,8 +124,16 @@ export class RegisterDetail extends Component {
             name="password"
           />
           {errors.password && <ErrorMessage message={errors.password} />}
-          {serverErrors && serverErrors.map((err, i) => {
+          {/*
+            SERVER ERRORS
+          serverErrors && serverErrors.map((err, i) => {
             return <ErrorMessage key={i} message={err.message} />
+          })
+            since they are not descriptive, custom message is returned
+          */}
+          {serverErrors && serverErrors.map((err, i) => {
+            if (err.message.includes('username'))
+              return <ErrorMessage key={i} message="This email is already taken" />
           })}
         </UIContainer>
         <div className="login-button-container">

@@ -13,10 +13,12 @@ const client = new ApolloClient({
     credentials: 'include'
   },
   request: async operation => {
-    let headers = { 'x-csrftoken': Cookies.get('csrftoken') }
+    let headers = {
+      'x-csrftoken': Cookies.get('csrftoken')
+    }
     const token = localStorage.getItem('token')
     if (token) {
-      headers['authorization'] =`JWT ${token}`
+      headers['authorization'] = `JWT ${token}`
     }
     operation.setContext({ headers })
   }

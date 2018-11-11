@@ -19,11 +19,6 @@ let start = [
   { id: 'threeMonths', label: '3+ months', value: '12', name: 'startIn' }
 ]
 
-let visa = [
-  { id: '8', label: 'Yes', value: true, name: 'offer' },
-  { id: '9', label: 'No', value: false, name: 'offer' }
-]
-
 class PostFormPreview extends React.Component {
   constructor(props) {
     super(props);
@@ -61,7 +56,7 @@ class PostFormPreview extends React.Component {
         {
           // start is array with all options to answer when you expect to start
           title: 'Expected start',
-          value: start.find(p => p.value == jobofferSet.startIn).label
+          value: start.find(p => p.value === jobofferSet.startIn).label
         },
         {
           // find education based on educationLevelId, and pass its name
@@ -91,7 +86,6 @@ class PostFormPreview extends React.Component {
     >
       {({ loading, data, error }) => {
         const employer = data && data.employer
-        const jobofferSet = data && data.employer
           && data.employer.jobofferSet && data.employer.jobofferSet.edges &&
           data.employer.jobofferSet.edges[0] &&
           data.employer.jobofferSet.edges[0].node

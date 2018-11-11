@@ -24,3 +24,7 @@
   right: 0;
   transform: translateY(-27px) translateX(-15px);
 }
+
+.skill-relative {
+  position: relative;
+}

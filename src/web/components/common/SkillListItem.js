@@ -1,8 +1,19 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import x from 'assets/images/x.svg'
+import star from '../../../assets/images/Company/star.png'
+import star_gray from '../../../assets/images/Company/star_1.png'
 import SkillExperienceList from './SkillExperienceList'
 
+
+let Star = () => <img
+  src={star}
+  alt="star"
+  style={{ width: "13px", height: "13px", margin: "0 0.1em 0.2em" }} />
+let StarGray = () => <img
+  src={star_gray}
+  alt="star_gray"
+  style={{ width: "13px", height: "13px", margin: "0 0.1em 0.2em" }} />
 
 class CompanyItem extends Component {
 
@@ -15,6 +26,7 @@ class CompanyItem extends Component {
     return (<li className='skill-list-item'>
       {data.name}
       <span
+        style={{ margin: "0 0.2em" }}
         onClick={() => onRemove(data.name)}
       >
         <img src={x} alt='' />
@@ -35,14 +47,22 @@ class SkillListItem extends Component {
     experienceActive: true
   }
 
+  componentWillMount() {
+    if (this.props.fromBack) {
+      this.setState({
+        experienceActive: false
+      })
+    }
+  }
 
 
   handleExperienceClick = async value => {
+    console.log(value)
     await this.setState({
       experience: value,
       experienceActive: false
     })
-    this.props.onClick()
+    //this.props.onClick()
   }
 
   toggleExp = () => {
@@ -54,7 +74,6 @@ class SkillListItem extends Component {
   render() {
     const { data, onRemove, onClick } = this.props
     const { experience, experienceActive } = this.state
-
     if (data) {
       if (data.skill) {
         return <React.Fragment>
@@ -65,7 +84,23 @@ class SkillListItem extends Component {
               onClick={this.toggleExp}
               className='skill-list-span'
             >
-              {experience || 'Select level'}
+              {experience !== '' ? experience === "Novice" ?
+                <span className="skill-experience-group" >
+                  <Star />
+                  <StarGray />
+                  <StarGray />
+                </span> : experience === 'Intermediate' ?
+                  <span className="skill-experience-group" >
+                    <Star />
+                    <Star />
+                    <StarGray />
+                  </span> :
+                  <span className="skill-experience-group" >
+                    <Star />
+                    <Star />
+                    <Star />
+                  </span>
+                : 'Select level'}
             </span>}
             <span
               onClick={() => onRemove(data.skill)}
@@ -75,6 +110,8 @@ class SkillListItem extends Component {
           </li>
           {(experienceActive) && (
             <SkillExperienceList
+              data={data}
+              onClick={onClick}
               onExperienceClick={this.handleExperienceClick}
             />)}
         </React.Fragment>

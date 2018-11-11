@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import RadioItem from './RadioItem'
-import ErrorMessage from '../../Error/ErrorMessage'
 import './Radio.css'
 
 class EducationRadio extends Component {
@@ -13,8 +11,7 @@ class EducationRadio extends Component {
     label: PropTypes.string,
     options: PropTypes.array.isRequired,
     desc: PropTypes.string,
-    className: PropTypes.string,
-    error: PropTypes.string
+    className: PropTypes.string
   }
 
   componentDidMount() {
@@ -35,8 +32,7 @@ class EducationRadio extends Component {
     const {
       label,
       desc,
-      options,
-      error
+      options
     } = this.props
     return (
       <div className='form-input-group'>

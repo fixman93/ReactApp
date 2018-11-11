@@ -1,5 +1,5 @@
-import React, {Component} from 'react'
-import {PropTypes} from 'prop-types'
+import React, { Component } from 'react'
+import { PropTypes } from 'prop-types'
 import MenuHeader from 'common/MenuHeader/'
 import LandingTop from './components/LandingTop'
 // import Ednos from './components/Ednos'
@@ -8,7 +8,7 @@ import SignupBanner from './components/SignupBanner'
 import './TalentLanding.css'
 
 export class TalentLanding extends Component {
-  render () {
+  render() {
     return (
       <div>
         <LandingTop match={this.props.match}>

@@ -3,5 +3,14 @@
   font-size: 14px;
   font-family: 'Muli', sans-serif;
   font-weight: bold;
-  margin: 1em 0;
+  padding: 1em 0 2.5em;
+  display: flex;
+  align-items: center;
+}
+
+.error {
+  width: 15px;
+  height: 15px;
+  object-fit: contain;
+  margin-right: 0.3em;
 }

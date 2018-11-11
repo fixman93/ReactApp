@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Mutation, compose, graphql, withApollo } from 'react-apollo'
+import { Mutation, graphql } from 'react-apollo'
 import { Link } from 'react-router-dom'
 import ErrorMessage from 'common/Error/ErrorMessage'
 import Input from 'common/Forms/Input'
@@ -33,7 +33,6 @@ export class LoginForm extends Component {
     const { history, type } = this.props
     const { input, errors } = this.state
     const error = errors && errors[0] && errors[0].message
-    console.log(type)
     return (
       <Mutation
         mutation={LOGIN_USER}
@@ -45,19 +44,17 @@ export class LoginForm extends Component {
         onCompleted={async data => {
           await localStorage.setItem('token', data.tokenAuth.token)
           await localStorage.setItem('userId', data.tokenAuth.id)
+          await localStorage.setItem('type', 'talent')
           if (data.tokenAuth.id) {
-            if (type === 'talent') {
-              await this.props.data.refetch({ id: data.tokenAuth.id })
-              if (this.props.data.candidate) {
-                if (this.props.data.candidate.desiredSalary) {
-                  await history.push('/talent/profile')
-                } else {
-                  await history.push('/talent/complite-profile')
-                }
+            await this.props.data.refetch({ id: data.tokenAuth.id })
+            if (this.props.data.candidate) {
+              if (this.props.data.candidate.desiredSalary) {
+                await history.push('/talent/profile')
+              } else {
+                await history.push('/talent/complite-profile')
               }
-            } else {
-              await history.push('/company/profile')
             }
+
           }
         }}
       >

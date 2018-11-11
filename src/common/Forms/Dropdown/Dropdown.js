@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import DropdownItem from './DropdownItem'
 import DropdownList from './DropdownList'
-import ErrorMessage from '../../Error/ErrorMessage';
 import './Dropdown.css'
 
 class Dropdown extends Component {
@@ -44,8 +43,7 @@ class Dropdown extends Component {
       dropdownActive,
       data,
       dataToMap,
-      refProp,
-      error
+      refProp
     } = this.props
     return (
       <div className="dropdown" ref={refProp}>

@@ -45,7 +45,7 @@ class Radio extends Component {
       <div className='form-input-group'>
         {error && <ErrorMessage message={error} />}
         <label>{label} <span>{desc}</span></label>
-        {options.map((option, index) => (
+        {options && options.map((option, index) => (
           <RadioItem
             key={index}
             option={option}

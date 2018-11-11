@@ -106,7 +106,6 @@ export class RegisterFormSecondStep extends Component {
       input,
       dropdownValue,
       dropdownActive,
-      data,
       loading,
       userId
     } = this.state

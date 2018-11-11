@@ -1,14 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import UIContainer from "common/UIContainer";
 import FeaturedTitle from "common/FeaturedTitle";
-import { Query } from "react-apollo";
-import Input from 'common/Forms/Input'
-import SkillList from "web/components/common/SkillList";
-import NewSkill from "web/components/common/NewSkill";
 import BlueArrow from '../../../../assets/images/blue-arrow.svg'
-import { GET_SKILLS } from "../../../../services/queries";
-
 class StepFiveOne extends Component {
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
@@ -27,11 +20,10 @@ class StepFiveOne extends Component {
 
   render() {
     const { heading, onSubmit, onBack } = this.props;
-    const { newSkillInputActive, skills, errors } = this.state;
     return (<form
       ref={this.formRef}
       className="form"
-      onSubmit={() => this.props.onSubmit({})}
+      onSubmit={() => onSubmit({})}
     >
       <FeaturedTitle
         title={heading.title}
@@ -54,7 +46,7 @@ class StepFiveOne extends Component {
                   Back
                 </button> */}
         <button type="submit" className="btn btn-white-blue">
-          Next <img src={BlueArrow} />
+          Next <img src={BlueArrow} alt="blue-arrow" />
         </button>
       </div>
     </form>

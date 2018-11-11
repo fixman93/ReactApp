@@ -130,7 +130,7 @@ class StepFour extends Component {
                   Back
                 </button> */}
                 <button type="submit" className="btn btn-white-blue">
-                  Next <img src={BlueArrow} />
+                  Next <img src={BlueArrow} alt="blue-arrow" />
                 </button>
               </div>
             </form>

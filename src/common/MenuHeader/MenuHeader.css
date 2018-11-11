@@ -28,3 +28,10 @@
   color: var(--white);
   font-size: 12px;
 }
+
+
+@media screen and (max-width: 1200px) {
+  .btn-white {
+    margin-bottom: 0.5em!important;
+  }
+}

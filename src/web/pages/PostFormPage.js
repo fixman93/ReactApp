@@ -46,6 +46,7 @@ class PostFormPage extends Component {
 
 
   handleStep = (data) => {
+    console.log(data)
     const { userId } = this.state;
     this.setState(prevState => ({
       input: {
@@ -76,10 +77,6 @@ class PostFormPage extends Component {
             data.data.employer && data.data.employer.id
           const postcode = data && data.data &&
             data.data.employer && data.data.employer.postcode
-          const employeesNumber = data && data.data &&
-            data.data.employer && data.data.employer.employeesNumber
-          const website = data && data.data &&
-            data.data.employer && data.data.employer.website
           const employerJobs = data && data.data && data.data.employer
             && data.data.employer.jobofferSet &&
             data.data.employer.jobofferSet.edges.map(job => Object.assign({}, { "id": job.node.id }))
@@ -152,12 +149,12 @@ class PostFormPage extends Component {
                                   educationLevelId: input.jobofferSet.educationLevelId,
                                   permanent: input.jobofferSet.contractLength === 1 ? true : false,
                                   experience: parseInt(input.jobofferSet.experience),
-                                  skill: input.jobofferSet.skillsIds.map(id => Object.assign({}, { "id": id })),
+                                  skill: input.jobofferSet.skills.map(skill => Object.assign({}, { "id": skill.id })),
                                   contractLength: parseInt(input.jobofferSet.contractLength),
                                   offersSponsorship: input.jobofferSet.offer === "true" ? true : false,
                                   spec: input.jobofferSet.spec,
                                   remuneration: parseInt(input.jobofferSet.remuneration),
-                                  interviewStages: parseInt(input.jobofferSet.interviewStages),
+                                  interviewStages: input.jobofferSet.interviewStagesID,
                                   startIn: parseInt(input.jobofferSet.startIn)
 
                                 }]

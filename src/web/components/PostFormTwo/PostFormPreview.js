@@ -8,9 +8,6 @@ import SkillItem from '../common/SkillItem'
 import pound from 'assets/images/pound.svg'
 import './PostFormPreview.css'
 
-const skills = ['Sketch', 'Adobe Photoshop', 'Adobe Illustrator', 'Adobe InDesign',
-  'User Experience', 'User Interface', 'Managin Team', 'Prototyping', 'iOS App',
-  'Android App', 'Principle', 'Axure', 'Basic HTML/CSS', 'Wordpress']
 
 const requirements = [
   {

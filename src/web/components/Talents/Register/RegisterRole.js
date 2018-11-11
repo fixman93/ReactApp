@@ -216,22 +216,24 @@ class RegisterRole extends Component {
                   {errors.roleId && <ErrorMessage message={errors.roleId} />}
 
 
-                  <div className="SelectSkills form-input-group">
+                  <div className="SelectSkills form-input-group" >
                     <label>2. What are your skills?
                       <span>Tag a maximum of 15, include technical, soft & management skills</span></label>
                     {errors.skills && <ErrorMessage message={errors.skills} />}
-                    <SkillList
-                      skills={skills}
-                      onRemove={this.handleRemoveSkill}
-                      onClick={this.handleSkillDropdownClick}
-                    />
-                    {newSkillInputActive && (
-                      <NewSkill
-                        placeholder="Enter new skill..."
-                        data={data}
-                        onAdd={this.handleAddSkill}
+                    <div style={{ display: "flex" }}>
+                      <SkillList
+                        skills={skills}
+                        onRemove={this.handleRemoveSkill}
+                        onClick={this.handleSkillDropdownClick}
                       />
-                    )}
+                      {newSkillInputActive && (
+                        <NewSkill
+                          placeholder="Enter new skill..."
+                          data={data}
+                          onAdd={this.handleAddSkill}
+                        />
+                      )}
+                    </div>
                   </div>
                 </UIContainer>
                 <div className="button-container">

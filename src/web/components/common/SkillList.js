@@ -3,10 +3,12 @@ import PropTypes from 'prop-types'
 import SkillListItem from './SkillListItem'
 import './SkillList.css'
 
-const SkillList = ({ skills, onRemove, onClick }) => skills ? (
+const SkillList = ({ skills, onRemove, onClick, fromBack, experience }) => skills ? (
   <ul className='skill-list-container'>
     {skills && skills.map(item => (
       <SkillListItem
+        experience={experience}
+        fromBack={fromBack}
         key={item.id}
         data={item}
         onClick={onClick}

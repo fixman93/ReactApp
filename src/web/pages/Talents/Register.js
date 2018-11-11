@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import PostPage from "../../../web/pages/PostPage";
-import { Mutation, Query } from "react-apollo";
+import { Mutation } from "react-apollo";
 import TalentHeader from "../../../common/TalentHeader";
 import RegisterRole from "../../components/Talents/Register";
 import RegisterDetail from "../../components/Talents/RegisterDetail";
 import { ADD_TALENT } from "services/mutations";
 
 import "./Register.css";
-import ErrorMessage from "../../../common/Error/ErrorMessage";
+
+import { history } from '../../../App';
 
 class TalentRegister extends Component {
   constructor(props) {
@@ -53,10 +54,7 @@ class TalentRegister extends Component {
       <Mutation
         mutation={ADD_TALENT}
         onCompleted={(data) => {
-          if (data.candidateJoin.ok) {
-
-            this.props.history.push({ pathName: '/talent/email', state: { registration: 'talent' } })
-          }
+          history.push('/talent/email')
         }
         }
 

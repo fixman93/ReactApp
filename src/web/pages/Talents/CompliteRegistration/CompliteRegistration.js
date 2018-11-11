@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom';
 import TalentPage from "../TalentPage";
 import TalentHeader from "../../../../common/TalentHeader";
-import UserTalent from '../../UserTalent'
 import StepOne from '../../../components/Talents/CompliteRegistration/StepOne'
 import StepTwo from '../../../components/Talents/CompliteRegistration/StepTwo'
 import StepThree from '../../../components/Talents/CompliteRegistration/StepThree'
@@ -9,9 +9,10 @@ import StepFour from '../../../components/Talents/CompliteRegistration/StepFour'
 import StepFiveOne from '../../../components/Talents/CompliteRegistration/StepFiveOne'
 import StepFive from '../../../components/Talents/CompliteRegistration/StepFive'
 import './CompliteRegistration.css'
-import { Query, Mutation } from 'react-apollo';
+import { Mutation } from 'react-apollo';
 import { CANDIDATE_DETAILS } from '../../../../services/mutations';
 
+import { history } from '../../../../App';
 
 export class CompliteProfile extends Component {
 
@@ -19,7 +20,7 @@ export class CompliteProfile extends Component {
     super(props);
     this.state = {
       input: {},
-      page: 1,
+      page: 6,
       userId: null
     };
   }
@@ -47,7 +48,6 @@ export class CompliteProfile extends Component {
   };
 
   handleStep = (data) => {
-    const { userId } = this.state;
     this.setState(prevState => ({
       input: {
         ...prevState.input,
@@ -61,7 +61,7 @@ export class CompliteProfile extends Component {
     const { page, input, userId } = this.state;
     return (<Mutation mutation={CANDIDATE_DETAILS}
       onCompleted={() => {
-        this.props.history.push({ pathName: '/talent/profile', state: { input, userId } })
+        history.push({ pathName: '/talent/profile', state: { input, userId, fromRegister: true } })
       }} >
       {addTalent => {
 
@@ -137,54 +137,75 @@ export class CompliteProfile extends Component {
                 }}
                 onBack={this.prevPage}
                 onSubmit={(e) => {
-                  console.log({
-                    input: {
-                      id: userId,
-                      educationLevelId: input.educationLevelId.id,
-                      skill: input.skillsIds.map(sk => Object.assign({}, { "id": sk })),
-                      permanent: true,
-                      contract: false,
-                      needsSponsorship: input.visaSponsorship === 1 ? true : false,
-                      noticePeriod: 1,
-                      phoneNumber: input.phoneNumber,
-                      postcode: input.postcode,
-                      maxCommute: 1,
-                      currentSalary: input.currentSalary,
-                      desiredSalary: input.expectedSalary,
-                      rolesoughtSet: [{ candidateId: userId, roleId: input.roleId_primary.id, order: 13, experience: input.experience },
-                      { candidateId: userId, roleId: input.roleId_secondary.id, order: 12, experience: input.experience_secondary }],
-                      jobSet:
-                        input.companies.map(company => {
-                          return Object.assign({}, { roleId: input.roleId_primary.id, candidateId: userId, company: { name: company.name, id: company.id }, startDate: "2018-10-10" })
 
-                        })
-
-                    }
-                  })
                   e.preventDefault();
                   addTalent({
                     variables: {
                       input: {
-                        id: userId,
-                        educationLevelId: input.educationLevelId.id,
-                        skill: input.skillsIds.map(sk => Object.assign({}, { "id": sk })),
+                        id: "Q2FuZGlkYXRlTm9kZToz",
+                        educationLevelId: "RWR1Y2F0aW9uTGV2ZWxOb2RlOjE=",
+                        reasonForChangeId: "UmVhc29uRm9yQ2hhbmdlTm9kZTox",
+                        rolesoughtSet: [
+                          {
+                            candidateId: "Q2FuZGlkYXRlTm9kZToz",
+                            roleId: "Um9sZU5vZGU6MTA=",
+                            order: 6,
+                            experience: 5,
+                          },
+                          {
+                            candidateId: "Q2FuZGlkYXRlTm9kZToz",
+                            roleId: "Um9sZU5vZGU6MTI=",
+                            order: 8,
+                            experience: 3,
+                          }
+                        ],
+                        skill: [{ id: "U2tpbGxOb2RlOjE=" }],
+                        candidateresponseSet: [
+                          {
+                            questionId: "UXVlc3Rpb25Ob2RlOjE=",
+                            answers: { yes: "" },
+                            candidateId: "Q2FuZGlkYXRlTm9kZToz"
+                          },
+                          {
+                            questionId: "UXVlc3Rpb25Ob2RlOjI=",
+                            answers: { yes: "" },
+                            candidateId: "Q2FuZGlkYXRlTm9kZToz",
+                          }
+                        ],
+                        portfolioSet: [
+                          {
+                            link: "https://www.linkedin.com/in/lancucki/",
+                            candidateId: "Q2FuZGlkYXRlTm9kZToz"
+                          },
+                          {
+                            link: "https://www.linkedin.com/in/bla/",
+                            candidateId: "Q2FuZGlkYXRlTm9kZToz",
+                          }
+                        ],
+                        jobSet: [
+                          {
+                            candidateId: "Q2FuZGlkYXRlTm9kZToz",
+                            company: {
+                              id: "Q29tcGFueU5vZGU6MQ==",
+                            },
+                            roleId: "Um9sZU5vZGU6OQ==",
+                            startDate: "2000-05-01",
+                          },
+                        ],
                         permanent: true,
                         contract: false,
-                        needsSponsorship: input.visaSponsorship === 1 ? true : false,
-                        noticePeriod: 1,
-                        phoneNumber: input.phoneNumber,
-                        postcode: input.postcode,
-                        maxCommute: 1,
-                        currentSalary: input.currentSalary,
-                        desiredSalary: input.expectedSalary,
-                        rolesoughtSet: [{ candidateId: userId, roleId: input.roleId_primary.id, order: 13, experience: input.experience },
-                        { candidateId: userId, roleId: input.roleId_secondary.id, order: 12, experience: input.experience_secondary }],
-                        jobSet:
-                          input.companies.map(company => {
-                            return Object.assign({}, { roleId: input.roleId_primary.id, candidateId: userId, company: { name: company.name, id: company.id }, startDate: "2018-10-10" })
-
-                          })
-
+                        needsSponsorship: true,
+                        noticePeriod: 20,
+                        phoneNumber: "123412341234",
+                        postcode: "qwer",
+                        maxCommute: 45,
+                        currentSalary: 54,
+                        minimumSalary: 34,
+                        desiredSalary: 23,
+                        currentRate: 54,
+                        minimumRate: 34,
+                        desiredRate: 23,
+                        linkedIn: "https://www.linkedin.com/in/lancucki/",
                       }
                     }
                   })
@@ -200,4 +221,4 @@ export class CompliteProfile extends Component {
   }
 }
 
-export default CompliteProfile
+export default withRouter(CompliteProfile);

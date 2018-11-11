@@ -6,7 +6,7 @@ import star_gray from './../../../assets/images/Company/star_1.png'
 import './SkillExperienceList.css'
 
 
-const SkillExperienceList = ({ onExperienceClick }) => (
+const SkillExperienceList = ({ onClick, onExperienceClick, data }) => (
   <ul className='skill-list-container centered'>
     <SkillExperienceItem
       text='Novice'
@@ -14,7 +14,10 @@ const SkillExperienceList = ({ onExperienceClick }) => (
       image2={star_gray}
       image3={star_gray}
       desc='Limited experience'
-      onExperienceClick={onExperienceClick}
+      onExperienceClick={async (e) => {
+        await onExperienceClick(e)
+        await onClick(e, data)
+      }}
     />
     <SkillExperienceItem
       text='Intermediate'
@@ -22,7 +25,10 @@ const SkillExperienceList = ({ onExperienceClick }) => (
       image2={star}
       image3={star_gray}
       desc='Commercial experience'
-      onExperienceClick={onExperienceClick}
+      onExperienceClick={async (e) => {
+        await onExperienceClick(e)
+        await onClick(e, data)
+      }}
     />
     <SkillExperienceItem
       text='Expert'
@@ -30,7 +36,10 @@ const SkillExperienceList = ({ onExperienceClick }) => (
       image2={star}
       image3={star}
       desc='A highly developed skill'
-      onExperienceClick={onExperienceClick}
+      onExperienceClick={async (e) => {
+        await onExperienceClick(e)
+        await onClick(e, data)
+      }}
     />
   </ul>
 )

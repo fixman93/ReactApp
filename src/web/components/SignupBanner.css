@@ -1,5 +1,5 @@
 .signup-banner {
-  height: 880px;
+  min-height: 880px;
 }
 
 .signup-banner h2 {

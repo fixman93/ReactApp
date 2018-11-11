@@ -91,7 +91,7 @@ export class TalentHeader extends Component {
                                                 {this.state.show && (
                                                     <ul>
                                                         <li><Link to="/talent/complite-registration">Edit Account</Link></li>
-                                                        <li><Link to="/login" onClick={() => this.logout()}>Log Out</Link></li>
+                                                        <li><Link to="/talent/login" onClick={() => this.logout()}>Log Out</Link></li>
                                                     </ul>
                                                 )}
                                             </div>

@@ -85,7 +85,7 @@ class StepThree extends Component {
 
 
   render() {
-    const { heading, onBack } = this.props;
+    const { heading } = this.props;
     const { newSkillInputActive, skills, error } = this.state;
     return (
       <Query query={GET_SKILLS}>
@@ -105,18 +105,20 @@ class StepThree extends Component {
               <UIContainer>
                 {error !== '' && <ErrorMessage message={error} />}
                 <div className="SelectSkills form-input-group">
-                  <SkillList
-                    skills={skills}
-                    onRemove={this.handleRemoveSkill}
-                    onClick={this.handleSkillDropdownClick}
-                  />
-                  {newSkillInputActive && (
-                    <NewSkill
-                      placeholder="Enter new skill..."
-                      data={data}
-                      onAdd={this.handleAddSkill}
+                  <div style={{ display: 'flex' }}>
+                    <SkillList
+                      skills={skills}
+                      onRemove={this.handleRemoveSkill}
+                      onClick={this.handleSkillDropdownClick}
                     />
-                  )}
+                    {newSkillInputActive && (
+                      <NewSkill
+                        placeholder="Enter new skill..."
+                        data={data}
+                        onAdd={this.handleAddSkill}
+                      />
+                    )}
+                  </div>
                 </div>
               </UIContainer>
               <div className="button-container">
@@ -128,7 +130,7 @@ class StepThree extends Component {
                   Back
                 </button> */}
                 <button type="submit" className="btn btn-white-blue">
-                  Next <img src={BlueArrow} />
+                  Next <img src={BlueArrow} alt="blue-arrow" />
                 </button>
               </div>
             </form>

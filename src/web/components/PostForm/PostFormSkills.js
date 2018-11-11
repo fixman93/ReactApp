@@ -13,7 +13,6 @@ export class PostForm extends Component {
     super(props);
     this.state = {
       skills: [],
-      skillIds: [],
       newSkillInputActive: true,
       error: ""
     };
@@ -21,19 +20,17 @@ export class PostForm extends Component {
   }
 
   componentDidMount() {
-    if(this.props.propsData.jobofferSet.skills) {
+    if (this.props.propsData.jobofferSet.skills) {
       this.setState({
         skills: this.props.propsData.jobofferSet.skills,
-        skillIds: this.props.propsData.jobofferSet.skillIds,
       })
     }
   }
 
-  handleAddSkill = name => {
+  handleAddSkill = async (name) => {
     let skills = [...this.state.skills];
-
     // can't add same skill twice
-    if (skills.includes(name)) {
+    if (skills.find(s => s.id === name.id)) {
       // it will close the menu
       return;
     } else {
@@ -51,17 +48,30 @@ export class PostForm extends Component {
     }));
   };
 
-  skillIds = () => {
-    let skillIds = this.state.skills.map(skill => skill.id);
-    this.setState({
-      skillIds: skillIds
-    });
-  };
 
-  handleSkillDropdownClick = value => {
+
+  handleSkillDropdownClick = async (e, skill) => {
     this.setState({
       newSkillInputActive: true
     });
+    // e is experience level, skill is skill object
+    // if skill is in state skills array
+    if (this.state.skills.find(sk => sk.id === skill.id)) {
+      // add all state skills to new array
+      let newSkills = [...this.state.skills]
+      // find the skill to in the array
+      let skl = newSkills.find(sk => sk.id === skill.id)
+      // find skill index in the array
+      let sklId = newSkills.findIndex(sk => sk.id === skill.id)
+      // add experience level to found skill
+      skl = Object.assign({}, skl, { "level": e })
+      // replace skill in array with new skill including experience level
+      await newSkills.splice(sklId, 1, skl)
+      // set new skills array
+      await this.setState({
+        skills: newSkills
+      })
+    }
   };
 
   handleSubmit = async (e) => {
@@ -69,25 +79,23 @@ export class PostForm extends Component {
     // rest error to blank
     this.setState({ error: "" }, async () => {
       // then checks if there are at least 5 skills added
-      if(this.state.skills.length < 5) {
+      if (this.state.skills.length < 5) {
         // if not add error
-        await this.setState({ error: "You need to have at least 5 skills"})
+        await this.setState({ error: "You need to have at least 5 skills" })
       } else {
         // else resets the error, pass skills and ids to onSubmit function
-        await this.setState({ error: ""})
-        await this.skillIds();
+        await this.setState({ error: "" })
         await this.props.onSubmit({
-          skills: [...this.state.skills],
-          skillsIds: [...this.state.skillIds]
+          skills: [...this.state.skills]
         });
       }
     })
 
-    
+
   }
-    
+
   render() {
-    const { heading, onBack } = this.props;
+    const { heading, onBack, propsData } = this.props;
     const { skills, newSkillInputActive, error } = this.state;
 
     return (
@@ -105,11 +113,13 @@ export class PostForm extends Component {
                 id="postFormSkills"
                 className="form"
                 onSubmit={this.handleSubmit}>
-             >
-                  
+
+
                 <UIContainer className="post-form">
                   {error !== "" && <ErrorMessage message={error} />}
                   <SkillList
+                    fromBack={propsData.jobofferSet && propsData.jobofferSet.skills ? true : false}
+                    experience={propsData.jobofferSet ? propsData.jobofferSet.skills : null}
                     skills={skills}
                     onRemove={this.handleRemoveSkill}
                     onClick={this.handleSkillDropdownClick}

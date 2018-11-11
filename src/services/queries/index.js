@@ -52,7 +52,9 @@ export const GET_EMPLOYER = gql`
              experience
              postcode
              startIn
-             interviewStages
+             interviewStages {
+               stages 
+             }
              remuneration
             spec
              contractLength
@@ -80,6 +82,27 @@ export const ALL_ROLES = gql`
         }
       }
     }
+  }
+`
+
+export const ALL_ROLES_AND_INTERVIEW_STAGES = gql`
+query {
+  allRoles {
+    edges {
+      node {
+        id
+        name
+      }
+    }
+    }
+  allInterviewStages {
+        edges {
+          node {
+            id
+            stages 
+          }
+        }
+      }
   }
 `
 
@@ -115,22 +138,13 @@ export const ALL_QUESTIONS = gql`
     allStandardQuestions {
       edges {
         node {
-          id
           question {
-            id
             standardquestion {
-              id
+              id,
+              answers,
               question {
-                id
+                id,
                 question
-              }
-            }
-            answer {
-              edges {
-                node {
-                  id
-                  answer
-                }
               }
             }
           }
@@ -142,6 +156,7 @@ export const ALL_QUESTIONS = gql`
         node {
           id
           name
+          level
         }
       }
     }

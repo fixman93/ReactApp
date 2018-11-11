@@ -17,8 +17,7 @@ class NewSkill extends Component {
     this.state = {
       value: '',
       skills: [],
-      dropdownActive: false,
-      mounted: false
+      dropdownActive: false
     }
     this.dropdownRef = React.createRef()
   }
@@ -91,7 +90,7 @@ class NewSkill extends Component {
     const { placeholder, onAdd } = this.props
     const { dropdownActive, skills, value } = this.state
     return (
-      <React.Fragment>
+      <div className="skill-relative">
         <div ref={this.dropdownRef} className='new-skill-container'>
           <input
             value={value}
@@ -111,7 +110,7 @@ class NewSkill extends Component {
             }}
           />
         )}
-      </React.Fragment>
+      </div>
     )
   }
 }

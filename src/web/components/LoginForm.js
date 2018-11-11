@@ -34,7 +34,6 @@ class LoginForm extends Component {
     const { history, type } = this.props
     const { input, errors } = this.state
     const error = errors && errors[0] && errors[0].message
-    console.log(type)
     return (
       <Mutation
         mutation={LOGIN_USER}
@@ -46,6 +45,7 @@ class LoginForm extends Component {
         onCompleted={async data => {
           await localStorage.setItem('token', data.tokenAuth.token)
           await localStorage.setItem('userId', data.tokenAuth.id)
+          await localStorage.setItem('type', 'company')
           if (type === 'company') {
             await history.push('/company/profile')
           }

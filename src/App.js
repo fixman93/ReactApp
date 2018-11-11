@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
+import { Router, Route, Redirect, Switch } from 'react-router-dom'
 import CompanyRegisterPage from 'web/pages/CompanyRegisterPage'
 import LoginPage from 'web/pages/LoginPage'
 import ActiveJobsPageDefault from 'web/pages/ActiveDefaultJobsPage'
@@ -24,10 +24,14 @@ import 'bootstrap-css-only'
 import 'assets/styles/main.css'
 import PrivateRoute from './containers/PrivateRoute'
 
+import createHistory from 'history/createBrowserHistory';
+
+export const history = createHistory();
+
 class App extends Component {
   render() {
     return (
-      <Router>
+      <Router history={history}>
         <Switch>
           <PrivateRoute path='/company/jobs/applications' component={AllAplicationsPage} />
           <PrivateRoute path='/company/jobs/active' component={ActiveJobsPage} />

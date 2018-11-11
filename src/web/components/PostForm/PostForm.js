@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
-
 import PropTypes from 'prop-types'
 import { Query, Mutation } from 'react-apollo'
 import UIContainer from 'common/UIContainer'
@@ -8,11 +6,11 @@ import FeaturedTitle from 'common/FeaturedTitle'
 import Dropdown from 'common/Forms/Dropdown'
 import Radio from 'common/Forms/Radio'
 import Input from 'common/Forms/Input'
-import { ALL_ROLES } from 'services/queries'
 import { ADD_JOB } from 'services/mutations'
 import './PostForm.css'
 import ErrorMessage from '../../../common/Error/ErrorMessage';
 import { setInput, setError } from '../../../common/Forms/helpers';
+import { ALL_ROLES_AND_INTERVIEW_STAGES } from '../../../services/queries';
 
 export class PostForm extends Component {
   static propTypes = {
@@ -94,12 +92,16 @@ export class PostForm extends Component {
         let isAtLeastOneChecked = list.filter(el => el.name === name && el.checked === true).length === 1 ? true : false;
 
         // finds checked radio input
-        let toAdd = list.find(el => el.name == name && el.checked);
+        let toAdd = list.find(el => el.name === name && el.checked);
 
         if (isAtLeastOneChecked) {
           // if one is checked, add it to input object
-          setInput(this, name, toAdd.value)
-
+          if (name === 'interviewStages') {
+            setInput(this, name, toAdd.nextSibling.innerHTML)
+            setInput(this, "interviewStagesID", toAdd.value)
+          } else {
+            setInput(this, name, toAdd.value)
+          }
         } else {
           // else add error to select one option
           setError(this, name, 'Please select one option')
@@ -125,8 +127,8 @@ export class PostForm extends Component {
           }
         } else {
           // else, it's remuneration name, check if it has value, and find the element
-          let ifHasValue = list.find(el => el.name == name && el.value !== '') ? true : false;
-          let toAdd = list.find(el => el.name == name);
+          let ifHasValue = list.find(el => el.name === name && el.value !== '') ? true : false;
+          let toAdd = list.find(el => el.name === name);
 
           if (ifHasValue) {
             // if it has value and if it's number
@@ -162,7 +164,7 @@ export class PostForm extends Component {
     const { heading, onBack, propsData } = this.props
     return (
       <Query
-        query={ALL_ROLES}
+        query={ALL_ROLES_AND_INTERVIEW_STAGES}
       >
         {data => {
           const roles = data &&
@@ -233,8 +235,7 @@ export class PostForm extends Component {
                         label='3. Minimum years of experience?'
                         desc='(Select one)'
                         id='experience'
-
-                        val={propsData.jobofferSet ? propsData.jobofferSet.experience : null}
+                        val={propsData.jobofferSet ? parseFloat(propsData.jobofferSet.experience) : null}
                         name='experience'
                         options={[
                           { id: 'sixMonths', label: '6 months', value: 0.5, name: 'experience' },
@@ -244,7 +245,6 @@ export class PostForm extends Component {
                           { id: 'fourYears', label: '4 years', value: 4, name: 'experience' },
                           { id: 'fiveYears', label: '5+ years', value: 5, name: 'experience' }
                         ]}
-                        errors={errors.experience}
                       />
                       {errors.experience && <ErrorMessage message={errors.experience} />}
                       <Input
@@ -266,15 +266,19 @@ export class PostForm extends Component {
                         val={propsData.jobofferSet ? propsData.jobofferSet.interviewStages : null}
                         name='interviewStages'
                         options={[
-                          { id: 'one', value: '1', label: '1', name: 'interviewStages' },
-                          { id: 'two', value: '2', label: '2', name: 'interviewStages' },
-                          { id: 'three', value: '3', label: '3', name: 'interviewStages' },
-                          { id: 'four', value: '4', label: '4', name: 'interviewStages' },
-                          { id: 'five', value: '5', label: '5', name: 'interviewStages' }
+                          /* stages ids are hard coded, find ids in query  */
+                          {
+                            id: 'one',
+                            value: 'SW50ZXJ2aWV3U3RhZ2VzTm9kZTox', label: '1', name: 'interviewStages'
+                          },
+                          { id: 'two', value: "SW50ZXJ2aWV3U3RhZ2VzTm9kZToy", label: '2', name: 'interviewStages' },
+                          { id: 'three', value: 'SW50ZXJ2aWV3U3RhZ2VzTm9kZToz', label: '3', name: 'interviewStages' },
+                          { id: 'four', value: 'SW50ZXJ2aWV3U3RhZ2VzTm9kZTo0', label: '4', name: 'interviewStages' },
+                          { id: 'five', value: 'SW50ZXJ2aWV3U3RhZ2VzTm9kZTo1', label: '5', name: 'interviewStages' }
                         ]}
-                        errors={errors.interviewStages}
                       />
                       {errors.interviewStages && <ErrorMessage message={errors.interviewStages} />}
+
                       <Radio
                         label='6. Expected new start date?'
                         desc='(Select one)'

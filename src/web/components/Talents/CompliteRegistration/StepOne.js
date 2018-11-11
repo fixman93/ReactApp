@@ -3,14 +3,11 @@ import PropTypes from "prop-types";
 import UIContainer from "common/UIContainer";
 import FeaturedTitle from "common/FeaturedTitle";
 import Radio from "common/Forms/Radio";
-import Checkbox from "common/Forms/Checkbox"
 import Input from 'common/Forms/Input'
 import Dropdown from 'common/Forms/Dropdown'
-import { Query, graphql, compose } from "react-apollo";
-import SkillList from "web/components/common/SkillList";
-import NewSkill from "web/components/common/NewSkill";
+import { graphql, compose } from "react-apollo";
 import BlueArrow from '../../../../assets/images/blue-arrow.svg'
-import { GET_SKILLS, ALL_ROLES, ALL_EDUCATION_LEVELS } from "../../../../services/queries";
+import { ALL_ROLES, ALL_EDUCATION_LEVELS } from "../../../../services/queries";
 import ErrorMessage from '../../../../common/Error/ErrorMessage';
 import { setInput, setError } from "../../../../common/Forms/helpers";
 

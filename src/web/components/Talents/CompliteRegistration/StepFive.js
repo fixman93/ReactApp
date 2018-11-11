@@ -1,17 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import MediaCapturer from 'react-multimedia-capture';
-
 import UIContainer from "common/UIContainer";
 import FeaturedTitle from "common/FeaturedTitle";
-import Radio from "common/Forms/Radio";
-import Checkbox from "common/Forms/Checkbox"
-import { Query } from "react-apollo";
-import SkillList from "web/components/common/SkillList";
-import NewSkill from "web/components/common/NewSkill";
 import BlueArrow from '../../../../assets/images/blue-arrow.svg'
 import VideoExample from '../../../../assets/images/videoExample.png'
-import { GET_SKILLS } from "../../../../services/queries";
 
 class StepFive extends Component {
   static propTypes = {
@@ -161,7 +154,7 @@ class StepFive extends Component {
                 <div className="Video">
                   {this.state.videoSrc && <video className="videoBox" src={this.state.videoSrc} autoPlay></video>}
                   <div className="videoImage">
-                    <img src={VideoExample} />
+                    <img src={VideoExample} alt="video" />
                   </div>
                   <p className="tellUs">In 1 minute tell us…</p>
                   <h2>What’s your name and what do you do?</h2>
@@ -188,7 +181,7 @@ class StepFive extends Component {
           onClick={this.props.onSubmit}
           className="btn btn-white-blue"
         >
-          Finish <img src={BlueArrow} /></button>
+          Finish <img src={BlueArrow} alt="blue-arrow" /></button>
       </div >
     )
   }
