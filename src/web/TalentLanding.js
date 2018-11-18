@@ -6,6 +6,10 @@ import LandingTop from './components/LandingTop'
 import LandingBottom from './components/LandingBottom'
 import SignupBanner from './components/SignupBanner'
 import './TalentLanding.css'
+import PreparationBanner from './components/PreparationBanner';
+import ApplicationBanner from './components/ApplicationBanner';
+import InterviewsBanner from './components/InterviewsBanner';
+import BottomBoxes from './components/BottomBoxes';
 
 export class TalentLanding extends Component {
   render() {
@@ -15,6 +19,10 @@ export class TalentLanding extends Component {
           <MenuHeader match={this.props.match} />
         </LandingTop>
         <SignupBanner />
+        <PreparationBanner />
+        <ApplicationBanner />
+        <InterviewsBanner />
+        <BottomBoxes />
         {/*<Ednos />*/}
         <LandingBottom />
       </div>

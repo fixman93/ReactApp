@@ -47,8 +47,13 @@
   position: absolute;
   top: 50px;
   left: 40px;
+  width: 63%;
 }
 
 .signup-banner .quotes {
   margin-top: 85px;
+}
+
+.square.square-transparent img{
+  right: -30px;
 }

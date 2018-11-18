@@ -1,0 +1,133 @@
+
+
+
+.bottom-box {
+    width: 240px;
+    height: 243px;
+    position: relative;
+    font-size: 12px;
+    overflow: hidden;
+}
+
+.bottom-box-app {
+    position: absolute;
+    top: 1.2em;
+    left: 0.9em;
+    display: flex;
+    align-items: center;
+}
+
+.app-text {
+    font-size: 10px;
+    margin-left: 1em;
+    margin-bottom: 2px;
+    color: white;
+}
+
+.bottom-box-logo {
+    width: 1em;
+    height: 1em;
+}
+
+.bottom-box-content {
+    position: absolute;
+    top: 3.5em;
+    left: 1em;
+    right: 1em;
+    margin: 0 auto;
+    text-align: center;
+
+    
+}
+
+.content-small-text {
+    margin: 0;
+    font-size: 8px;
+    color: white;
+    font-family: cursive;
+    
+}
+
+.content-text {
+    margin: 0;
+    font-size: 10px;
+    color: white;
+    font-family: cursive;
+    
+}
+
+.bottom-box-image {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    object-fit: cover;
+}
+
+.bottom-box .number-1 {
+    color: white;
+    /* to fill */
+
+}
+.bottom-box .number-2 {
+    color: white;
+    /* to fill */
+}
+
+.bottom-box.number-1 > .bottom-box-content > img {
+    width: 95%!important;
+    margin-top: 9px;
+ }
+ 
+ .bottom-box.number-2 > .bottom-box-content > img {
+    width: 95%!important;
+    margin-top: 18px;
+ }
+
+
+.bottom-box .number-3 {
+    color: white;
+    /* to fill */
+
+}
+.bottom-box .number-4 {
+    color: white;
+    /* to fill */
+
+}
+
+.bottom-box.number-4 > .bottom-box-content > .content {
+   margin-bottom: 8px;
+}
+
+
+.bottom-box .number-5 {
+    color: white;
+    position: relative;
+}
+
+.bottom-box.number-5 > .bottom-box-content > .content {
+   
+    width: 55%;
+    text-align: left;
+    /* float: left; */
+    /* left: 20px; */
+    margin: 0 -0.4em -4em 0;
+}
+
+.bottom-box.number-5 > .bottom-box-content > img {
+   width: 70%!important;
+   margin-left: 5em;
+   text-align: right!important;
+}
+
+
+.bottom-box .number-6 {
+    color: white;
+    /* to fill */
+
+}
+
+.bottom-box.number-6 > .bottom-box-content > .content {
+    margin-bottom: 22px;
+ }
+ 

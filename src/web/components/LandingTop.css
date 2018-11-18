@@ -1,0 +1,23 @@
+ 
+
+ .landing-flex { 
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     margin: 200px 1em 1em 1em;
+     justify-content: center;
+ }
+
+ .landing-flex > h1 {
+     flex:2;
+     top: 0!important;
+ }
+
+ .radar {
+     flex: 1;
+ }
+
+.radar > img {
+    width: 100%;
+    height: 100%;
+}
